@@ -1,0 +1,105 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Missão 2 - Jogos Interativos 2º Ano</title>
+<style>
+:root{--p:#68478a;--t:#2f7d86;--o:#df8736;--g:#27834a;--r:#b63b3b;--ink:#26323a}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;color:var(--ink);background:linear-gradient(135deg,#f8f0ff,#edf9f2)}
+header{background:linear-gradient(100deg,var(--p),var(--t));color:#fff;text-align:center;padding:22px}h1{margin:0;font-size:clamp(25px,5vw,42px)}header p{margin:8px}
+main{max-width:1050px;margin:auto;padding:16px}.score{position:sticky;top:0;z-index:5;background:#fff;border-radius:14px;padding:11px;display:flex;gap:15px;justify-content:center;flex-wrap:wrap;box-shadow:0 3px 12px #0002}
+nav{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:9px;margin:16px 0}button{font:inherit;cursor:pointer}.tab,.ans,.btn,.tile{border:0;border-radius:12px;padding:12px;box-shadow:0 2px 8px #0002;background:#fff}.tab.on{background:var(--t);color:#fff}.game{display:none;background:#fff;padding:20px;border-radius:18px;box-shadow:0 4px 16px #0002}.game.on{display:block}
+.card{border:2px solid #e8e3da;border-radius:14px;padding:15px;margin:12px 0}.answers{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:9px;margin-top:10px}.ans:hover{outline:2px solid var(--t)}.good{background:#dff3e5!important;color:#165c30}.bad{background:#fde0e0!important;color:#7b2020}.fb{min-height:24px;font-weight:bold;margin-top:8px}.btn{background:var(--o);color:#fff;font-weight:bold}
+.progress{height:12px;background:#eee;border-radius:20px;overflow:hidden;min-width:180px}.bar{height:100%;width:0;background:var(--g)}
+.sortbox{display:flex;gap:8px;flex-wrap:wrap}.tile{border:2px dashed var(--t);background:#f0fbfb}.tile:disabled{opacity:.4}
+.memory{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;max-width:650px;margin:auto}.mem{height:92px;border:0;border-radius:12px;background:var(--p);color:#fff;font-weight:bold;font-size:15px;padding:5px}.mem.open,.mem.done{background:#fff;color:var(--ink);border:2px solid var(--t)}.mem.done{background:#dff3e5}
+.map{position:relative;height:340px;background:#dfead7;border-radius:14px;overflow:hidden}.rh{position:absolute;top:145px;left:0;right:0;height:50px;background:#777}.rv{position:absolute;left:47%;top:0;bottom:0;width:48px;background:#777}.place{position:absolute;width:130px;height:72px;border:3px solid var(--t);border-radius:10px;background:#fff;display:flex;align-items:center;justify-content:center;font-weight:bold}.a{left:25px;top:30px}.b{right:25px;top:30px}.c{left:25px;bottom:25px}.d{right:25px;bottom:25px}
+.big{font-size:34px;text-align:center}.badge{padding:5px 9px;border-radius:20px;background:#fff2cb}.finish{text-align:center;padding:20px;background:#f7f3ff;border-radius:14px}
+@media(max-width:600px){.memory{grid-template-columns:repeat(3,1fr)}.place{width:105px;font-size:12px}.map{height:300px}}
+</style></head><body>
+<header><h1>🚀 Missão 2: Super Revisão</h1><p>Uma nova coleção de jogos para o 2º ano — com mais exercícios e desafios diferentes</p></header>
+<main><div class="score"><b>⭐ <span id="pts">0</span> pontos</b><span>🏆 <span id="hit">0</span> acertos</span><span>🎯 <span id="try">0</span> tentativas</span><span>Progresso</span><div class="progress"><div class="bar" id="bar"></div></div><button class="btn" onclick="location.reload()">Recomeçar</button></div>
+<nav>
+<button class="tab on" onclick="show(0,this)">🏘️ Comunidade</button><button class="tab" onclick="show(1,this)">⏳ Tempo</button><button class="tab" onclick="show(2,this)">🧠 Sequências</button><button class="tab" onclick="show(3,this)">🗺️ Bairro</button><button class="tab" onclick="show(4,this)">☀️ Rotina</button><button class="tab" onclick="show(5,this)">🌿 Natureza</button><button class="tab" onclick="show(6,this)">🃏 Memória</button><button class="tab" onclick="show(7,this)">🏆 Desafio Final</button>
+</nav>
+<section class="game on"><h2>🏘️ Guardiões da Comunidade</h2><div id="g1"></div></section>
+<section class="game"><h2>⏳ Viajantes do Tempo</h2><div id="g2"></div></section>
+<section class="game"><h2>🧠 Sequências Malucas</h2><div class="card"><p><b>1. Clique na ordem correta da rotina:</b></p><div id="seq1" class="sortbox"></div><div id="seqfb1" class="fb"></div><button class="btn" onclick="makeSeq('seq1',seqA,'seqfb1')">Misturar</button></div><div class="card"><p><b>2. Clique na ordem das fases da vida:</b></p><div id="seq2" class="sortbox"></div><div id="seqfb2" class="fb"></div><button class="btn" onclick="makeSeq('seq2',seqB,'seqfb2')">Misturar</button></div><div id="g3"></div></section>
+<section class="game"><h2>🗺️ Caça ao Tesouro no Bairro</h2><div class="map"><div class="rh"></div><div class="rv"></div><div class="place a">🏫 ESCOLA</div><div class="place b">🏥 HOSPITAL</div><div class="place c">🏠 CASA</div><div class="place d">🌳 PRAÇA</div></div><div id="g4"></div></section>
+<section class="game"><h2>☀️🌙 Roleta da Rotina</h2><div id="g5"></div></section>
+<section class="game"><h2>🌿 Laboratório da Natureza</h2><div id="g6"></div></section>
+<section class="game"><h2>🃏 Jogo da Memória: Produto + Matéria-prima</h2><p>Encontre os pares. Exemplo: mesa ↔ madeira.</p><div id="memory" class="memory"></div><div id="memfb" class="fb"></div><button class="btn" onclick="memoryStart()">Novo jogo</button></section>
+<section class="game"><h2>🏆 Desafio Final</h2><div id="g8"></div><div class="finish"><h3>🎓 Medalha do Conhecimento</h3><p>Complete os desafios e tente superar sua própria pontuação.</p><p class="big">⭐ 🏘️ ⏳ 🗺️ 🌿 🏆</p></div></section>
+</main>
+<script>
+let pts=0,hit=0,tries=0,answered=0,total=54;
+function score(ok,n=10){tries++;if(ok){hit++;pts+=n}answered++;document.getElementById('pts').textContent=pts;document.getElementById('hit').textContent=hit;document.getElementById('try').textContent=tries;document.getElementById('bar').style.width=Math.min(100,answered/total*100)+'%'}
+function show(i,b){document.querySelectorAll('.game').forEach((x,j)=>x.classList.toggle('on',i===j));document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));b.classList.add('on');scrollTo(0,0)}
+function quiz(id,data){let root=document.getElementById(id);root.innerHTML='';data.forEach((x,k)=>{let c=document.createElement('div');c.className='card';c.innerHTML=`<b>${k+1}. ${x.q}</b><div class="answers"></div><div class="fb"></div>`;let box=c.querySelector('.answers'),fb=c.querySelector('.fb');x.a.forEach((a,i)=>{let b=document.createElement('button');b.className='ans';b.innerHTML=a;b.onclick=()=>{if(c.dataset.done)return;c.dataset.done=1;let ok=i===x.c;score(ok);b.classList.add(ok?'good':'bad');if(!ok)box.children[x.c].classList.add('good');fb.textContent=ok?'✓ Muito bem!':'Observe a resposta destacada e tente entender o motivo.'};box.appendChild(b)});root.appendChild(c)})}
+quiz('g1',[
+{q:'Qual atitude ajuda a cuidar de uma praça?',a:['Jogar lixo no chão','Usar a lixeira e cuidar dos brinquedos','Quebrar os bancos'],c:1},
+{q:'Uma festa junina da comunidade é um exemplo de...',a:['manifestação cultural','relógio antigo','extrativismo mineral'],c:0},
+{q:'Em uma comunidade, os conhecimentos podem ser...',a:['compartilhados entre as pessoas','guardados para uma única pessoa','aprendidos apenas por adultos'],c:0},
+{q:'Uma criança pode contribuir com a comunidade quando...',a:['cuida dos espaços e respeita as pessoas','estraga os espaços coletivos','não respeita ninguém'],c:0},
+{q:'Qual grupo pode ser considerado uma comunidade por ter interesses em comum?',a:['alunos de uma escola','pedras de uma calçada','carros estacionados'],c:0},
+{q:'Nas comunidades quilombolas, adultos e idosos podem ajudar a transmitir...',a:['cultura e conhecimentos','somente horários','placas de trânsito'],c:0},
+{q:'Qual opção é uma manifestação cultural?',a:['dança, música e festa popular','semáforo','relógio digital'],c:0},
+{q:'O que significa “coletivo”?',a:['Compartilhado por um grupo','Pertence sempre a uma única pessoa','Algo que aconteceu ontem'],c:0}
+]);
+quiz('g2',[
+{q:'“Na semana passada visitei minha avó.”',a:['Passado','Presente','Futuro'],c:0},
+{q:'“Neste momento estou lendo.”',a:['Passado','Presente','Futuro'],c:1},
+{q:'“No próximo mês faremos uma viagem.”',a:['Passado','Presente','Futuro'],c:2},
+{q:'Qual palavra combina com passado?',a:['ontem','agora','amanhã'],c:0},
+{q:'Qual palavra combina com presente?',a:['depois','agora','antes'],c:1},
+{q:'Qual palavra combina com futuro?',a:['amanhã','ontem','antes'],c:0},
+{q:'Se amanhã será sábado, hoje é...',a:['quinta-feira','sexta-feira','domingo'],c:1},
+{q:'Se ontem foi terça-feira, hoje é...',a:['segunda','quarta','quinta'],c:1}
+]);
+let seqA=['Acordar','Tomar café','Ir à escola','Almoçar','Jantar','Dormir'],seqB=['Nascer','Aprender a andar','Ir à escola','Tornar-se adulto'];
+function makeSeq(id,seq,fbid){let chosen=[],r=document.getElementById(id);r.innerHTML='';document.getElementById(fbid).textContent='';[...seq].sort(()=>Math.random()-.5).forEach(x=>{let b=document.createElement('button');b.className='tile';b.textContent=x;b.onclick=()=>{if(b.disabled)return;b.disabled=true;chosen.push(x);if(chosen.length===seq.length){let ok=chosen.every((v,i)=>v===seq[i]);score(ok,15);document.getElementById(fbid).textContent=ok?'✓ Ordem perfeita!':'A sequência não ficou correta. Misture e tente novamente.'}};r.appendChild(b)})}makeSeq('seq1',seqA,'seqfb1');makeSeq('seq2',seqB,'seqfb2');
+quiz('g3',[
+{q:'Uma linha do tempo organiza...',a:['acontecimentos em sequência','somente lugares','matérias-primas'],c:0},
+{q:'Qual acontece primeiro?',a:['nascer','tornar-se adulto','terminar a escola'],c:0},
+{q:'Manhã, tarde e noite indicam...',a:['períodos do dia','tipos de comunidade','recursos minerais'],c:0},
+{q:'Duas ações que acontecem ao mesmo tempo são chamadas de...',a:['simultâneas','antigas','minerais'],c:0}
+]);
+quiz('g4',[
+{q:'Qual lugar está acima da CASA?',a:['Escola','Hospital','Praça'],c:0},
+{q:'Qual lugar está à direita da ESCOLA?',a:['Hospital','Casa','Nenhum'],c:0},
+{q:'Qual lugar está à direita da CASA?',a:['Praça','Escola','Hospital'],c:0},
+{q:'Você sai da CASA e atravessa a rua para cima. Onde chega?',a:['Escola','Praça','Hospital'],c:0},
+{q:'Símbolos em uma planta servem para...',a:['representar elementos do lugar','medir minutos','mostrar o futuro'],c:0},
+{q:'Cores diferentes em uma planta podem ajudar a...',a:['identificar tipos de áreas','contar a idade','marcar segundos'],c:0},
+{q:'Um ponto de referência ajuda uma pessoa a...',a:['se localizar','medir a temperatura','produzir aço'],c:0}
+]);
+quiz('g5',[
+{q:'☀️ Tomar café da manhã costuma acontecer...',a:['de manhã','à noite'],c:0},
+{q:'🌙 Jantar costuma acontecer...',a:['à noite','pela manhã'],c:0},
+{q:'🏫 Ir à escola pode fazer parte da...',a:['rotina diária','mineração','legenda'],c:0},
+{q:'😴 Descansar e dormir são atividades comuns...',a:['à noite','somente ao meio-dia'],c:0},
+{q:'🏥 Hospitais podem funcionar...',a:['de dia e de noite','somente de manhã'],c:0},
+{q:'👮 Algumas atividades de segurança acontecem...',a:['também à noite','somente quando há Sol'],c:0},
+{q:'Se uma pessoa trabalha enquanto uma criança está na escola, as duas ações podem ser...',a:['simultâneas','sempre passadas','sempre futuras'],c:0}
+]);
+quiz('g6',[
+{q:'Recursos retirados diretamente da natureza podem ser chamados de...',a:['recursos naturais','legendas','horários'],c:0},
+{q:'A coleta de açaí é exemplo de...',a:['extrativismo vegetal','extrativismo mineral','indústria mecânica'],c:0},
+{q:'O látex é retirado principalmente da...',a:['seringueira','rocha','água do mar'],c:0},
+{q:'Minério de ferro é obtido por...',a:['extrativismo mineral','extrativismo vegetal','agricultura'],c:0},
+{q:'O petróleo pode ser matéria-prima para...',a:['plástico','açaí','madeira'],c:0},
+{q:'Aço pode ser produzido a partir de...',a:['minério de ferro','látex','tomate'],c:0},
+{q:'Água subterrânea pode ser encontrada em...',a:['aquíferos','copas das árvores apenas','relógios'],c:0},
+{q:'Batata usada em salgadinhos é uma...',a:['matéria-prima vegetal','matéria-prima mineral','engrenagem'],c:0},
+{q:'Tapioca tem relação com a...',a:['mandioca','seringueira','mineração'],c:0}
+]);
+const pairs=[['Mesa','Madeira'],['Borracha','Látex'],['Plástico','Petróleo'],['Molho','Tomate'],['Bolo','Milho'],['Tapioca','Mandioca']];
+let first=null,lock=false,matched=0;
+function memoryStart(){first=null;lock=false;matched=0;document.getElementById('memfb').textContent='';let cards=[];pairs.forEach((p,i)=>{cards.push({t:p[0],p:i});cards.push({t:p[1],p:i})});cards.sort(()=>Math.random()-.5);let root=document.getElementById('memory');root.innerHTML='';cards.forEach(x=>{let b=document.createElement('button');b.className='mem';b.textContent='?';b.dataset.text=x.t;b.dataset.p=x.p;b.onclick=()=>flip(b);root.appendChild(b)})}
+function flip(b){if(lock||b.classList.contains('done')||b===first)return;b.textContent=b.dataset.text;b.classList.add('open');if(!first){first=b;return}lock=true;setTimeout(()=>{let ok=first.dataset.p===b.dataset.p;score(ok,15);if(ok){first.classList.add('done');b.classList.add('done');matched++;document.getElementById('memfb').textContent='✓ Par encontrado!';if(matched===pairs.length)document.getElementById('memfb').textContent='🏆 Você encontrou todos os pares!'}else{first.textContent='?';b.textContent='?';first.classList.remove('open');b.classList.remove('open');document.getElementById('memfb').textContent='Tente outro par.'}first=null;lock=false},650)}memoryStart();
+quiz('g8',[
+{q:'Qual trio está totalmente relacionado à passagem do tempo?',a:['ontem, agora, amanhã','praça, escola, látex','madeira, direita, noite'],c:0},
+{q:'Qual trio contém apenas recursos ou matérias-primas da natureza?',a:['madeira, petróleo, látex','futuro, praça, relógio','escola, minuto, direita'],c:0},
+{q:'Qual alternativa junta um lugar coletivo e uma atividade de convivência?',a:['praça + brincar com colegas','quarto + ficar sozinho','petróleo + mineração'],c:0},
+{q:'Para ir a um lugar desconhecido do bairro, o que mais ajuda?',a:['planta, legenda e pontos de referência','ampulheta e látex','linha do tempo e petróleo'],c:0},
+{q:'Qual frase está correta?',a:['Crianças podem aprender e também contribuir com a comunidade.','Somente adultos pertencem à comunidade.','Uma legenda serve para contar horas.'],c:0},
+{q:'Qual combinação está correta?',a:['ampulheta → areia','clepsidra → petróleo','relógio de sol → látex'],c:0}
+]);
+</script></body></html>
