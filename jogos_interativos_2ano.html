@@ -7,6 +7,13 @@
 <style>
 :root{--p:#704b8e;--t:#347e86;--o:#df8435;--bg:#f8f5ee;--ok:#27864b;--bad:#bd3d3d;--ink:#29323a}
 *{box-sizing:border-box} body{margin:0;font-family:Arial,sans-serif;background:linear-gradient(135deg,#f7f0ff,#eef9f5);color:var(--ink)}
+
+/* MENU DE NAVEGAÇÃO ENTRE OS JOGOS NO GITHUB */
+.top-menu { background-color: #29323a; padding: 12px; text-align: center; border-bottom: 4px solid var(--o); display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+.top-menu a { color: white; text-decoration: none; font-weight: bold; padding: 8px 12px; border-radius: 8px; transition: 0.2s; }
+.top-menu a:hover { background-color: #43505c; }
+.top-menu a.active { color: var(--o); background-color: rgba(255,255,255,0.1); pointer-events: none; }
+
 header{background:var(--p);color:white;padding:20px;text-align:center} header h1{margin:0;font-size:clamp(24px,5vw,40px)}
 header p{margin:8px 0 0}.wrap{max-width:980px;margin:auto;padding:18px}
 .score{position:sticky;top:0;z-index:3;background:white;border:2px solid #ddd;border-radius:14px;padding:10px 14px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap;box-shadow:0 3px 10px #0001}
@@ -26,6 +33,15 @@ footer{text-align:center;padding:24px;color:#667}@media(max-width:600px){.map{he
 </style>
 </head>
 <body>
+
+<!-- BARRA DE LINKS PARA O GITHUB -->
+<div class="top-menu">
+    <a href="index.html">🏠 Menu Principal</a>
+    <a href="jogos_interativos_2ano.html" class="active">🎲 Missão 1</a>
+    <a href="jogos_interativos_2ano_missao2.html">🚀 Missão 2</a>
+    <a href="jogos_interativos_2ano_missao3.html">🌍 Missão 3</a>
+</div>
+
 <header><h1>🎲 Missão do 2º Ano</h1><p>Jogos de revisão: comunidade, tempo, mapas, rotina e natureza</p></header>
 <div class="wrap">
 <div class="score"><b>⭐ Pontos: <span id="score">0</span></b><span>🏆 Acertos: <span id="hits">0</span></span><span>🎯 Tentativas: <span id="tries">0</span></span><button class="action" onclick="resetAll()">Recomeçar</button></div>
