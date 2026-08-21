@@ -35,7 +35,7 @@
     header p { font-size: 1.2em; margin-top: 10px; opacity: 0.9; }
     
     .container { 
-        max-width: 900px; 
+        max-width: 1000px; 
         width: 90%; 
         display: grid; 
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
@@ -60,6 +60,7 @@
     
     .card.missao1 { border-top: 8px solid #e67e22; }
     .card.missao2 { border-top: 8px solid #2ecc71; }
+    .card.missao3 { border-top: 8px solid #9b59b6; }
     
     .icon { font-size: 4em; margin-bottom: 15px; }
     .card h2 { margin: 0 0 10px 0; font-size: 1.8em; color: #34495e; }
@@ -77,6 +78,8 @@
     
     .card.missao1 .btn { background: #e67e22; box-shadow: 0 5px 0 #d35400; }
     .card.missao2 .btn { background: #2ecc71; box-shadow: 0 5px 0 #27ae60; }
+    .card.missao3 .btn { background: #9b59b6; box-shadow: 0 5px 0 #8e44ad; }
+    
     .card:active .btn { transform: translateY(5px); box-shadow: 0 0 0 transparent; }
     
     footer { margin-top: auto; padding: 20px; text-align: center; color: #95a5a6; font-size: 0.9em; }
@@ -89,7 +92,7 @@
     </header>
 
     <div class="container">
-        <!-- LINK PARA O PRIMEIRO ARQUIVO -->
+        <!-- LINK PARA A MISSÃO 1 -->
         <a href="jogos_interativos_2ano.html" class="card missao1">
             <div class="icon">🎲</div>
             <h2>Missão 1</h2>
@@ -97,17 +100,25 @@
             <div class="btn">Jogar Agora</div>
         </a>
 
-        <!-- LINK PARA O SEGUNDO ARQUIVO -->
+        <!-- LINK PARA A MISSÃO 2 -->
         <a href="jogos_interativos_2ano_missao2.html" class="card missao2">
-            <div class="icon">🌍</div>
+            <div class="icon">🚀</div>
             <h2>Missão 2</h2>
             <p>Aprofundando em História e Geografia: O tempo, a rotina, a comunidade e a natureza.</p>
+            <div class="btn">Jogar Agora</div>
+        </a>
+
+        <!-- LINK PARA A MISSÃO 3 -->
+        <a href="jogos_interativos_2ano_missao3.html" class="card missao3">
+            <div class="icon">🌍</div>
+            <h2>Missão 3</h2>
+            <p>Novos desafios! Matérias-primas, leis da natureza, indígenas e quilombolas.</p>
             <div class="btn">Jogar Agora</div>
         </a>
     </div>
 
     <footer>
-        Projeto de código aberto (Open Source) criado para compartilhar conhecimento e ajudar na revisão escolar. ❤️
+        Projeto de código aberto criado para compartilhar conhecimento e ajudar na revisão escolar. ❤️
     </footer>
 </body>
 </html>
