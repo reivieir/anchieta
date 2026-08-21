@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Jogos Interativos - 2º Ano</title>
+<style>
+:root{--p:#704b8e;--t:#347e86;--o:#df8435;--bg:#f8f5ee;--ok:#27864b;--bad:#bd3d3d;--ink:#29323a}
+*{box-sizing:border-box} body{margin:0;font-family:Arial,sans-serif;background:linear-gradient(135deg,#f7f0ff,#eef9f5);color:var(--ink)}
+header{background:var(--p);color:white;padding:20px;text-align:center} header h1{margin:0;font-size:clamp(24px,5vw,40px)}
+header p{margin:8px 0 0}.wrap{max-width:980px;margin:auto;padding:18px}
+.score{position:sticky;top:0;z-index:3;background:white;border:2px solid #ddd;border-radius:14px;padding:10px 14px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap;box-shadow:0 3px 10px #0001}
+.tabs{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0}
+button{font:inherit;cursor:pointer}.tab,.choice,.action{border:0;border-radius:12px;padding:12px;background:white;box-shadow:0 2px 8px #0002}
+.tab.active{background:var(--t);color:white}.game{display:none;background:white;border-radius:18px;padding:20px;box-shadow:0 4px 18px #0002}.game.active{display:block}
+.card{border:2px solid #e7e2da;border-radius:14px;padding:16px;margin:12px 0}.choices{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-top:12px}
+.choice:hover{outline:2px solid var(--t)}.choice.correct{background:#dff4e6;color:#175d31}.choice.wrong{background:#fde1e1;color:#7b2020}
+.feedback{font-weight:bold;min-height:25px;margin-top:10px}.action{background:var(--o);color:white;font-weight:bold}.big{font-size:42px;text-align:center}
+.timeline{display:flex;gap:8px;flex-wrap:wrap}.drag{padding:14px;border:2px dashed var(--t);border-radius:12px;background:#f1fbfb;cursor:grab}
+.map{position:relative;height:330px;background:#dfead8;border-radius:14px;overflow:hidden;margin:15px 0}.roadH{position:absolute;left:0;right:0;top:140px;height:50px;background:#777}.roadV{position:absolute;top:0;bottom:0;left:46%;width:50px;background:#777}
+.place{position:absolute;width:130px;height:70px;background:white;border:3px solid var(--t);border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:bold}.quadra{left:25px;top:35px}.bombeiros{right:25px;top:35px}.escola{left:25px;bottom:30px}.parque{right:25px;bottom:30px}
+.match{display:grid;grid-template-columns:1fr 1fr;gap:10px}.match button{padding:12px;border:2px solid #ddd;background:white;border-radius:10px}.selected{outline:3px solid var(--o)}
+.clock{width:220px;height:220px;border:8px solid #333;border-radius:50%;margin:15px auto;position:relative;background:#fff}.hand{position:absolute;left:50%;bottom:50%;transform-origin:bottom;width:5px;background:#333;border-radius:4px}.hour{height:58px}.minute{height:82px;width:3px}.center{position:absolute;left:50%;top:50%;width:14px;height:14px;background:#333;border-radius:50%;transform:translate(-50%,-50%)}
+.num{position:absolute;transform:translate(-50%,-50%);font-weight:bold}.badge{display:inline-block;background:#fff3cd;padding:5px 9px;border-radius:20px}
+footer{text-align:center;padding:24px;color:#667}@media(max-width:600px){.map{height:290px}.place{width:105px;font-size:13px}.match{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header><h1>🎲 Missão do 2º Ano</h1><p>Jogos de revisão: comunidade, tempo, mapas, rotina e natureza</p></header>
+<div class="wrap">
+<div class="score"><b>⭐ Pontos: <span id="score">0</span></b><span>🏆 Acertos: <span id="hits">0</span></span><span>🎯 Tentativas: <span id="tries">0</span></span><button class="action" onclick="resetAll()">Recomeçar</button></div>
+<div class="tabs">
+<button class="tab active" onclick="showGame(0,this)">🏘️ Comunidade</button>
+<button class="tab" onclick="showGame(1,this)">⏳ Tempo</button>
+<button class="tab" onclick="showGame(2,this)">🕐 Relógios</button>
+<button class="tab" onclick="showGame(3,this)">🗺️ Mapa</button>
+<button class="tab" onclick="showGame(4,this)">☀️🌙 Rotina</button>
+<button class="tab" onclick="showGame(5,this)">🌳 Natureza</button>
+</div>
+
+<section class="game active">
+<h2>🏘️ Jogo 1 — Detetive da Comunidade</h2><p>Escolha a resposta correta. Cada acerto vale 10 pontos.</p>
+<div id="community"></div>
+</section>
+
+<section class="game">
+<h2>⏳ Jogo 2 — Máquina do Tempo</h2><p>Descubra se cada situação é passado, presente ou futuro.</p>
+<div id="timegame"></div>
+<div class="card"><h3>Desafio de sequência</h3><p>Clique nos acontecimentos do primeiro para o último:</p><div id="timeline" class="timeline"></div><div id="tfb" class="feedback"></div><button class="action" onclick="resetTimeline()">Tentar de novo</button></div>
+</section>
+
+<section class="game">
+<h2>🕐 Jogo 3 — Mestre dos Relógios</h2>
+<div class="card"><p id="clockQuestion"></p><div class="clock" id="clock"></div><div class="choices" id="clockChoices"></div><div id="clockfb" class="feedback"></div><button class="action" onclick="newClock()">Novo relógio</button></div>
+<div class="card"><h3>Relógios antigos</h3><div id="oldclocks"></div></div>
+</section>
+
+<section class="game">
+<h2>🗺️ Jogo 4 — Explorador do Bairro</h2><div class="map"><div class="roadH"></div><div class="roadV"></div><div class="place quadra">🏀 QUADRA</div><div class="place bombeiros">🚒 BOMBEIROS</div><div class="place escola">🏫 ESCOLA</div><div class="place parque">🛝 PARQUINHO</div></div>
+<div id="mapgame"></div>
+</section>
+
+<section class="game">
+<h2>☀️🌙 Jogo 5 — Dia ou Noite?</h2><p>Classifique as atividades.</p><div id="routine"></div>
+</section>
+
+<section class="game">
+<h2>🌳 Jogo 6 — Fábrica da Natureza</h2><p>Encontre a matéria-prima correta de cada produto.</p><div id="nature"></div>
+<div class="card"><h3>Vegetal ou mineral?</h3><div id="extract"></div></div>
+</section>
+<footer>Feito para revisão do conteúdo do simulado do 2º ano.</footer>
+</div>
+<script>
+let score=0,hits=0,tries=0;
+function add(ok){tries++;if(ok){score+=10;hits++}document.querySelector('#score').textContent=score;document.querySelector('#hits').textContent=hits;document.querySelector('#tries').textContent=tries}
+function showGame(i,b){document.querySelectorAll('.game').forEach((g,j)=>g.classList.toggle('active',i===j));document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));b.classList.add('active')}
+function quiz(container,data){
+ const root=document.getElementById(container); root.innerHTML='';
+ data.forEach((x,qi)=>{let c=document.createElement('div');c.className='card';c.innerHTML=`<b>${qi+1}. ${x.q}</b><div class="choices"></div><div class="feedback"></div>`;
+ let box=c.querySelector('.choices'),fb=c.querySelector('.feedback');
+ x.a.forEach((a,i)=>{let b=document.createElement('button');b.className='choice';b.textContent=a;b.onclick=()=>{if(c.dataset.done)return;c.dataset.done=1;let ok=i===x.c;add(ok);b.classList.add(ok?'correct':'wrong');if(!ok)box.children[x.c].classList.add('correct');fb.textContent=ok?'Muito bem! ✓':'Quase! Observe a resposta correta.'};box.appendChild(b)});root.appendChild(c)})
+}
+quiz('community',[
+ {q:'O que melhor representa uma comunidade?',a:['Pessoas que convivem e compartilham espaços e atividades','Somente pessoas da mesma família','Uma casa vazia'],c:0},
+ {q:'Qual é um espaço de uso coletivo?',a:['Praça','Quarto de uma casa','Armário'],c:0},
+ {q:'Quem pode contribuir com a comunidade?',a:['Somente adultos','Crianças, adultos e idosos','Somente professores'],c:1},
+ {q:'Qual atividade aproxima as pessoas?',a:['Festa e brincadeiras em grupo','Ficar sempre isolado','Esconder os espaços públicos'],c:0}
+]);
+quiz('timegame',[
+ {q:'Ontem eu fui ao parque.',a:['Passado','Presente','Futuro'],c:0},
+ {q:'Agora estou jogando.',a:['Passado','Presente','Futuro'],c:1},
+ {q:'Amanhã vou à escola.',a:['Passado','Presente','Futuro'],c:2},
+ {q:'Quando eu era bebê, aprendi a andar.',a:['Passado','Presente','Futuro'],c:0}
+]);
+let seq=['Bebê nasce','Aprende a andar','Vai à escola','Torna-se adulto'],chosen=[];
+function resetTimeline(){chosen=[];let a=[...seq].sort(()=>Math.random()-.5),r=document.getElementById('timeline');r.innerHTML='';document.getElementById('tfb').textContent='';a.forEach(x=>{let b=document.createElement('button');b.className='drag';b.textContent=x;b.onclick=()=>{if(b.disabled)return;b.disabled=true;b.style.opacity=.45;chosen.push(x);if(chosen.length===4){let ok=chosen.every((v,i)=>v===seq[i]);add(ok);document.getElementById('tfb').textContent=ok?'Sequência perfeita! ✓':'A ordem não ficou certa. Tente novamente.'}};r.appendChild(b)})} resetTimeline();
+
+function drawClock(h,m){let c=document.getElementById('clock');c.innerHTML='<div class="hand hour"></div><div class="hand minute"></div><div class="center"></div>';for(let i=1;i<=12;i++){let n=document.createElement('span'),a=i*30*Math.PI/180;n.className='num';n.textContent=i;n.style.left=(50+40*Math.sin(a))+'%';n.style.top=(50-40*Math.cos(a))+'%';c.appendChild(n)}c.querySelector('.hour').style.transform=`translateX(-50%) rotate(${h*30+m*.5}deg)`;c.querySelector('.minute').style.transform=`translateX(-50%) rotate(${m*6}deg)`}
+let clockSet=[[9,15],[4,0],[7,30],[6,0],[2,30]],ci=0;
+function newClock(){let [h,m]=clockSet[ci++%clockSet.length];drawClock(h,m);document.getElementById('clockQuestion').innerHTML='<b>Que horas são?</b>';let correct=`${h}:${String(m).padStart(2,'0')}`,wrong1=`${h}:${String((m+15)%60).padStart(2,'0')}`,wrong2=`${(h%12)+1}:${String(m).padStart(2,'0')}`;let arr=[correct,wrong1,wrong2].sort(()=>Math.random()-.5),box=document.getElementById('clockChoices');box.innerHTML='';document.getElementById('clockfb').textContent='';arr.forEach(a=>{let b=document.createElement('button');b.className='choice';b.textContent=a;b.onclick=()=>{if(box.dataset.done)return;box.dataset.done=1;let ok=a===correct;add(ok);b.classList.add(ok?'correct':'wrong');document.getElementById('clockfb').textContent=ok?'Acertou o horário! ✓':'Confira os ponteiros novamente.'};box.appendChild(b)});delete box.dataset.done}newClock();
+quiz('oldclocks',[
+ {q:'O relógio de sol usa...',a:['a sombra do Sol','areia','água'],c:0},
+ {q:'A clepsidra usa...',a:['água','pilha','areia'],c:0},
+ {q:'A ampulheta usa...',a:['areia','engrenagens elétricas','luz'],c:0}
+]);
+quiz('mapgame',[
+ {q:'Qual lugar está na parte inferior direita?',a:['Parquinho','Quadra','Escola'],c:0},
+ {q:'Qual lugar está acima da escola?',a:['Quadra','Bombeiros','Parquinho'],c:0},
+ {q:'Para que serve uma legenda em uma planta?',a:['Explicar símbolos e cores','Marcar as horas','Contar a idade'],c:0},
+ {q:'Uma planta de bairro ajuda principalmente a...',a:['localizar e representar lugares','medir temperatura','preparar alimentos'],c:0}
+]);
+quiz('routine',[
+ {q:'Ir à escola normalmente acontece...',a:['Durante o dia','Durante a noite'],c:0},
+ {q:'Dormir normalmente acontece...',a:['Durante o dia','Durante a noite'],c:1},
+ {q:'Jantar normalmente acontece...',a:['Durante o dia','Durante a noite'],c:1},
+ {q:'Algumas pessoas trabalham...',a:['Só de dia','Só de noite','De dia ou de noite'],c:2}
+]);
+quiz('nature',[
+ {q:'A principal matéria-prima de uma mesa de madeira é...',a:['Madeira','Petróleo','Areia'],c:0},
+ {q:'A borracha pode ser produzida a partir do...',a:['Látex','Minério de ferro','Milho'],c:0},
+ {q:'O plástico pode ser produzido a partir do...',a:['Petróleo','Açaí','Madeira'],c:0},
+ {q:'A lâmina de aço de um apontador tem relação com...',a:['Minério de ferro','Látex','Tomate'],c:0},
+ {q:'O bolo de milho tem como matéria-prima...',a:['Milho','Petróleo','Ferro'],c:0}
+]);
+quiz('extract',[
+ {q:'Açaí é exemplo de recurso...',a:['Vegetal','Mineral'],c:0},
+ {q:'Petróleo é recurso...',a:['Vegetal','Mineral'],c:1},
+ {q:'Minério de ferro é recurso...',a:['Vegetal','Mineral'],c:1},
+ {q:'Látex da seringueira é recurso...',a:['Vegetal','Mineral'],c:0}
+]);
+function resetAll(){score=hits=tries=0;location.reload()}
+</script>
+</body></html>
