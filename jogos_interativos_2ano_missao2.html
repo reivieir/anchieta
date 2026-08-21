@@ -1,8 +1,19 @@
-<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Missão 2 - Jogos Interativos 2º Ano</title>
 <style>
 :root{--p:#68478a;--t:#2f7d86;--o:#df8736;--g:#27834a;--r:#b63b3b;--ink:#26323a}
 *{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;color:var(--ink);background:linear-gradient(135deg,#f8f0ff,#edf9f2)}
+
+/* MENU DE NAVEGAÇÃO ENTRE OS JOGOS NO GITHUB */
+.top-menu { background-color: #29323a; padding: 12px; text-align: center; border-bottom: 4px solid var(--o); display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+.top-menu a { color: white; text-decoration: none; font-weight: bold; padding: 8px 12px; border-radius: 8px; transition: 0.2s; }
+.top-menu a:hover { background-color: #43505c; }
+.top-menu a.active { color: var(--o); background-color: rgba(255,255,255,0.1); pointer-events: none; }
+
 header{background:linear-gradient(100deg,var(--p),var(--t));color:#fff;text-align:center;padding:22px}h1{margin:0;font-size:clamp(25px,5vw,42px)}header p{margin:8px}
 main{max-width:1050px;margin:auto;padding:16px}.score{position:sticky;top:0;z-index:5;background:#fff;border-radius:14px;padding:11px;display:flex;gap:15px;justify-content:center;flex-wrap:wrap;box-shadow:0 3px 12px #0002}
 nav{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:9px;margin:16px 0}button{font:inherit;cursor:pointer}.tab,.ans,.btn,.tile{border:0;border-radius:12px;padding:12px;box-shadow:0 2px 8px #0002;background:#fff}.tab.on{background:var(--t);color:#fff}.game{display:none;background:#fff;padding:20px;border-radius:18px;box-shadow:0 4px 16px #0002}.game.on{display:block}
@@ -13,7 +24,18 @@ nav{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:9p
 .map{position:relative;height:340px;background:#dfead7;border-radius:14px;overflow:hidden}.rh{position:absolute;top:145px;left:0;right:0;height:50px;background:#777}.rv{position:absolute;left:47%;top:0;bottom:0;width:48px;background:#777}.place{position:absolute;width:130px;height:72px;border:3px solid var(--t);border-radius:10px;background:#fff;display:flex;align-items:center;justify-content:center;font-weight:bold}.a{left:25px;top:30px}.b{right:25px;top:30px}.c{left:25px;bottom:25px}.d{right:25px;bottom:25px}
 .big{font-size:34px;text-align:center}.badge{padding:5px 9px;border-radius:20px;background:#fff2cb}.finish{text-align:center;padding:20px;background:#f7f3ff;border-radius:14px}
 @media(max-width:600px){.memory{grid-template-columns:repeat(3,1fr)}.place{width:105px;font-size:12px}.map{height:300px}}
-</style></head><body>
+</style>
+</head>
+<body>
+
+<!-- BARRA DE LINKS PARA O GITHUB -->
+<div class="top-menu">
+    <a href="index.html">🏠 Menu Principal</a>
+    <a href="jogos_interativos_2ano.html">🎲 Missão 1</a>
+    <a href="jogos_interativos_2ano_missao2.html" class="active">🚀 Missão 2</a>
+    <a href="jogos_interativos_2ano_missao3.html">🌍 Missão 3</a>
+</div>
+
 <header><h1>🚀 Missão 2: Super Revisão</h1><p>Uma nova coleção de jogos para o 2º ano — com mais exercícios e desafios diferentes</p></header>
 <main><div class="score"><b>⭐ <span id="pts">0</span> pontos</b><span>🏆 <span id="hit">0</span> acertos</span><span>🎯 <span id="try">0</span> tentativas</span><span>Progresso</span><div class="progress"><div class="bar" id="bar"></div></div><button class="btn" onclick="location.reload()">Recomeçar</button></div>
 <nav>
@@ -102,4 +124,6 @@ quiz('g8',[
 {q:'Qual frase está correta?',a:['Crianças podem aprender e também contribuir com a comunidade.','Somente adultos pertencem à comunidade.','Uma legenda serve para contar horas.'],c:0},
 {q:'Qual combinação está correta?',a:['ampulheta → areia','clepsidra → petróleo','relógio de sol → látex'],c:0}
 ]);
-</script></body></html>
+</script>
+</body>
+</html>
