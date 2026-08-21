@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Missão 3 - Jogos Interativos 2º Ano</title>
+<style>
+:root{--p:#704b8e;--t:#347e86;--o:#df8435;--bg:#f8f5ee;--ok:#27864b;--bad:#bd3d3d;--ink:#29323a}
+*{box-sizing:border-box} body{margin:0;font-family:Arial,sans-serif;background:linear-gradient(135deg,#f7f0ff,#eef9f5);color:var(--ink)}
+
+/* MENU DE NAVEGAÇÃO ENTRE OS JOGOS NO GITHUB */
+.top-menu { background-color: #29323a; padding: 12px; text-align: center; border-bottom: 4px solid var(--o); display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; }
+.top-menu a { color: white; text-decoration: none; font-weight: bold; padding: 8px 12px; border-radius: 8px; transition: 0.2s; }
+.top-menu a:hover { background-color: #43505c; }
+.top-menu a.active { color: var(--o); background-color: rgba(255,255,255,0.1); pointer-events: none; }
+
+header{background:var(--p);color:white;padding:20px;text-align:center} header h1{margin:0;font-size:clamp(24px,5vw,40px)}
+header p{margin:8px 0 0}.wrap{max-width:980px;margin:auto;padding:18px}
+.score{position:sticky;top:0;z-index:3;background:white;border:2px solid #ddd;border-radius:14px;padding:10px 14px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap;box-shadow:0 3px 10px #0001}
+.tabs{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:18px 0}
+button{font:inherit;cursor:pointer}.tab,.choice,.action{border:0;border-radius:12px;padding:12px;background:white;box-shadow:0 2px 8px #0002}
+.tab.active{background:var(--t);color:white}.game{display:none;background:white;border-radius:18px;padding:20px;box-shadow:0 4px 18px #0002}.game.active{display:block}
+.card{border:2px solid #e7e2da;border-radius:14px;padding:16px;margin:12px 0}.choices{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-top:12px}
+.choice:hover{outline:2px solid var(--t)}.choice.correct{background:#dff4e6;color:#175d31}.choice.wrong{background:#fde1e1;color:#7b2020}
+.feedback{font-weight:bold;min-height:25px;margin-top:10px}.action{background:var(--o);color:white;font-weight:bold}.big{font-size:42px;text-align:center}
+
+/* CSS DO JOGO DA MEMÓRIA */
+.memory{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;max-width:650px;margin:auto}.mem{height:92px;border:0;border-radius:12px;background:var(--p);color:#fff;font-weight:bold;font-size:15px;padding:5px}.mem.open,.mem.done{background:#fff;color:var(--ink);border:2px solid var(--t)}.mem.done{background:#dff3e5}
+
+footer{text-align:center;padding:24px;color:#667}
+@media(max-width:600px){.memory{grid-template-columns:repeat(3,1fr)}}
+</style>
+</head>
+<body>
+
+<!-- BARRA DE LINKS PARA O GITHUB -->
+<div class="top-menu">
+    <a href="index.html">🏠 Menu Principal</a>
+    <a href="jogos_interativos_2ano.html">🎲 Missão 1</a>
+    <a href="jogos_interativos_2ano_missao2.html">🚀 Missão 2</a>
+    <a href="jogos_interativos_2ano_missao3.html" class="active">🌍 Missão 3</a>
+</div>
+
+<header><h1>🌍 Missão 3: Exploradores em Ação!</h1><p>Novos desafios de História e Geografia retirados da apostila.</p></header>
+
+<div class="wrap">
+<div class="score"><b>⭐ Pontos: <span id="score">0</span></b><span>🏆 Acertos: <span id="hits">0</span></span><span>🎯 Tentativas: <span id="tries">0</span></span><button class="action" onclick="resetAll()">Recomeçar</button></div>
+
+<div class="tabs">
+<button class="tab active" onclick="showGame(0,this)">🏘️ Crianças e Comunidade</button>
+<button class="tab" onclick="showGame(1,this)">🦀 Cuidando da Natureza</button>
+<button class="tab" onclick="showGame(2,this)">🏭 De Onde Vêm?</button>
+<button class="tab" onclick="showGame(3,this)">🃏 Memória de Produtos</button>
+<button class="tab" onclick="showGame(4,this)">🕐 Curiosidades do Tempo</button>
+</div>
+
+<!-- JOGO 1 -->
+<section class="game active">
+<h2>🏘️ Crianças e Comunidade</h2><p>Responda sobre a participação na comunidade.</p>
+<div id="g_comunidade"></div>
+</section>
+
+<!-- JOGO 2 -->
+<section class="game">
+<h2>🦀 Cuidando da Natureza</h2><p>Descubra as regras de proteção ao meio ambiente.</p>
+<div id="g_natureza"></div>
+</section>
+
+<!-- JOGO 3 -->
+<section class="game">
+<h2>🏭 De Onde Vêm os Produtos?</h2><p>Classifique os produtos que consumimos no dia a dia.</p>
+<div id="g_produtos"></div>
+</section>
+
+<!-- JOGO 4 -->
+<section class="game">
+<h2>🃏 Jogo da Memória: Produto + Ingrediente Principal</h2>
+<p>Encontre os pares. Exemplo: Sabão de coco ↔ Coco.</p>
+<div id="memory" class="memory"></div>
+<div id="memfb" class="feedback"></div>
+<br>
+<button class="action" onclick="memoryStart()">Misturar e Jogar Novamente</button>
+</section>
+
+<!-- JOGO 5 -->
+<section class="game">
+<h2>🕐 Curiosidades do Tempo</h2><p>Teste seus conhecimentos sobre relógios e rotinas!</p>
+<div id="g_tempo"></div>
+</section>
+
+<footer>Feito para o projeto escolar no GitHub - Missão 3.</footer>
+</div>
+
+<script>
+// LÓGICA DE PONTUAÇÃO
+let score=0,hits=0,tries=0;
+function add(ok){tries++;if(ok){score+=10;hits++}document.querySelector('#score').textContent=score;document.querySelector('#hits').textContent=hits;document.querySelector('#tries').textContent=tries}
+
+// TROCA DE ABAS
+function showGame(i,b){document.querySelectorAll('.game').forEach((g,j)=>g.classList.toggle('active',i===j));document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));b.classList.add('active')}
+
+// FUNÇÃO CRIADORA DE QUIZ
+function quiz(container,data){
+ const root=document.getElementById(container); root.innerHTML='';
+ data.forEach((x,qi)=>{let c=document.createElement('div');c.className='card';c.innerHTML=`<b>${qi+1}. ${x.q}</b><div class="choices"></div><div class="feedback"></div>`;
+ let box=c.querySelector('.choices'),fb=c.querySelector('.feedback');
+ x.a.forEach((a,i)=>{let b=document.createElement('button');b.className='choice';b.innerHTML=a;b.onclick=()=>{if(c.dataset.done)return;c.dataset.done=1;let ok=i===x.c;add(ok);b.classList.add(ok?'correct':'wrong');if(!ok)box.children[x.c].classList.add('correct');fb.textContent=ok?'Muito bem! ✓':'Quase! Observe a resposta correta.'};box.appendChild(b)});root.appendChild(c)})
+}
+
+// ---------------- ALIMENTAÇÃO DAS PERGUNTAS ----------------
+
+quiz('g_comunidade',[
+ {q:'O que as crianças do povo indígena Xacriabá costumam fazer a partir dos 6 anos na comunidade?',a:['Ajudam a alimentar animais (como galinhas) e dão recados','Ficam apenas brincando','Vão trabalhar na cidade'],c:0},
+ {q:'Nas comunidades quilombolas, por que os conhecimentos dos adultos e idosos são tão importantes?',a:['Eles não são importantes','Para transmitir a cultura, o artesanato e as tradições de geração em geração','Para esconder as histórias do passado'],c:1},
+ {q:'Onde os moradores de uma comunidade costumam interagir e aprender com os mais velhos?',a:['Em estradas perigosas','Apenas trancados em casa','Nos locais de uso coletivo (como praças, festas e parques)'],c:2}
+]);
+
+quiz('g_natureza',[
+ {q:'A coleta de caranguejos costuma ser feita no mangue. O que é o mangue?',a:['Área de vegetação na transição entre a terra firme e o mar','Um deserto de areia seca','Uma montanha coberta de neve'],c:0},
+ {q:'No Brasil, existem leis e regras rigorosas para a pesca. Por que elas existem?',a:['Para organizar a pesca, proteger a natureza e respeitar a época de reprodução dos peixes','Para dar férias aos peixes','Para cobrar ingressos nas praias'],c:0},
+ {q:'A água é um recurso mineral muito importante. Como se chamam os grandes depósitos de água escondidos no subsolo (embaixo da terra)?',a:['Aquíferos','Nuvens','Oceanos'],c:0}
+]);
+
+quiz('g_produtos',[
+ {q:'Um produto obtido a partir do cultivo de vegetais (plantações) é chamado de:',a:['Produto industrializado','Produto pecuário','Produto agrícola'],c:2},
+ {q:'E um produto obtido a partir da criação de animais (como o leite e os ovos)?',a:['Produto agrícola','Produto da pecuária','Produto extrativista'],c:1},
+ {q:'Uma lata de refrigerante que foi fabricada utilizando máquinas em uma indústria é um:',a:['Produto industrializado','Produto natural','Produto agrícola'],c:0},
+ {q:'O plástico (usado na base de um apontador escolar) é fabricado a partir de qual mineral oleoso?',a:['Látex da seringueira','Minério de ferro','Petróleo'],c:2}
+]);
+
+quiz('g_tempo',[
+ {q:'O famoso relógio astronômico de Praga mostra as horas e também a posição de quê no céu?',a:['Do Sol e da Lua','Das estrelas cadentes','Dos aviões'],c:0},
+ {q:'O relógio que não tem ponteiros e mostra as horas usando apenas números em um painel eletrônico é o:',a:['Relógio de pêndulo','Relógio digital','Relógio de bolso'],c:1},
+ {q:'Quando mais de um evento acontece ao mesmo tempo (como duas pessoas jogando bola juntas), dizemos que são ações:',a:['Passadas','Atrasadas','Simultâneas'],c:2},
+ {q:'Para planejar algo que ainda vai acontecer (como um aniversário na semana que vem), nós usamos o tempo no:',a:['Passado','Presente','Futuro'],c:2}
+]);
+
+// ---------------- LÓGICA DO JOGO DA MEMÓRIA ----------------
+const pairs=[['Sabão de coco','Coco'],['Molho de tomate','Tomate'],['Salgadinho','Batata'],['Tapioca','Mandioca'],['Sorvete de açaí','Açaí'],['Refrigerante','Guaraná']];
+let first=null,lock=false,matched=0;
+
+function memoryStart(){
+ first=null; lock=false; matched=0;
+ document.getElementById('memfb').textContent='';
+ let cards=[];
+ pairs.forEach((p,i)=>{cards.push({t:p[0],p:i});cards.push({t:p[1],p:i})});
+ cards.sort(()=>Math.random()-.5);
+ let root=document.getElementById('memory');
+ root.innerHTML='';
+ cards.forEach(x=>{
+  let b=document.createElement('button');
+  b.className='mem'; b.textContent='?'; b.dataset.text=x.t; b.dataset.p=x.p;
+  b.onclick=()=>flip(b);
+  root.appendChild(b)
+ })
+}
+
+function flip(b){
+ if(lock||b.classList.contains('done')||b===first)return;
+ b.textContent=b.dataset.text; b.classList.add('open');
+ if(!first){first=b;return}
+ lock=true;
+ setTimeout(()=>{
+  let ok=first.dataset.p===b.dataset.p;
+  add(ok);
+  if(ok){
+   first.classList.add('done'); b.classList.add('done'); matched++;
+   document.getElementById('memfb').textContent='✓ Par perfeito! '+first.dataset.text+' e '+b.dataset.text;
+   if(matched===pairs.length)document.getElementById('memfb').textContent='🏆 Parabéns! Você encontrou todos os produtos e matérias-primas!'
+  }else{
+   first.textContent='?'; b.textContent='?';
+   first.classList.remove('open'); b.classList.remove('open');
+   document.getElementById('memfb').textContent='Ops! Tente outro par.'
+  }
+  first=null; lock=false
+ }, 800)
+}
+
+// Inicia o jogo da memória assim que a página carrega
+memoryStart();
+
+function resetAll(){score=hits=tries=0;location.reload()}
+</script>
+</body>
+</html>
