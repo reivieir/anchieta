@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portal de Revisão - 2º Ano</title>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&display=swap');
+    
+    body { 
+        font-family: 'Montserrat', sans-serif; 
+        background-color: #0d2f7a; 
+        background-image: 
+            linear-gradient(30deg, #0a2561 12%, transparent 12.5%, transparent 87%, #0a2561 87.5%, #0a2561),
+            linear-gradient(150deg, #0a2561 12%, transparent 12.5%, transparent 87%, #0a2561 87.5%, #0a2561),
+            linear-gradient(30deg, #0a2561 12%, transparent 12.5%, transparent 87%, #0a2561 87.5%, #0a2561),
+            linear-gradient(150deg, #0a2561 12%, transparent 12.5%, transparent 87%, #0a2561 87.5%, #0a2561),
+            linear-gradient(60deg, #0e358c 25%, transparent 25.5%, transparent 75%, #0e358c 75%, #0e358c),
+            linear-gradient(60deg, #0e358c 25%, transparent 25.5%, transparent 75%, #0e358c 75%, #0e358c);
+        background-size: 80px 140px;
+        background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
+        margin: 0; 
+        padding: 20px; 
+        display: flex; 
+        flex-direction: column; 
+        align-items: center; 
+        justify-content: center;
+        min-height: 100vh; 
+        box-sizing: border-box;
+    }
+    
+    .panel {
+        background-color: #e5b92e; 
+        width: 100%;
+        max-width: 450px;
+        padding: 40px 30px;
+        border-radius: 4px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    }
+    
+    .panel-title {
+        color: #1c386b; 
+        text-align: center;
+        font-size: 1.3em;
+        font-weight: 700;
+        letter-spacing: 2px;
+        margin: 0 0 30px 0;
+        text-transform: uppercase;
+    }
+
+    .section-title {
+        color: #1c386b;
+        font-size: 0.9em;
+        font-weight: 700;
+        margin: 25px 0 15px 0;
+        text-transform: uppercase;
+        border-bottom: 2px solid rgba(28, 56, 107, 0.2);
+        padding-bottom: 5px;
+    }
+
+    /* ESTILO DOS BOTÕES DE MISSÃO */
+    .link-row {
+        display: flex;
+        background-color: #f4f4f4; 
+        margin-bottom: 12px;
+        text-decoration: none;
+        border-radius: 3px;
+        overflow: hidden;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+        transition: transform 0.2s;
+    }
+    .link-row:active { transform: translateY(2px); box-shadow: 0 0 0 transparent; }
+    
+    .link-icon {
+        background-color: #213d78; 
+        color: white;
+        width: 55px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.4em;
+    }
+    
+    .link-text {
+        color: #555;
+        padding: 14px 15px;
+        font-size: 0.95em;
+        font-weight: 600;
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+    }
+
+    /* ESTILO DOS BOTÕES DE SIMULADOS */
+    .dl-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+    
+    .btn-solid {
+        background-color: #213d78; 
+        color: white;
+        text-align: center;
+        padding: 14px 10px;
+        text-decoration: none;
+        border-radius: 3px;
+        font-size: 0.85em;
+        font-weight: 600;
+        text-transform: uppercase;
+        transition: background-color 0.2s;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    .btn-solid:hover { background-color: #172c57; }
+    .btn-solid:active { transform: translateY(2px); box-shadow: 0 0 0 transparent; }
+
+    .btn-full { grid-column: 1 / -1; }
+
+    .footer {
+        margin-top: 25px;
+        color: rgba(255,255,255,0.6);
+        font-size: 0.8em;
+        text-align: center;
+    }
+
+    @media (max-width: 380px) {
+        .dl-grid { grid-template-columns: 1fr; }
+        .btn-full { grid-column: auto; }
+    }
+</style>
+</head>
+<body>
+
+    <div class="panel">
+        <h1 class="panel-title">Portal de Revisão</h1>
+        
+        <div class="section-title">Missões Interativas</div>
+        
+        <a href="jogos_interativos_2ano.html" class="link-row">
+            <div class="link-icon">🎲</div>
+            <div class="link-text">Missão 1: Conceitos Gerais</div>
+        </a>
+        
+        <a href="jogos_interativos_2ano_missao2.html" class="link-row">
+            <div class="link-icon">🚀</div>
+            <div class="link-text">Missão 2: Tempo e Rotina</div>
+        </a>
+        
+        <a href="jogos_interativos_2ano_missao3.html" class="link-row">
+            <div class="link-icon">🌍</div>
+            <div class="link-text">Missão 3: Espaço e Natureza</div>
+        </a>
+
+        <div class="section-title">Simulados Completos</div>
+        
+        <div class="dl-grid">
+            <a href="simulado_portugues.pdf" target="_blank" class="btn-solid">📘 Português</a>
+            <a href="simulado_matematica.pdf" target="_blank" class="btn-solid">🧮 Matemática</a>
+            
+            <!-- AQUI: Alterado para o arquivo HTML do simulado interativo/imprimível -->
+            <a href="simulado_hist_geo.html" target="_blank" class="btn-solid">🌍 História / Geo.</a>
+            
+            <a href="simulado_ciencias.pdf" target="_blank" class="btn-solid">🌿 Ciências</a>
+            <a href="simulado_ingles.pdf" target="_blank" class="btn-solid btn-full">🗣️ Inglês</a>
+        </div>
+    </div>
+
+    <div class="footer">
+        Projeto de Revisão Escolar - 2º Ano
+    </div>
+
+</body>
+</html>
