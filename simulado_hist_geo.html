@@ -3,171 +3,643 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portal de Revisão - 2º Ano</title>
+<title>Super Simulado - 70 Questões - História e Geografia</title>
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap');
     
-    body { 
-        font-family: 'Montserrat', sans-serif; 
-        background-color: #0d2f7a; 
-        background-image: 
-            linear-gradient(30deg, #0a2561 12%, transparent 12.5%, transparent 87%, #0a2561 87.5%, #0a2561),
-            linear-gradient(150deg, #0a2561 12%, transparent 12.5%, transparent 87%, #0a2561 87.5%, #0a2561),
-            linear-gradient(30deg, #0a2561 12%, transparent 12.5%, transparent 87%, #0a2561 87.5%, #0a2561),
-            linear-gradient(150deg, #0a2561 12%, transparent 12.5%, transparent 87%, #0a2561 87.5%, #0a2561),
-            linear-gradient(60deg, #0e358c 25%, transparent 25.5%, transparent 75%, #0e358c 75%, #0e358c),
-            linear-gradient(60deg, #0e358c 25%, transparent 25.5%, transparent 75%, #0e358c 75%, #0e358c);
-        background-size: 80px 140px;
-        background-position: 0 0, 0 0, 40px 70px, 40px 70px, 0 0, 40px 70px;
-        margin: 0; 
-        padding: 20px; 
-        display: flex; 
-        flex-direction: column; 
-        align-items: center; 
-        justify-content: center;
-        min-height: 100vh; 
-        box-sizing: border-box;
+    body {
+        font-family: 'Nunito', sans-serif;
+        color: #333;
+        background-color: #f4f6f9;
+        margin: 0;
+        padding: 0;
     }
     
-    .panel {
-        background-color: #e5b92e; 
-        width: 100%;
-        max-width: 450px;
-        padding: 40px 30px;
-        border-radius: 4px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-    }
-    
-    .panel-title {
-        color: #1c386b; 
+    /* BARRA DE AÇÕES (IMPRIMIR / PDF) */
+    .action-bar {
+        background-color: #2c3e50;
+        padding: 15px;
         text-align: center;
-        font-size: 1.3em;
-        font-weight: 700;
-        letter-spacing: 2px;
-        margin: 0 0 30px 0;
-        text-transform: uppercase;
-    }
-
-    .section-title {
-        color: #1c386b;
-        font-size: 0.9em;
-        font-weight: 700;
-        margin: 25px 0 15px 0;
-        text-transform: uppercase;
-        border-bottom: 2px solid rgba(28, 56, 107, 0.2);
-        padding-bottom: 5px;
-    }
-
-    /* ESTILO DOS BOTÕES DE MISSÃO */
-    .link-row {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
         display: flex;
-        background-color: #f4f4f4; 
-        margin-bottom: 12px;
-        text-decoration: none;
-        border-radius: 3px;
-        overflow: hidden;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.15);
-        transition: transform 0.2s;
-    }
-    .link-row:active { transform: translateY(2px); box-shadow: 0 0 0 transparent; }
-    
-    .link-icon {
-        background-color: #213d78; 
-        color: white;
-        width: 55px;
-        display: flex;
-        align-items: center;
         justify-content: center;
-        font-size: 1.4em;
+        gap: 15px;
+        flex-wrap: wrap;
     }
     
-    .link-text {
-        color: #555;
-        padding: 14px 15px;
-        font-size: 0.95em;
-        font-weight: 600;
-        flex-grow: 1;
+    .btn-action {
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        border-radius: 8px;
+        font-size: 1.1em;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.2s;
         display: flex;
         align-items: center;
+        gap: 8px;
+    }
+    .btn-print { background-color: #2ecc71; box-shadow: 0 4px 0 #27ae60; }
+    .btn-pdf { background-color: #e74c3c; box-shadow: 0 4px 0 #c0392b; }
+    
+    .btn-action:active { transform: translateY(4px); box-shadow: 0 0 0 transparent; }
+
+    /* LAYOUT DA PÁGINA */
+    .page-container {
+        padding: 20px;
     }
 
-    /* ESTILO DOS BOTÕES DE SIMULADOS */
-    .dl-grid {
+    .page {
+        background: white;
+        max-width: 850px;
+        margin: 0 auto 30px auto;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    h1 { color: #2c3e50; text-align: center; border-bottom: 3px solid #3498db; padding-bottom: 10px; font-size: 2.2em; }
+    h2 { color: #e67e22; border-bottom: 2px dashed #ccc; padding-bottom: 5px; margin-top: 30px; font-size: 1.5em; }
+    
+    .cabecalho {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 12px;
+        gap: 15px;
+        margin-bottom: 30px;
+        background: #fdfefe;
+        padding: 20px;
+        border: 2px solid #bdc3c7;
+        border-radius: 10px;
+    }
+    .linha-campo { border-bottom: 1px solid #333; flex-grow: 1; margin-left: 10px; }
+    .campo { display: flex; font-weight: bold; font-size: 1.1em; }
+    
+    .q-container { margin-bottom: 25px; font-size: 1.1em; }
+    .q-enunciado { font-weight: bold; margin-bottom: 10px; color: #2c3e50; }
+    .opcoes label { display: block; margin-bottom: 8px; cursor: pointer; }
+    .opcoes input { margin-right: 10px; }
+    
+    .linha-escrita {
+        border-bottom: 1px solid #999;
+        height: 30px;
+        margin-top: 10px;
+        width: 100%;
     }
     
-    .btn-solid {
-        background-color: #213d78; 
-        color: white;
-        text-align: center;
-        padding: 14px 10px;
-        text-decoration: none;
-        border-radius: 3px;
-        font-size: 0.85em;
-        font-weight: 600;
-        text-transform: uppercase;
-        transition: background-color 0.2s;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    .draw-box {
+        border: 2px dashed #95a5a6;
+        height: 150px;
+        border-radius: 10px;
+        margin-top: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #bdc3c7;
+        font-weight: bold;
     }
-    .btn-solid:hover { background-color: #172c57; }
-    .btn-solid:active { transform: translateY(2px); box-shadow: 0 0 0 transparent; }
+    
+    .grid-match {
+        display: flex;
+        justify-content: space-between;
+        max-width: 500px;
+        margin: 20px auto;
+    }
+    .match-col { display: flex; flex-direction: column; gap: 20px; }
+    .match-item { padding: 10px 20px; border: 2px solid #3498db; border-radius: 8px; font-weight: bold; text-align: center; }
 
-    .btn-full { grid-column: 1 / -1; }
-
-    .footer {
-        margin-top: 25px;
-        color: rgba(255,255,255,0.6);
-        font-size: 0.8em;
+    /* Caça Palavras */
+    .caca-palavras {
+        display: grid;
+        grid-template-columns: repeat(10, 1fr);
+        gap: 2px;
+        max-width: 400px;
+        margin: 20px auto;
+        background: #2c3e50;
+        padding: 5px;
+        border-radius: 5px;
+    }
+    .letra {
+        background: white;
         text-align: center;
+        padding: 10px;
+        font-weight: bold;
+        font-size: 1.2em;
     }
 
-    @media (max-width: 380px) {
-        .dl-grid { grid-template-columns: 1fr; }
-        .btn-full { grid-column: auto; }
+    .gabarito { background: #e8f8f5; padding: 20px; border-radius: 10px; margin-top: 40px; border: 2px solid #2ecc71; }
+
+    /* ESCONDER BOTÕES E AJUSTAR MARGENS NA HORA DA IMPRESSÃO */
+    @media print {
+        body { background-color: white; margin: 0; padding: 0; }
+        .action-bar { display: none !important; }
+        .page-container { padding: 0; }
+        .page { box-shadow: none; max-width: 100%; margin: 0; padding: 0; page-break-after: always; }
+        .gabarito { page-break-before: always; }
     }
 </style>
 </head>
 <body>
 
-    <div class="panel">
-        <h1 class="panel-title">Portal de Revisão</h1>
-        
-        <div class="section-title">Missões Interativas</div>
-        
-        <a href="jogos_interativos_2ano.html" class="link-row">
-            <div class="link-icon">🎲</div>
-            <div class="link-text">Missão 1: Conceitos Gerais</div>
-        </a>
-        
-        <a href="jogos_interativos_2ano_missao2.html" class="link-row">
-            <div class="link-icon">🚀</div>
-            <div class="link-text">Missão 2: Tempo e Rotina</div>
-        </a>
-        
-        <a href="jogos_interativos_2ano_missao3.html" class="link-row">
-            <div class="link-icon">🌍</div>
-            <div class="link-text">Missão 3: Espaço e Natureza</div>
-        </a>
+<!-- BARRA DE BOTÕES -->
+<div class="action-bar">
+    <button class="btn-action btn-print" onclick="window.print()">🖨️ Imprimir Simulado</button>
+    <button class="btn-action btn-pdf" onclick="salvarComoPDF()">📄 Salvar em PDF</button>
+</div>
 
-        <div class="section-title">Simulados Completos</div>
+<div class="page-container">
+    <div class="page">
+        <h1>SUPER SIMULADO - 2º ANO</h1>
+        <p style="text-align: center; font-size: 1.2em; color: #7f8c8d;">70 questões de História e Geografia</p>
         
-        <div class="dl-grid">
-            <a href="simulado_portugues.pdf" target="_blank" class="btn-solid">📘 Português</a>
-            <a href="simulado_matematica.pdf" target="_blank" class="btn-solid">🧮 Matemática</a>
-            
-            <!-- AQUI: Alterado para o arquivo HTML do simulado interativo/imprimível -->
-            <a href="simulado_hist_geo.html" target="_blank" class="btn-solid">🌍 História / Geo.</a>
-            
-            <a href="simulado_ciencias.pdf" target="_blank" class="btn-solid">🌿 Ciências</a>
-            <a href="simulado_ingles.pdf" target="_blank" class="btn-solid btn-full">🗣️ Inglês</a>
+        <div class="cabecalho">
+            <div class="campo">Nome: <div class="linha-campo"></div></div>
+            <div class="campo">Turma: <div class="linha-campo"></div></div>
+            <div class="campo">Data: <div class="linha-campo"></div></div>
+            <div class="campo">Nota: <div class="linha-campo"></div></div>
+        </div>
+
+        <p style="font-weight: bold; text-align: center; background: #fff3cd; padding: 10px; border-radius: 8px;">
+            Instruções: Leia com calma. Há questões de marcar, completar, desenhar, observar, pensar e brincar. Faça o seu melhor!
+        </p>
+
+        <!-- BLOCO A -->
+        <h2>A. Comunidade e Convivência</h2>
+        
+        <div class="q-container">
+            <div class="q-enunciado">1) Marque a frase que melhor explica o que é uma comunidade.</div>
+            <div class="opcoes">
+                <label><input type="radio"> Pessoas que convivem e compartilham espaços, interesses ou costumes.</label>
+                <label><input type="radio"> Somente quem mora na mesma casa.</label>
+                <label><input type="radio"> Uma casa vazia.</label>
+            </div>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">2) Qual situação mostra pessoas convivendo em comunidade?</div>
+            <div class="opcoes">
+                <label><input type="radio"> Crianças brincando juntas na praça.</label>
+                <label><input type="radio"> Um brinquedo guardado no armário.</label>
+                <label><input type="radio"> Uma pedra no meio da rua.</label>
+            </div>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">3) Marque os lugares que podem ser usados por várias pessoas da comunidade (uso coletivo).</div>
+            <div class="opcoes">
+                <label><input type="checkbox"> Escola</label>
+                <label><input type="checkbox"> Parquinho</label>
+                <label><input type="checkbox"> Praça</label>
+                <label><input type="checkbox"> Quarto de uma casa</label>
+            </div>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">4) Escreva uma atividade que as crianças podem fazer juntas em uma comunidade.</div>
+            <div class="linha-escrita"></div>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">5) Adultos e idosos podem ensinar conhecimentos às crianças. Dê um exemplo do que podemos aprender com eles.</div>
+            <div class="linha-escrita"></div>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">6) Verdadeiro ou falso. Escreva V ou F nas opções:</div>
+            <p>( ) Crianças também fazem parte da comunidade.</p>
+            <p>( ) Só os adultos podem ajudar a comunidade.</p>
+            <p>( ) Festas, jogos e brincadeiras podem aproximar as pessoas.</p>
+            <p>( ) Uma praça pode ser um espaço de uso coletivo.</p>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">7) Caça ao intruso: Risque a palavra que NÃO combina com os espaços da comunidade:</div>
+            <p style="text-align: center; font-size: 1.2em; font-weight: bold;">PRAÇA - ESCOLA - PARQUINHO - PASSADO</p>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">8) Desenhe duas pessoas realizando juntas uma atividade na comunidade.</div>
+            <div class="draw-box">Área de Desenho</div>
+        </div>
+
+        <!-- BLOCO B -->
+        <h2>B. A Passagem do Tempo</h2>
+
+        <div class="q-container">
+            <div class="q-enunciado">9) "Ontem fui ao parque." Essa frase fala do:</div>
+            <div class="opcoes">
+                <label><input type="radio"> Passado</label>
+                <label><input type="radio"> Presente</label>
+                <label><input type="radio"> Futuro</label>
+            </div>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">10) "Agora estou estudando." Essa frase fala do:</div>
+            <div class="opcoes">
+                <label><input type="radio"> Passado</label>
+                <label><input type="radio"> Presente</label>
+                <label><input type="radio"> Futuro</label>
+            </div>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">11) "Amanhã visitarei minha avó." Essa frase fala do:</div>
+            <div class="opcoes">
+                <label><input type="radio"> Passado</label>
+                <label><input type="radio"> Presente</label>
+                <label><input type="radio"> Futuro</label>
+            </div>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">12) Complete as frases usando as palavras: ANTES, AGORA ou DEPOIS.</div>
+            <p>a) ______________ estou fazendo o simulado.</p>
+            <p>b) ______________ eu tomei meu café da manhã.</p>
+            <p>c) ______________ eu vou dormir.</p>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">13) Linha do tempo: Numere os eventos do mais antigo (1) ao mais recente (4).</div>
+            <p>( ) Adulto</p>
+            <p>( ) Bebê</p>
+            <p>( ) Criança na escola</p>
+            <p>( ) Criança aprendendo a andar</p>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">14) Qual destas palavras indica algo que AINDA vai acontecer?</div>
+            <div class="opcoes">
+                <label><input type="radio"> Ontem</label>
+                <label><input type="radio"> Agora</label>
+                <label><input type="radio"> Amanhã</label>
+                <label><input type="radio"> Antes</label>
+            </div>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">15) Desafio Lógico: Se hoje é quarta-feira, que dia será amanhã?</div>
+            <div class="linha-escrita"></div>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">16) Desafio Lógico: Se ontem foi domingo, que dia é hoje?</div>
+            <div class="linha-escrita"></div>
         </div>
     </div>
 
-    <div class="footer">
-        Projeto de Revisão Escolar - 2º Ano
+    <div class="page">
+        <!-- BLOCO C -->
+        <h2>C. Relógios e Formas de Contar o Tempo</h2>
+
+        <div class="q-container">
+            <div class="q-enunciado">17) Antes dos relógios atuais, o que as pessoas observavam no céu para perceber os períodos do dia?</div>
+            <div class="opcoes">
+                <label><input type="radio"> Os pássaros</label>
+                <label><input type="radio"> O Sol</label>
+                <label><input type="radio"> Os aviões</label>
+            </div>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">18) O relógio de sol mede a passagem do tempo observando:</div>
+            <div class="opcoes">
+                <label><input type="radio"> A sombra</label>
+                <label><input type="radio"> A chuva</label>
+                <label><input type="radio"> O vento</label>
+            </div>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">19) A clepsidra é um relógio muito antigo que utiliza o que para marcar o tempo?</div>
+            <div class="opcoes">
+                <label><input type="radio"> Água</label>
+                <label><input type="radio"> Areia</label>
+                <label><input type="radio"> Pilha</label>
+            </div>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">20) A ampulheta funciona com a passagem de:</div>
+            <div class="opcoes">
+                <label><input type="radio"> Areia</label>
+                <label><input type="radio"> Água</label>
+                <label><input type="radio"> Óleo</label>
+            </div>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">21) Em um relógio de ponteiros, o ponteiro menor indica:</div>
+            <div class="opcoes">
+                <label><input type="radio"> As Horas</label>
+                <label><input type="radio"> Os Minutos</label>
+                <label><input type="radio"> Os Segundos</label>
+            </div>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">22) Escreva os horários que você costuma fazer estas atividades:</div>
+            <p>Acordar: _______________</p>
+            <p>Ir para a escola: _______________</p>
+            <p>Dormir: _______________</p>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">23) Desenhe um relógio de ponteiros marcando 6 horas.</div>
+            <div class="draw-box" style="border-radius: 50%; width: 150px; margin: 10px auto;">Relógio</div>
+        </div>
+
+        <!-- BLOCO D -->
+        <h2>D. Localização, Plantas e Legendas</h2>
+
+        <div class="q-container" style="background: #eaf2f8; padding: 15px; border-radius: 10px; text-align: center; border: 2px solid #3498db;">
+            <strong>MAPA DO BAIRRO</strong><br>
+            [ ESCOLA ] --- Rua Central --- [ BOMBEIROS ]<br>
+            [ QUADRA ] --- Rua das Araras --- [ PARQUINHO ]
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">24) De acordo com o mapa acima, se você está na ESCOLA e atravessa a rua para baixo, onde você chega?</div>
+            <div class="linha-escrita"></div>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">25) Se você está no PARQUINHO, o que está acima de você?</div>
+            <div class="linha-escrita"></div>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">26) Descreva o caminho da ESCOLA até os BOMBEIROS:</div>
+            <div class="linha-escrita"></div>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">27) Uma "planta de bairro" serve para:</div>
+            <div class="opcoes">
+                <label><input type="radio"> Representar e localizar lugares vistos de cima.</label>
+                <label><input type="radio"> Contar histórias em quadrinhos.</label>
+                <label><input type="radio"> Medir o tempo.</label>
+            </div>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">28) A legenda de uma planta serve para explicar o significado de:</div>
+            <div class="opcoes">
+                <label><input type="radio"> Símbolos e cores</label>
+                <label><input type="radio"> As horas do dia</label>
+                <label><input type="radio"> O passado</label>
+            </div>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">29) Se na legenda há uma área pintada de VERDE, o que ela geralmente representa?</div>
+            <div class="opcoes">
+                <label><input type="radio"> Uma praça ou área de natureza.</label>
+                <label><input type="radio"> Um prédio alto.</label>
+                <label><input type="radio"> Uma escola de tijolos.</label>
+            </div>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">30) Crie os seus próprios símbolos! Desenhe na caixa um ícone que represente uma ESCOLA e outro que represente um HOSPITAL.</div>
+            <div style="display: flex; gap: 20px;">
+                <div class="draw-box" style="flex: 1;">ESCOLA</div>
+                <div class="draw-box" style="flex: 1;">HOSPITAL</div>
+            </div>
+        </div>
     </div>
+
+    <div class="page">
+        <!-- BLOCO E -->
+        <h2>E. Dia, Noite e Rotina</h2>
+
+        <div class="q-container">
+            <div class="q-enunciado">31) Qual destas atividades acontece quase sempre durante o DIA?</div>
+            <div class="opcoes">
+                <label><input type="radio"> Ir à escola.</label>
+                <label><input type="radio"> Observar as estrelas e a lua.</label>
+                <label><input type="radio"> Dormir a noite inteira.</label>
+            </div>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">32) Qual atividade é comum no período da NOITE?</div>
+            <div class="opcoes">
+                <label><input type="radio"> Jantar e ir dormir.</label>
+                <label><input type="radio"> Almoçar no parque sob o sol.</label>
+                <label><input type="radio"> Tomar café da manhã ao acordar.</label>
+            </div>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">33) Escreva (D) para Dia, (N) para Noite ou (DN) se puder acontecer nos dois períodos:</div>
+            <p>( ) Brincar no parque iluminado pelo sol.</p>
+            <p>( ) Médicos trabalhando em hospitais.</p>
+            <p>( ) Usar lanterna para enxergar no escuro.</p>
+            <p>( ) Jantar com a família.</p>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">34) Sequência da rotina: Coloque os números 1, 2, 3 e 4 na ordem correta do seu dia.</div>
+            <p>( ) Almoçar.</p>
+            <p>( ) Tomar café da manhã.</p>
+            <p>( ) Dormir.</p>
+            <p>( ) Jantar.</p>
+        </div>
+
+        <!-- BLOCO F -->
+        <h2>F. Natureza, Matérias-Primas e Produtos</h2>
+
+        <div class="q-container">
+            <div class="q-enunciado">35) Os materiais retirados da natureza que são usados nas indústrias para produzir objetos são chamados de:</div>
+            <div class="opcoes">
+                <label><input type="radio"> Matérias-primas</label>
+                <label><input type="radio"> Legendas</label>
+                <label><input type="radio"> Comunidades</label>
+            </div>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">36) A madeira usada para fabricar a sua mesa vem principalmente de onde?</div>
+            <div class="opcoes">
+                <label><input type="radio"> Do petróleo</label>
+                <label><input type="radio"> Das árvores da floresta</label>
+                <label><input type="radio"> Das rochas do fundo do mar</label>
+            </div>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">37) O látex retirado do caule da árvore seringueira é usado para fabricar o quê?</div>
+            <div class="opcoes">
+                <label><input type="radio"> A borracha que apaga o lápis</label>
+                <label><input type="radio"> O vidro da janela</label>
+                <label><input type="radio"> O aço do apontador</label>
+            </div>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">38) Classifique os itens escrevendo (V) para Extrativismo Vegetal ou (M) para Extrativismo Mineral:</div>
+            <p>( ) Açaí</p>
+            <p>( ) Látex</p>
+            <p>( ) Petróleo</p>
+            <p>( ) Minério de Ferro</p>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">39) Encontre e marque a combinação que está ERRADA (produto que não vem daquela matéria-prima):</div>
+            <div class="opcoes">
+                <label><input type="radio"> Molho de tomate -> Tomate</label>
+                <label><input type="radio"> Plástico -> Petróleo</label>
+                <label><input type="radio"> Bolo de milho -> Milho</label>
+                <label><input type="radio"> Borracha -> Minério de ferro</label>
+            </div>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">40) Desenhe um objeto que você usa muito na escola e escreva de qual matéria-prima ele é feito:</div>
+            <div class="draw-box">Desenho do Objeto</div>
+            <p>Matéria-prima: _______________________________</p>
+        </div>
+    </div>
+
+    <div class="page">
+        <!-- BLOCO G: NOVAS QUESTÕES (41 A 70) -->
+        <h1 style="color: #8e44ad; text-align: center;">🔥 MISSÕES ESPECIAIS 🔥</h1>
+        
+        <h2>G. Ligar as Colunas: Produtos e Origens</h2>
+        <div class="q-container">
+            <div class="q-enunciado">Ligue o PRODUTO (número) com a sua MATÉRIA-PRIMA correta (letra). Escreva a letra correspondente no espaço.</div>
+            
+            <div style="display: flex; justify-content: space-around; background: #fff; padding: 20px; border-radius: 10px; border: 2px dashed #9b59b6;">
+                <div>
+                    <p>41) Lâmina de Aço ( )</p>
+                    <p>42) Borracha Escolar ( )</p>
+                    <p>43) Salgadinho ( )</p>
+                    <p>44) Garrafa de Plástico ( )</p>
+                </div>
+                <div>
+                    <p>A. Látex da Seringueira</p>
+                    <p>B. Petróleo</p>
+                    <p>C. Minério de Ferro</p>
+                    <p>D. Batata</p>
+                </div>
+            </div>
+        </div>
+
+        <h2>H. Caça-Palavras do Explorador</h2>
+        <div class="q-container">
+            <div class="q-enunciado">Encontre as 8 palavras escondidas na grade abaixo:</div>
+            <p style="text-align: center; font-weight: bold; color: #e67e22;">PASSADO - FUTURO - MAPA - LEGENDA - LÁTEX - PRAÇA - RELÓGIO - MINÉRIO</p>
+            
+            <div class="caca-palavras">
+                <div class="letra">P</div><div class="letra">A</div><div class="letra">S</div><div class="letra">S</div><div class="letra">A</div><div class="letra">D</div><div class="letra">O</div><div class="letra">X</div><div class="letra">B</div><div class="letra">Z</div>
+                <div class="letra">Q</div><div class="letra">L</div><div class="letra">A</div><div class="letra">T</div><div class="letra">E</div><div class="letra">X</div><div class="letra">W</div><div class="letra">M</div><div class="letra">K</div><div class="letra">F</div>
+                <div class="letra">R</div><div class="letra">E</div><div class="letra">L</div><div class="letra">O</div><div class="letra">G</div><div class="letra">I</div><div class="letra">O</div><div class="letra">A</div><div class="letra">V</div><div class="letra">U</div>
+                <div class="letra">T</div><div class="letra">M</div><div class="letra">A</div><div class="letra">P</div><div class="letra">A</div><div class="letra">Y</div><div class="letra">L</div><div class="letra">P</div><div class="letra">C</div><div class="letra">T</div>
+                <div class="letra">U</div><div class="letra">L</div><div class="letra">E</div><div class="letra">G</div><div class="letra">E</div><div class="letra">N</div><div class="letra">D</div><div class="letra">A</div><div class="letra">X</div><div class="letra">U</div>
+                <div class="letra">S</div><div class="letra">M</div><div class="letra">I</div><div class="letra">N</div><div class="letra">E</div><div class="letra">R</div><div class="letra">I</div><div class="letra">O</div><div class="letra">J</div><div class="letra">R</div>
+                <div class="letra">H</div><div class="letra">P</div><div class="letra">R</div><div class="letra">A</div><div class="letra">C</div><div class="letra">A</div><div class="letra">O</div><div class="letra">P</div><div class="letra">M</div><div class="letra">O</div>
+            </div>
+            
+            <p style="text-align: center;">Marque as palavras quando as encontrar!</p>
+            <p>45. PASSADO ( ) &nbsp; 46. FUTURO ( ) &nbsp; 47. MAPA ( ) &nbsp; 48. LEGENDA ( )</p>
+            <p>49. LÁTEX ( ) &nbsp;&nbsp;&nbsp; 50. PRAÇA ( ) &nbsp;&nbsp; 51. RELÓGIO ( ) &nbsp; 52. MINÉRIO ( )</p>
+        </div>
+
+        <h2>I. Cruzadinha da Sabedoria</h2>
+        <div class="q-container">
+            <div class="q-enunciado">Leia as dicas e descubra as respostas da cruzadinha:</div>
+            <p>53. O relógio que usa areia para marcar o tempo. ________________________</p>
+            <p>54. Desenho de um bairro visto de cima. ________________________</p>
+            <p>55. Profissionais que trabalham no hospital (dia e noite). ________________________</p>
+            <p>56. Povo tradicional onde os idosos ensinam a cultura. ________________________</p>
+            <p>57. Mineral oleoso escuro usado para fazer plástico. ________________________</p>
+        </div>
+    </div>
+
+    <div class="page">
+        <h2>J. O Desafio do Verdadeiro ou Falso (V ou F)</h2>
+        <div class="q-container">
+            <div class="q-enunciado">Coloque (V) se a frase for verdadeira e (F) se for falsa:</div>
+            <p>58. ( ) Nas comunidades indígenas Xacriabá, as crianças não ajudam em nada.</p>
+            <p>59. ( ) É proibido pescar na época de reprodução dos peixes para proteger a natureza.</p>
+            <p>60. ( ) O relógio de sol funciona muito bem durante a noite.</p>
+            <p>61. ( ) Extrativismo é a prática de retirar recursos da natureza.</p>
+            <p>62. ( ) Um carro de brinquedo de plástico é considerado um recurso natural.</p>
+        </div>
+
+        <h2>K. Desenhando Espaços e Localizações</h2>
+        <div class="q-container">
+            <div class="q-enunciado">63) Desenhe o "mapa" (planta) do seu próprio quarto visto de cima. Não esqueça de colocar a cama e a porta!</div>
+            <div class="draw-box">Mapa do Quarto</div>
+        </div>
+        <div class="q-container">
+            <div class="q-enunciado">64) Desenhe um Ponto de Referência que existe perto da sua casa (ex: uma padaria, uma árvore grande, um mercado).</div>
+            <div class="draw-box">Ponto de Referência</div>
+        </div>
+
+        <h2>L. O Desafio Final das Frases</h2>
+        <div class="q-container">
+            <div class="q-enunciado">Complete as frases com a palavra correta do quadro:</div>
+            <p style="text-align: center; font-weight: bold; background: #ecf0f1; padding: 10px; border-radius: 5px;">SIMULTÂNEAS - AGRÍCOLA - COMUNIDADE - CULTURA</p>
+            <br>
+            <p>65) A _____________________ é formada por pessoas que convivem em um mesmo espaço e dividem interesses.</p>
+            <p>66) Duas ações que acontecem no mesmo exato momento são chamadas de ações _____________________.</p>
+            <p>67) Nas comunidades quilombolas, os idosos ensinam a _____________________ aos mais jovens.</p>
+            <p>68) O tomate e o milho são exemplos de produtos do cultivo _____________________.</p>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">69) Qual destes NÂO é um relógio?</div>
+            <div class="opcoes">
+                <label><input type="radio"> Ampulheta</label>
+                <label><input type="radio"> Bússola</label>
+                <label><input type="radio"> Clepsidra</label>
+            </div>
+        </div>
+        
+        <div class="q-container">
+            <div class="q-enunciado">70) Escreva uma mensagem curta dizendo o que você mais gostou de aprender nesta revisão:</div>
+            <div class="linha-escrita"></div>
+            <div class="linha-escrita"></div>
+        </div>
+        
+        <p style="text-align: center; font-size: 1.5em; margin-top: 40px;">🌟 PARABÉNS! VOCÊ CONCLUIU O SUPER SIMULADO! 🌟</p>
+    </div>
+
+    <!-- GABARITO PARA OS PAIS -->
+    <div class="page gabarito">
+        <h2 style="text-align: center; color: #27ae60; margin-top: 0;">GABARITO PARA OS PAIS / PROFESSORES</h2>
+        <div style="display: flex; gap: 40px; font-size: 0.95em;">
+            <div>
+                <p><strong>Bloco A:</strong> 1) Pessoas que convivem... | 2) Crianças na praça | 3) Escola, Parquinho, Praça | 4 e 5) Pessoal | 6) V, F, V, V | 7) Passado</p>
+                <p><strong>Bloco B:</strong> 9) Passado | 10) Presente | 11) Futuro | 12) a-Agora, b-Antes, c-Depois | 13) 4, 1, 3, 2 | 14) Amanhã | 15) Quinta | 16) Segunda</p>
+                <p><strong>Bloco C:</strong> 17) O Sol | 18) A sombra | 19) Água | 20) Areia | 21) Horas</p>
+                <p><strong>Bloco D:</strong> 24) Quadra | 25) Bombeiros | 26) Pessoal (usando as ruas) | 27) Representar e localizar | 28) Símbolos e cores | 29) Praça/Natureza</p>
+                <p><strong>Bloco E:</strong> 31) Ir à escola | 32) Jantar e ir dormir | 33) D/DN, DN, N, N | 34) 2, 1, 4, 3</p>
+            </div>
+            <div>
+                <p><strong>Bloco F:</strong> 35) Matérias-primas | 36) Das árvores | 37) A borracha | 38) V, V, M, M | 39) Borracha -> Minério de ferro</p>
+                <p><strong>Bloco G:</strong> 41) C | 42) A | 43) D | 44) B</p>
+                <p><strong>Bloco H:</strong> Resolução visual no quadro.</p>
+                <p><strong>Bloco I:</strong> 53) Ampulheta | 54) Planta | 55) Médicos | 56) Quilombolas | 57) Petróleo</p>
+                <p><strong>Bloco J:</strong> 58) F | 59) V | 60) F | 61) V | 62) F</p>
+                <p><strong>Bloco K:</strong> 63 e 64) Pessoal.</p>
+                <p><strong>Bloco L:</strong> 65) Comunidade | 66) Simultâneas | 67) Cultura | 68) Agrícola | 69) Bússola | 70) Pessoal</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function salvarComoPDF() {
+        alert("DICA: Na próxima tela que vai abrir, procure o campo 'Impressora' ou 'Destino' e troque para 'Salvar como PDF'!");
+        window.print();
+    }
+</script>
 
 </body>
 </html>
