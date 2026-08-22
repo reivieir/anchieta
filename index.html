@@ -9,9 +9,7 @@
     
     body { 
         font-family: 'Montserrat', sans-serif; 
-        /* Cor de fundo azul escuro baseada na imagem */
         background-color: #0d2f7a; 
-        /* Padrão geométrico suave no fundo para imitar a imagem */
         background-image: 
             linear-gradient(30deg, #0a2561 12%, transparent 12.5%, transparent 87%, #0a2561 87.5%, #0a2561),
             linear-gradient(150deg, #0a2561 12%, transparent 12.5%, transparent 87%, #0a2561 87.5%, #0a2561),
@@ -32,7 +30,6 @@
     }
     
     .panel {
-        /* Cor amarelo/mostarda baseada na imagem */
         background-color: #e5b92e; 
         width: 100%;
         max-width: 450px;
@@ -42,7 +39,7 @@
     }
     
     .panel-title {
-        color: #1c386b; /* Azul escuro do texto */
+        color: #1c386b; 
         text-align: center;
         font-size: 1.3em;
         font-weight: 700;
@@ -61,10 +58,10 @@
         padding-bottom: 5px;
     }
 
-    /* ESTILO DOS BOTÕES DE MISSÃO (inspirado nos inputs da imagem) */
+    /* ESTILO DOS BOTÕES DE MISSÃO */
     .link-row {
         display: flex;
-        background-color: #f4f4f4; /* Fundo branco/cinza claro */
+        background-color: #f4f4f4; 
         margin-bottom: 12px;
         text-decoration: none;
         border-radius: 3px;
@@ -75,7 +72,7 @@
     .link-row:active { transform: translateY(2px); box-shadow: 0 0 0 transparent; }
     
     .link-icon {
-        background-color: #213d78; /* Azul escuro do ícone */
+        background-color: #213d78; 
         color: white;
         width: 55px;
         display: flex;
@@ -94,7 +91,7 @@
         align-items: center;
     }
 
-    /* ESTILO DOS BOTÕES DE DOWNLOAD (inspirado no botão SALVAR) */
+    /* ESTILO DOS BOTÕES DE SIMULADOS */
     .dl-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -102,7 +99,7 @@
     }
     
     .btn-solid {
-        background-color: #213d78; /* Azul escuro sólido */
+        background-color: #213d78; 
         color: white;
         text-align: center;
         padding: 14px 10px;
@@ -117,7 +114,6 @@
     .btn-solid:hover { background-color: #172c57; }
     .btn-solid:active { transform: translateY(2px); box-shadow: 0 0 0 transparent; }
 
-    /* O botão de Inglês fica ocupando a linha toda embaixo */
     .btn-full { grid-column: 1 / -1; }
 
     .footer {
@@ -155,12 +151,15 @@
             <div class="link-text">Missão 3: Espaço e Natureza</div>
         </a>
 
-        <div class="section-title">Downloads dos Simulados</div>
+        <div class="section-title">Simulados Completos</div>
         
         <div class="dl-grid">
             <a href="simulado_portugues.pdf" target="_blank" class="btn-solid">📘 Português</a>
             <a href="simulado_matematica.pdf" target="_blank" class="btn-solid">🧮 Matemática</a>
-            <a href="simulado_hist_geo.pdf" target="_blank" class="btn-solid">🌍 História / Geo.</a>
+            
+            <!-- AQUI: Alterado para o arquivo HTML do simulado interativo/imprimível -->
+            <a href="simulado_hist_geo.html" target="_blank" class="btn-solid">🌍 História / Geo.</a>
+            
             <a href="simulado_ciencias.pdf" target="_blank" class="btn-solid">🌿 Ciências</a>
             <a href="simulado_ingles.pdf" target="_blank" class="btn-solid btn-full">🗣️ Inglês</a>
         </div>
