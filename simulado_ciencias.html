@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Super Simulado - 50 Questões - Ciências</title>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap');
+    
+    body {
+        font-family: 'Nunito', sans-serif;
+        color: #333;
+        background-color: #f4f6f9;
+        margin: 0;
+        padding: 0;
+    }
+    
+    /* BARRA DE AÇÕES (IMPRIMIR / PDF) */
+    .action-bar {
+        background-color: #2c3e50;
+        padding: 15px;
+        text-align: center;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+    
+    .btn-action {
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        border-radius: 8px;
+        font-size: 1.1em;
+        font-weight: bold;
+        cursor: pointer;
+        transition: 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    .btn-print { background-color: #2ecc71; box-shadow: 0 4px 0 #27ae60; }
+    .btn-pdf { background-color: #e74c3c; box-shadow: 0 4px 0 #c0392b; }
+    
+    .btn-action:active { transform: translateY(4px); box-shadow: 0 0 0 transparent; }
+
+    /* LAYOUT DA PÁGINA */
+    .page-container {
+        padding: 20px;
+    }
+
+    .page {
+        background: white;
+        max-width: 850px;
+        margin: 0 auto 30px auto;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    h1 { color: #27ae60; text-align: center; border-bottom: 3px solid #2ecc71; padding-bottom: 10px; font-size: 2.2em; }
+    h2 { color: #2980b9; border-bottom: 2px dashed #ccc; padding-bottom: 5px; margin-top: 30px; font-size: 1.5em; }
+    
+    .cabecalho {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+        margin-bottom: 30px;
+        background: #fdfefe;
+        padding: 20px;
+        border: 2px solid #bdc3c7;
+        border-radius: 10px;
+    }
+    .linha-campo { border-bottom: 1px solid #333; flex-grow: 1; margin-left: 10px; }
+    .campo { display: flex; font-weight: bold; font-size: 1.1em; }
+    
+    .q-container { margin-bottom: 25px; font-size: 1.1em; }
+    .q-enunciado { font-weight: bold; margin-bottom: 10px; color: #2c3e50; }
+    .opcoes label { display: block; margin-bottom: 8px; cursor: pointer; }
+    .opcoes input { margin-right: 10px; }
+    
+    .linha-escrita {
+        border-bottom: 1px solid #999;
+        height: 30px;
+        margin-top: 10px;
+        width: 100%;
+    }
+    
+    .draw-box {
+        border: 2px dashed #95a5a6;
+        height: 150px;
+        border-radius: 10px;
+        margin-top: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #bdc3c7;
+        font-weight: bold;
+    }
+
+    .gabarito { background: #f4f6f9; padding: 20px; border-radius: 10px; margin-top: 40px; border: 2px solid #34495e; }
+
+    /* ESCONDER BOTÕES E AJUSTAR MARGENS NA HORA DA IMPRESSÃO */
+    @media print {
+        body { background-color: white; margin: 0; padding: 0; }
+        .action-bar { display: none !important; }
+        .page-container { padding: 0; }
+        .page { box-shadow: none; max-width: 100%; margin: 0; padding: 0; page-break-after: always; }
+        .gabarito { page-break-before: always; }
+    }
+</style>
+</head>
+<body>
+
+<div class="action-bar">
+    <button class="btn-action btn-print" onclick="window.print()">🖨️ Imprimir Simulado</button>
+    <button class="btn-action btn-pdf" onclick="salvarComoPDF()">📄 Salvar em PDF</button>
+</div>
+
+<div class="page-container">
+    <div class="page">
+        <h1>SUPER SIMULADO - CIÊNCIAS</h1>
+        <p style="text-align: center; font-size: 1.2em; color: #7f8c8d;">50 questões: Materiais, Reciclagem e Prevenção de Acidentes</p>
+        
+        <div class="cabecalho">
+            <div class="campo">Nome: <div class="linha-campo"></div></div>
+            <div class="campo">Turma: <div class="linha-campo"></div></div>
+            <div class="campo">Data: <div class="linha-campo"></div></div>
+            <div class="campo">Nota: <div class="linha-campo"></div></div>
+        </div>
+
+        <!-- BLOCO A: OS MATERIAIS -->
+        <h2>A. Os Materiais e os Objetos</h2>
+        
+        <div class="q-container">
+            <div class="q-enunciado">1) Na sala de aula e em casa, somos rodeados por vários objetos. De que materiais uma tesoura escolar costuma ser feita?</div>
+            <div class="opcoes">
+                <label><input type="radio"> Vidro e papel.</label>
+                <label><input type="radio"> Metal e plástico.</label>
+                <label><input type="radio"> Pano e borracha.</label>
+            </div>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">2) É possível ter objetos com o mesmo formato, mas feitos de materiais diferentes. Assinale a opção que mostra 4 materiais usados para fazer COPOS:</div>
+            <div class="opcoes">
+                <label><input type="radio"> Vidro, plástico, papelão e isopor.</label>
+                <label><input type="radio"> Areia, couro, pedra e cera.</label>
+                <label><input type="radio"> Algodão, grafite, metal e cerâmica.</label>
+            </div>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">3) Os materiais produzidos pelo ser humano (como vidro, plástico e metal) a partir de coisas encontradas na natureza são chamados de materiais:</div>
+            <div class="opcoes">
+                <label><input type="radio"> Artificiais.</label>
+                <label><input type="radio"> Espaciais.</label>
+                <label><input type="radio"> Invisíveis.</label>
+            </div>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">4) Desenhe um objeto que você usa muito na escola e escreva do que ele é feito:</div>
+            <div class="draw-box">Desenho do Objeto</div>
+            <p>Material:</p> <div class="linha-escrita"></div>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">5) Quais destes materiais encontramos na sala de aula? Marque X.</div>
+            <p>( ) Plástico &nbsp;&nbsp;&nbsp; ( ) Metal &nbsp;&nbsp;&nbsp; ( ) Papel &nbsp;&nbsp;&nbsp; ( ) Areia da praia</p>
+        </div>
+
+        <!-- BLOCO B: ORIGEM DOS MATERIAIS -->
+        <h2>B. De Onde Vêm os Materiais?</h2>
+
+        <div class="q-container">
+            <div class="q-enunciado">6) O VIDRO que usamos nas janelas e copos é produzido aquecendo qual material natural?</div>
+            <div class="opcoes">
+                <label><input type="radio"> Madeira das árvores.</label>
+                <label><input type="radio"> Areia e outras substâncias.</label>
+                <label><input type="radio"> O petróleo do solo.</label>
+            </div>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">7) O PLÁSTICO (usado em potes e embalagens) é feito de materiais retirados de grandes profundidades no solo, de uma substância chamada:</div>
+            <div class="opcoes">
+                <label><input type="radio"> Água doce.</label>
+                <label><input type="radio"> Petróleo.</label>
+                <label><input type="radio"> Minério de ferro.</label>
+            </div>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">8) Os papéis (como o papel seda ou o papelão) são feitos de CELULOSE. Onde a celulose é encontrada?</div>
+            <div class="opcoes">
+                <label><input type="radio"> Nas rochas.</label>
+                <label><input type="radio"> Nas plantas, como as árvores.</label>
+                <label><input type="radio"> Na areia quente.</label>
+            </div>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">9) Os METAIS (ferro, alumínio, cobre) são feitos a partir de minerais. De onde esses minerais são retirados?</div>
+            <div class="opcoes">
+                <label><input type="radio"> Das rochas.</label>
+                <label><input type="radio"> Do tronco das árvores.</label>
+                <label><input type="radio"> Das nuvens.</label>
+            </div>
+        </div>
+        
+        <div class="q-container">
+            <div class="q-enunciado">10) Ligue o material (A e B) com a sua origem (1 e 2):</div>
+            <p>A. Vidro &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ( ) Petróleo</p>
+            <p>B. Plástico &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ( ) Areia</p>
+        </div>
+    </div>
+
+    <div class="page">
+        <!-- BLOCO C: PROPRIEDADES DOS MATERIAIS -->
+        <h2>C. As Propriedades (O jeito de cada material)</h2>
+
+        <div class="q-container">
+            <div class="q-enunciado">11) O papel de caderno pode ser dobrado de várias formas para criar aviõezinhos ou barquinhos. Por isso, dizemos que o papel é:</div>
+            <div class="opcoes">
+                <label><input type="radio"> Muito pesado e duro.</label>
+                <label><input type="radio"> Um material flexível.</label>
+                <label><input type="radio"> Transparente como o vidro.</label>
+            </div>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">12) O PAPELÃO, por outro lado, é usado para fazer caixas. Ele é diferente da folha do caderno porque:</div>
+            <div class="opcoes">
+                <label><input type="radio"> É mais grosso e geralmente mais resistente.</label>
+                <label><input type="radio"> É feito de pedra.</label>
+                <label><input type="radio"> Desmancha na hora que encosta.</label>
+            </div>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">13) A MADEIRA (como nos caixotes e palitos de sorvete) é muito usada para construir brinquedos porque:</div>
+            <div class="opcoes">
+                <label><input type="radio"> É transparente.</label>
+                <label><input type="radio"> É um material resistente que não quebra com facilidade.</label>
+                <label><input type="radio"> É molinha igual papel.</label>
+            </div>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">14) Depois de usadas, as garrafas plásticas podem virar diversos brinquedos (como um vai-e-vem). Isso acontece porque o plástico tem como características ser:</div>
+            <div class="opcoes">
+                <label><input type="radio"> Leve e resistente.</label>
+                <label><input type="radio"> Pesado e frágil.</label>
+                <label><input type="radio"> Quente e de metal.</label>
+            </div>
+        </div>
+        
+        <div class="q-container">
+            <div class="q-enunciado">15) Coloque V para Verdadeiro e F para Falso:</div>
+            <p>( ) O papelão é menos flexível que a folha de caderno.</p>
+            <p>( ) Os palitos de churrasco e de sorvete são feitos de plástico.</p>
+            <p>( ) Alguns materiais são fáceis de dobrar e outros são muito duros.</p>
+        </div>
+
+        <!-- BLOCO D: REUTILIZAR E RECICLAR -->
+        <h2>D. Cuidando do Planeta: Reutilizar e Reciclar</h2>
+
+        <div class="q-container">
+            <div class="q-enunciado">16) Quando pegamos um pote plástico de sorvete e usamos ele novamente para guardar brinquedos, nós estamos:</div>
+            <div class="opcoes">
+                <label><input type="radio"> Reutilizando o objeto.</label>
+                <label><input type="radio"> Jogando no lixo.</label>
+                <label><input type="radio"> Comendo o pote.</label>
+            </div>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">17) Quando o material passa por um processo de transformação na fábrica para produzir um objeto totalmente novo, nós chamamos isso de:</div>
+            <div class="opcoes">
+                <label><input type="radio"> Reutilizar.</label>
+                <label><input type="radio"> Reciclar.</label>
+                <label><input type="radio"> Acidente.</label>
+            </div>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">18) Qual é uma grande vantagem de inventar brinquedos reutilizando revistas, jornais e garrafas plásticas?</div>
+            <div class="opcoes">
+                <label><input type="radio"> Nós sujamos mais a casa.</label>
+                <label><input type="radio"> Nós brincamos e, ao mesmo tempo, produzimos MENOS lixo no planeta.</label>
+                <label><input type="radio"> Nós temos que comprar brinquedos caros.</label>
+            </div>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">19) Em uma aula de artes, as crianças construíram carrinhos e cidades. Que materiais descartados no lixo geralmente são fáceis de usar para fazer brinquedos?</div>
+            <div class="opcoes">
+                <label><input type="radio"> Cacos de vidro quebrados.</label>
+                <label><input type="radio"> Caixas de papelão e embalagens de plástico.</label>
+                <label><input type="radio"> Facas velhas.</label>
+            </div>
+        </div>
+        
+        <div class="q-container">
+            <div class="q-enunciado">20) Complete a frase: Usar uma garrafa plástica novamente para guardar água na geladeira é um exemplo de ________________________.</div>
+        </div>
+    </div>
+
+    <div class="page">
+        <!-- BLOCO E: SEGURANÇA E MATERIAIS PERIGOSOS -->
+        <h2>E. Perigos dos Materiais</h2>
+
+        <div class="q-container">
+            <div class="q-enunciado">21) Alguns materiais são CORTANTES e podem causar acidentes. Qual objeto escolar exige muito cuidado por ter lâminas de metal?</div>
+            <div class="opcoes">
+                <label><input type="radio"> A borracha.</label>
+                <label><input type="radio"> A tesoura.</label>
+                <label><input type="radio"> O estojo.</label>
+            </div>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">22) Como deve ser a ponta da tesoura que as crianças usam na escola?</div>
+            <div class="opcoes">
+                <label><input type="radio"> Arredondada (sem ponta aguda).</label>
+                <label><input type="radio"> Muito afiada igual uma faca.</label>
+                <label><input type="radio"> Torta e quebrada.</label>
+            </div>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">23) O papel e a madeira são materiais INFLAMÁVEIS. O que significa isso?</div>
+            <div class="opcoes">
+                <label><input type="radio"> Que eles derretem na água.</label>
+                <label><input type="radio"> Que eles se queimam e pegam fogo com facilidade.</label>
+                <label><input type="radio"> Que eles congelam rápido.</label>
+            </div>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">24) Por que NUNCA devemos colocar alguns tipos de plásticos ou tintas na boca?</div>
+            <div class="opcoes">
+                <label><input type="radio"> Porque eles são doces.</label>
+                <label><input type="radio"> Porque eles são TÓXICOS e essas substâncias nos fazem mal.</label>
+                <label><input type="radio"> Porque sujam os dentes apenas.</label>
+            </div>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">25) As folhas do nosso caderno podem parecer inofensivas. Mas, por serem muito finas, elas podem causar:</div>
+            <div class="opcoes">
+                <label><input type="radio"> Cortes doloridos na pele.</label>
+                <label><input type="radio"> Manchas azuis.</label>
+                <label><input type="radio"> Choque elétrico.</label>
+            </div>
+        </div>
+
+        <!-- BLOCO F: SEGURANÇA NA ESCOLA E EM CASA -->
+        <h2>F. Atitudes de Segurança na Escola e em Casa</h2>
+
+        <div class="q-container">
+            <div class="q-enunciado">26) Nos corredores da escola ou perto das portas, por que não podemos correr?</div>
+            <div class="opcoes">
+                <label><input type="radio"> Alguém pode abrir a porta de repente e esbarrar na gente causando um acidente.</label>
+                <label><input type="radio"> Porque não tem espaço.</label>
+                <label><input type="radio"> Porque as portas são de vidro e soltam raios.</label>
+            </div>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">27) No pátio e na quadra da escola, é um lugar onde as crianças:</div>
+            <div class="opcoes">
+                <label><input type="radio"> Devem ficar em silêncio absoluto.</label>
+                <label><input type="radio"> Podem brincar, correr e ter movimentação intensa.</label>
+                <label><input type="radio"> Não podem entrar nunca.</label>
+            </div>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">28) Para evitar quedas perigosas ao subir ou descer as escadas, devemos ir com calma e sempre segurar no:</div>
+            <div class="linha-escrita"></div>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">29) Em casa, quem deve ligar ou desligar os aparelhos da TOMADA (como televisão ou micro-ondas)?</div>
+            <div class="opcoes">
+                <label><input type="radio"> Qualquer criança pequena.</label>
+                <label><input type="radio"> Apenas um adulto, para evitar choques elétricos.</label>
+                <label><input type="radio"> O irmãozinho mais novo.</label>
+            </div>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">30) Brincar de pular corda e desenhar no papel são seguros. Mas qual atitude abaixo é PERIGOSA e deve ser evitada em casa?</div>
+            <div class="opcoes">
+                <label><input type="radio"> Sentar na janela ou subir em escadas sozinhos.</label>
+                <label><input type="radio"> Guardar os brinquedos.</label>
+                <label><input type="radio"> Lavar as mãos.</label>
+            </div>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">31) O fogão é perigoso por causa das panelas quentes. O que NÃO devemos fazer?</div>
+            <div class="opcoes">
+                <label><input type="radio"> Tocar nas panelas ou brincar perto do fogo.</label>
+                <label><input type="radio"> Ficar longe da cozinha enquanto a comida cozinha.</label>
+                <label><input type="radio"> Perguntar o que tem para o almoço.</label>
+            </div>
+        </div>
+        
+        <div class="q-container">
+            <div class="q-enunciado">32) Se você encontrar um produto de limpeza, a regra é:</div>
+            <div class="opcoes">
+                <label><input type="radio"> Não tocar nem cheirar, pois causa irritação.</label>
+                <label><input type="radio"> Cheirar para ver do que é feito.</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="page">
+        <!-- BLOCO G: SEGURANÇA NO TRÂNSITO -->
+        <h2>G. Trânsito e Prevenção nas Ruas</h2>
+
+        <div class="q-container">
+            <div class="q-enunciado">33) Para atravessar a rua com segurança, devemos sempre usar a:</div>
+            <div class="opcoes">
+                <label><input type="radio"> Pista de bicicleta.</label>
+                <label><input type="radio"> Faixa de pedestres.</label>
+                <label><input type="radio"> Janela do carro.</label>
+            </div>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">34) Antes de atravessar qualquer rua, a regra número 1 ensinada por todos é:</div>
+            <div class="opcoes">
+                <label><input type="radio"> Olhar para os dois lados.</label>
+                <label><input type="radio"> Correr o mais rápido possível.</label>
+                <label><input type="radio"> Fechar os olhos.</label>
+            </div>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">35) Qual luz do semáforo indica que os carros devem parar para os pedestres passarem com segurança?</div>
+            <div class="opcoes">
+                <label><input type="radio"> Verde.</label>
+                <label><input type="radio"> Vermelho.</label>
+                <label><input type="radio"> Azul.</label>
+            </div>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">36) Quando andam de carro, onde as crianças devem sentar sempre?</div>
+            <div class="opcoes">
+                <label><input type="radio"> No banco de trás, usando cinto de segurança (ou cadeirinha).</label>
+                <label><input type="radio"> No banco da frente.</label>
+                <label><input type="radio"> No porta-malas.</label>
+            </div>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">37) Colocar o braço ou a cabeça para fora da janela do veículo em movimento pode provocar:</div>
+            <div class="opcoes">
+                <label><input type="radio"> Cócegas no braço.</label>
+                <label><input type="radio"> Acidentes graves e ferimentos.</label>
+                <label><input type="radio"> Aumento da velocidade do carro.</label>
+            </div>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">38) Para proteger a cabeça ao andar de bicicleta, os ciclistas devem usar um equipamento obrigatório chamado:</div>
+            <div class="linha-escrita"></div>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">39) Além do capacete, as bicicletas devem ser equipadas com buzina, retrovisor e:</div>
+            <div class="opcoes">
+                <label><input type="radio"> Motor a gasolina.</label>
+                <label><input type="radio"> Sinalizações luminosas.</label>
+                <label><input type="radio"> Tinta spray.</label>
+            </div>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">40) Sempre que possível, o lugar mais seguro para andar de bicicleta nas ruas é usando as:</div>
+            <div class="opcoes">
+                <label><input type="radio"> Ciclovias.</label>
+                <label><input type="radio"> Rodovias de caminhões.</label>
+                <label><input type="radio"> Escadas.</label>
+            </div>
+        </div>
+
+        <!-- BLOCO H: REVISÃO FINAL -->
+        <h2>H. Desafio Final (Marque V ou F)</h2>
+
+        <div class="q-container">
+            <div class="q-enunciado">Para as questões 41 a 48, coloque (V) para Verdadeiro ou (F) para Falso:</div>
+            <p>41. ( ) O vidro das janelas é produzido a partir da areia. </p>
+            <p>42. ( ) O plástico é um material muito pesado e quebra fácil. </p>
+            <p>43. ( ) A madeira é muito forte e resistente para fazer caixotes. </p>
+            <p>44. ( ) Reciclar significa transformar o lixo em um objeto totalmente novo em uma fábrica. </p>
+            <p>45. ( ) Nós devemos usar uma tesoura com pontas bem afiadas na escola. </p>
+            <p>46. ( ) A tomada de energia pode dar choque e só adultos devem mexer. </p>
+            <p>47. ( ) Se o farol dos carros estiver verde para os carros, o pedestre pode atravessar. </p>
+            <p>48. ( ) Facas e tesouras são objetos cortantes. </p>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">49) Ligue a Atitude (A, B) com o Motivo (1, 2):</div>
+            <p>A. Não cheirar produtos de limpeza &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ( ) Porque pega fogo muito rápido.</p>
+            <p>B. Não brincar com papel perto do fogo &nbsp;&nbsp;&nbsp; ( ) Porque eles são tóxicos e causam irritação.</p>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">50) Na sua opinião, qual a regra mais importante para evitar acidentes que você viu neste simulado?</div>
+            <div class="linha-escrita"></div>
+            <div class="linha-escrita"></div>
+        </div>
+        
+        <p style="text-align: center; font-size: 1.5em; margin-top: 40px; color: #27ae60;">🌟 PARABÉNS! VOCÊ COMPLETOU AS 50 QUESTÕES! 🌟</p>
+    </div>
+
+    <!-- GABARITO PARA OS PAIS -->
+    <div class="page gabarito">
+        <h2 style="text-align: center; color: #2c3e50; margin-top: 0;">GABARITO PARA PAIS E PROFESSORES</h2>
+        <div style="display: flex; gap: 40px; font-size: 0.9em;">
+            <div>
+                <p><strong>A. Os Materiais:</strong> 1) Metal e plástico | 2) Vidro, plástico, papelão, isopor | 3) Artificiais | 4) Pessoal | 5) Plástico, Metal, Papel</p>
+                <p><strong>B. Origens:</strong> 6) Areia | 7) Petróleo | 8) Nas plantas/árvores | 9) Das rochas | 10) A-Areia, B-Petróleo</p>
+                <p><strong>C. Propriedades:</strong> 11) Flexível | 12) Mais grosso e resistente | 13) Resistente, não quebra | 14) Leve e resistente | 15) V, F, V</p>
+                <p><strong>D. Reciclagem:</strong> 16) Reutilizando | 17) Reciclar | 18) Produzimos menos lixo | 19) Caixas de papelão e embalagens plásticas | 20) Reutilização</p>
+                <p><strong>E. Perigos dos Materiais:</strong> 21) Tesoura | 22) Arredondada | 23) Pegam fogo com facilidade | 24) Porque são tóxicos | 25) Cortes na pele</p>
+            </div>
+            <div>
+                <p><strong>F. Casa e Escola:</strong> 26) Alguém pode abrir a porta/bater | 27) Podem brincar e correr | 28) Corrimão | 29) Apenas um adulto | 30) Sentar na janela/subir em escadas | 31) Tocar nas panelas quentes | 32) Não tocar nem cheirar</p>
+                <p><strong>G. Trânsito:</strong> 33) Faixa de pedestres | 34) Olhar para os dois lados | 35) Vermelho (para carros) | 36) Banco de trás com cinto | 37) Acidentes graves | 38) Capacete | 39) Sinalizações luminosas | 40) Ciclovias</p>
+                <p><strong>H. Revisão Final:</strong> 41) V | 42) F | 43) V | 44) V | 45) F | 46) V | 47) F | 48) V | 49) A-Tóxicos, B-Pega fogo | 50) Pessoal</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function salvarComoPDF() {
+        alert("DICA: Na próxima tela que vai abrir, procure o campo 'Impressora' ou 'Destino' e troque para 'Salvar como PDF'!");
+        window.print();
+    }
+</script>
+
+</body>
+</html>
