@@ -9,7 +9,7 @@
     
     body {
         font-family: 'Nunito', sans-serif;
-        background-color: #eafaf1; /* Fundo verde bem clarinho */
+        background-color: #eafaf1; 
         color: #2c3e50;
         margin: 0;
         padding: 0;
@@ -48,7 +48,7 @@
 
     /* HEADER */
     .header {
-        background: linear-gradient(135deg, #27ae60, #2ecc71); /* Gradiente Verde */
+        background: linear-gradient(135deg, #27ae60, #2ecc71); 
         color: white;
         width: 100%;
         text-align: center;
@@ -196,7 +196,7 @@
 </div>
 
 <div class="header">
-    <h1>Esquadrão da Segurança</h1>
+    <h1>Ciências na Prática</h1>
     <div class="score-badge">⭐ <span id="score">0</span> Pontos</div>
 </div>
 
@@ -207,12 +207,12 @@
         <div class="menu-card" onclick="startGame(1)">
             <div class="icon">✅❌</div>
             <h2>1. Seguro ou Perigoso?</h2>
-            <p>12 situações para avaliar.</p>
+            <p>Atitudes no dia a dia.</p>
         </div>
         <div class="menu-card" onclick="startGame(2)">
-            <div class="icon">🔌</div>
-            <h2>2. Ligar os Cuidados</h2>
-            <p>Conecte os objetos às regras.</p>
+            <div class="icon">🔬</div>
+            <h2>2. Origem dos Materiais</h2>
+            <p>Ligue o material à sua origem.</p>
         </div>
         <div class="menu-card" onclick="startGame(3)">
             <div class="icon">🕵️</div>
@@ -240,8 +240,8 @@
 
     <!-- TELA JOGO 2: LIGAR COLUNAS -->
     <div id="game-2" class="game-screen">
-        <div class="game-header"><h2>🔌 Ligar os Cuidados</h2><button class="btn-back" onclick="showMenu()">Voltar</button></div>
-        <p style="text-align:center; font-size:1.1em; color: #34495e; font-weight: bold;">Toque no objeto e depois no cuidado correto!</p>
+        <div class="game-header"><h2>🔬 Origem dos Materiais</h2><button class="btn-back" onclick="showMenu()">Voltar</button></div>
+        <p style="text-align:center; font-size:1.1em; color: #34495e; font-weight: bold;">Toque no material e depois de onde ele é feito!</p>
         <div class="match-grid">
             <div class="match-col" id="m-left"></div>
             <div class="match-col" id="m-right"></div>
@@ -271,7 +271,7 @@
     <div id="end-screen" class="game-screen end-screen">
         <div class="trophy">🏆</div>
         <h2>Excelente!</h2>
-        <p>Você é um verdadeiro membro do Esquadrão da Segurança!</p>
+        <p>Você é um verdadeiro Cientista da Segurança!</p>
         <button class="btn-next" style="display:block;" onclick="showMenu()">Voltar para o Menu</button>
     </div>
 
@@ -296,16 +296,12 @@
     const dataG1 = [
         { q: "Usar tesoura com pontas arredondadas e com bastante cuidado.", isSafe: true, tip: "As tesouras sem ponta evitam acidentes." },
         { q: "Correr pelos corredores da escola ou perto das portas.", isSafe: false, tip: "Alguém pode abrir a porta de repente e machucar você." },
-        { q: "Colocar o braço ou a cabeça para fora da janela do carro.", isSafe: false, tip: "Pode provocar acidentes muito graves no trânsito." },
-        { q: "Descer as escadas com calma e sempre segurando no corrimão.", isSafe: true, tip: "O corrimão ajuda a evitar quedas dolorosas." },
-        { q: "Ligar a TV ou mexer em tomadas sem pedir ajuda a um adulto.", isSafe: false, tip: "A energia elétrica é perigosa e pode causar choques fortes." },
-        { q: "Atravessar a rua sempre na faixa de pedestres.", isSafe: true, tip: "A faixa garante que os carros te vejam." },
-        { q: "Cheirar um produto de limpeza colorido para ver se tem um cheiro gostoso.", isSafe: false, tip: "Produtos de limpeza são tóxicos, não devemos tocar nem cheirar!" },
-        { q: "Andar de bicicleta usando capacete, buzina e na ciclovia.", isSafe: true, tip: "Equipamentos de segurança salvam vidas." },
-        { q: "Chegar bem perto do fogão enquanto a panela está cozinhando.", isSafe: false, tip: "O fogo e as panelas quentes causam queimaduras sérias." },
-        { q: "Manusear copos de vidro com cuidado para que não caiam.", isSafe: true, tip: "O vidro quebrado é cortante e muito perigoso." },
-        { q: "Experimentar ou colocar tinta escolar na boca.", isSafe: false, tip: "Elas fazem mal à saúde e não podem ser ingeridas." },
-        { q: "Sentar no banco de trás do carro usando cinto de segurança.", isSafe: true, tip: "Crianças sempre bem protegidas no banco de trás!" }
+        { q: "Sentar na janela de casa para olhar a rua.", isSafe: false, tip: "Janelas são muito perigosas e podem causar quedas graves." },
+        { q: "Brincar e correr na quadra ou no pátio da escola.", isSafe: true, tip: "Esses são os lugares certos para se movimentar bastante!" },
+        { q: "Reutilizar garrafas de plástico e caixas de papelão para fazer brinquedos.", isSafe: true, tip: "Reutilizar materiais é ótimo para a natureza." },
+        { q: "Brincar com papel e madeira perto do fogão aceso.", isSafe: false, tip: "Papel e madeira são INFLAMÁVEIS e pegam fogo fácil." },
+        { q: "Atravessar a rua sempre na faixa de pedestres com o semáforo fechado para os carros.", isSafe: true, tip: "Sempre com atenção e acompanhado de um adulto!" },
+        { q: "Colocar tintas coloridas escolares ou embalagens plásticas na boca.", isSafe: false, tip: "Esses materiais podem ser tóxicos e fazer muito mal." }
     ];
     let curG1 = 0;
 
@@ -314,7 +310,7 @@
     function renderG1() {
         if(curG1 >= dataG1.length) { document.getElementById('game-1').style.display = 'none'; document.getElementById('end-screen').style.display = 'block'; return; }
         const q = dataG1[curG1];
-        document.getElementById('g1-question').innerText = `${curG1+1}/12 - ${q.q}`;
+        document.getElementById('g1-question').innerText = `${curG1+1}/${dataG1.length} - ${q.q}`;
         document.getElementById('g1-options').style.display = 'flex';
         document.getElementById('g1-feedback').className = 'feedback';
         document.getElementById('g1-next').style.display = 'none';
@@ -337,17 +333,15 @@
 
 
     // ==========================================
-    // JOGO 2: LIGAR COLUNAS
+    // JOGO 2: LIGAR COLUNAS (MATERIAIS E ORIGENS/PROPRIEDADES)
     // ==========================================
     const allPairsG2 = [
-        { m: "Tomada Elétrica", p: "Pedir ajuda a um adulto" },
-        { m: "Facas e Tesouras", p: "Cuidado com lâminas cortantes" },
-        { m: "Panela no Fogão", p: "Não se aproximar do fogo" },
-        { m: "Copo de Vidro", p: "Manusear com cuidado" },
-        { m: "Produto de Limpeza", p: "Não cheirar ou tocar" },
-        { m: "Andar de Bicicleta", p: "Usar capacete e buzina" },
-        { m: "Andar de Carro", p: "Usar cinto no banco de trás" },
-        { m: "Atravessar a Rua", p: "Olhar para os dois lados" }
+        { m: "Vidro", p: "Feito de areia aquecida" },
+        { m: "Plástico", p: "Retirado do petróleo" },
+        { m: "Papel", p: "Feito da celulose das árvores" },
+        { m: "Metal", p: "Minerais retirados das rochas" },
+        { m: "Papelão", p: "Tipo de papel mais grosso" },
+        { m: "Madeira", p: "Material resistente (palitos)" }
     ];
     let selLeft = null, selRight = null, matchedCount = 0, currentPairs = [];
 
@@ -361,8 +355,7 @@
         const rightCol = document.getElementById('m-right');
         leftCol.innerHTML = ''; rightCol.innerHTML = '';
 
-        // Sorteia 5 pares dos 8 disponíveis para a tela não ficar gigante no celular/tablet
-        currentPairs = allPairsG2.sort(() => Math.random() - 0.5).slice(0, 5);
+        currentPairs = allPairsG2.sort(() => Math.random() - 0.5);
 
         let leftItems = currentPairs.map((p, i) => ({ text: p.m, id: i, side: 'l' })).sort(() => Math.random() - 0.5);
         let rightItems = currentPairs.map((p, i) => ({ text: p.p, id: i, side: 'r' })).sort(() => Math.random() - 0.5);
@@ -404,7 +397,7 @@
                 selLeft = null; selRight = null;
                 if(matchedCount === currentPairs.length) {
                     let fb = document.getElementById('g2-feedback');
-                    fb.innerHTML = "🎉 Parabéns! Você ligou todos com segurança!";
+                    fb.innerHTML = "🎉 Parabéns! Você conhece todos os materiais!";
                     fb.className = "feedback good";
                     setTimeout(() => {
                         document.getElementById('game-2').style.display = 'none';
@@ -422,17 +415,15 @@
     }
 
     // ==========================================
-    // JOGO 3: DETETIVE DA PREVENÇÃO
+    // JOGO 3: DETETIVE DA PREVENÇÃO E MATERIAIS
     // ==========================================
     const dataG3 = [
-        { q: "No carro, as crianças devem usar o cinto de segurança e sentar sempre...", opts: ["No banco da frente", "No banco de trás", "No porta-malas"], ans: 1 },
-        { q: "Ao andar de bicicleta, além de buzina e retrovisor, é muito importante usar...", opts: ["Capacete", "Fones de ouvido", "Mochila pesada"], ans: 0 },
-        { q: "As folhas de papel do caderno parecem inofensivas, mas se não tomarmos cuidado elas podem causar...", opts: ["Queimaduras de fogo", "Cortes finos na pele", "Choques elétricos"], ans: 1 },
-        { q: "As tintas e colas que usamos nas aulas não podem ser...", opts: ["Usadas no papel", "Emprestadas aos colegas", "Colocadas na boca"], ans: 2 },
-        { q: "Ao ver um produto de limpeza guardado no armário, o que a criança deve fazer?", opts: ["Não tocar nem cheirar", "Abrir para ver a cor", "Misturar com água"], ans: 0 },
-        { q: "Quando precisamos ligar a TV na tomada, qual é a atitude correta?", opts: ["Encaixar com força", "Pedir ajuda para um adulto", "Puxar pelo fio"], ans: 1 },
-        { q: "Por que não podemos correr perto das portas na escola?", opts: ["Porque gasta o sapato", "Alguém pode abrir e bater na gente", "Porque faz muito barulho"], ans: 1 },
-        { q: "Para atravessar a rua com segurança, devemos sempre observar o semáforo e passar pela...", opts: ["Faixa de pedestres", "Calçada do vizinho", "Pista de bicicletas"], ans: 0 }
+        { q: "Qual destes materiais não é encontrado pronto na natureza, sendo produzido pelo ser humano de forma artificial?", opts: ["Plástico e Vidro", "Madeira e Pedra", "Água e Terra"], ans: 0 },
+        { q: "O que significa 'Reutilizar' um objeto, como usar um pote de sorvete para guardar brinquedos?", opts: ["Jogar o objeto no lixo orgânico", "Usar o objeto novamente do mesmo modo ou de modo diferente", "Derreter o objeto para fazer fumaça"], ans: 1 },
+        { q: "Nas escolas, onde os alunos devem brincar e correr com segurança?", opts: ["Perto das escadas", "Dentro da sala de aula", "No pátio e na quadra"], ans: 2 },
+        { q: "Copos que usamos no dia a dia podem ter o mesmo formato, mas serem feitos de materiais diferentes, como:", opts: ["Apenas de água congelada", "Vidro, plástico ou isopor", "Folhas secas e areia"], ans: 1 },
+        { q: "Algumas embalagens são feitas de materiais com pontas arredondadas para não cortar a nossa...", opts: ["Pele", "Mesa", "Lousa"], ans: 0 },
+        { q: "Produtos de limpeza guardados no armário são muito perigosos. O que as crianças devem fazer?", opts: ["Abrir para ver a cor", "Não tocar nem cheirar", "Misturar com água para lavar louça"], ans: 1 }
     ];
     let curG3 = 0;
 
@@ -441,7 +432,7 @@
     function renderG3() {
         if(curG3 >= dataG3.length) { document.getElementById('game-3').style.display = 'none'; document.getElementById('end-screen').style.display = 'block'; return; }
         const q = dataG3[curG3];
-        document.getElementById('g3-question').innerText = `${curG3+1}/8 - ${q.q}`;
+        document.getElementById('g3-question').innerText = `${curG3+1}/${dataG3.length} - ${q.q}`;
         
         const optsDiv = document.getElementById('g3-options');
         optsDiv.innerHTML = '';
@@ -478,11 +469,11 @@
     // JOGO 4: COMPLETE A REGRA
     // ==========================================
     const dataG4 = [
-        { text: "Ao descer a escada, use sempre com calma o seu ", opt: ["CORRIMÃO", "FOGÃO"], ans: 0 },
-        { text: "Nunca coloque o braço para fora da ", opt: ["JANELA", "MOCHILA"], ans: 0 },
-        { text: "As tesouras escolares devem ter pontas ", opt: ["AFIADAS", "ARREDONDADAS"], ans: 1 },
-        { text: "Atravesse sempre na faixa de ", opt: ["PEDESTRES", "CARROS"], ans: 0 },
-        { text: "As panelas não devem ser tocadas quando estão no ", opt: ["ARMÁRIO", "FOGÃO"], ans: 1 }
+        { text: "Ao descer a escada, desça com calma segurando no seu ", opt: ["CORRIMÃO", "FOGÃO"], ans: 0 },
+        { text: "Materiais que pegam fogo facilmente (como papel) são chamados de materiais ", opt: ["INFLAMÁVEIS", "FLEXÍVEIS"], ans: 0 },
+        { text: "Para andar de bicicleta com segurança, além do capacete, devemos usar a ", opt: ["RODOVIA", "CICLOVIA"], ans: 1 },
+        { text: "As tintas coloridas e a cola não devem ser colocadas na ", opt: ["BOCA", "MESA"], ans: 0 },
+        { text: "O papel pode ser dobrado para fazer aviõezinhos de brinquedo porque ele é muito ", opt: ["FLEXÍVEL", "PESADO"], ans: 0 }
     ];
     let curG4 = 0;
 
@@ -516,7 +507,7 @@
         if(selected === q.ans) {
             btn.classList.add('correct');
             document.getElementById('g4-question').innerHTML = q.text + ` <br><br><b style="color:#27ae60;">[ ${q.opt[q.ans]} ]</b>`;
-            fb.innerText = "✅ Frase completa e segura!"; fb.className = "feedback good";
+            fb.innerText = "✅ Frase completa com sucesso!"; fb.className = "feedback good";
             addScore();
         } else {
             btn.classList.add('wrong');
