@@ -9,7 +9,7 @@
     
     body {
         font-family: 'Nunito', sans-serif;
-        background-color: #eafaf1; 
+        background-color: #eafaf1; /* Fundo verde bem clarinho */
         color: #2c3e50;
         margin: 0;
         padding: 0;
@@ -48,7 +48,7 @@
 
     /* HEADER */
     .header {
-        background: linear-gradient(135deg, #27ae60, #2ecc71); 
+        background: linear-gradient(135deg, #27ae60, #2ecc71); /* Gradiente Verde */
         color: white;
         width: 100%;
         text-align: center;
@@ -150,13 +150,6 @@
     .btn-opt.correct { background: #2ecc71; border-color: #27ae60; color: white; }
     .btn-opt.wrong { background: #e74c3c; border-color: #c0392b; color: white; }
 
-    /* BOTOES SEGURO / PERIGOSO */
-    .btn-safe-danger { display: flex; gap: 15px; justify-content: center; }
-    .btn-sd { flex: 1; padding: 15px 10px; font-size: 1.2em; border: none; border-radius: 15px; color: white; font-weight: bold; cursor: pointer; box-shadow: 0 5px 0 rgba(0,0,0,0.2); transition: 0.2s; }
-    .btn-safe { background: #2ecc71; }
-    .btn-danger { background: #e74c3c; }
-    .btn-sd:active { transform: translateY(5px); box-shadow: 0 0 0 transparent; }
-
     /* LIGAR COLUNAS */
     .match-grid { display: flex; justify-content: space-between; gap: 10px; }
     .match-col { display: flex; flex-direction: column; gap: 10px; width: 48%; }
@@ -196,7 +189,7 @@
 </div>
 
 <div class="header">
-    <h1>Ciências na Prática</h1>
+    <h1>Laboratório de Ciências</h1>
     <div class="score-badge">⭐ <span id="score">0</span> Pontos</div>
 </div>
 
@@ -205,64 +198,61 @@
     <!-- MENU PRINCIPAL -->
     <div id="main-menu" class="menu-grid">
         <div class="menu-card" onclick="startGame(1)">
-            <div class="icon">✅❌</div>
-            <h2>1. Seguro ou Perigoso?</h2>
-            <p>Atitudes no dia a dia.</p>
+            <div class="icon">🔬</div>
+            <h2>1. De Onde Vem?</h2>
+            <p>A origem dos materiais artificiais.</p>
         </div>
         <div class="menu-card" onclick="startGame(2)">
-            <div class="icon">🔬</div>
-            <h2>2. Origem dos Materiais</h2>
-            <p>Ligue o material à sua origem.</p>
+            <div class="icon">♻️</div>
+            <h2>2. Super Sustentável</h2>
+            <p>O poder de reutilizar objetos.</p>
         </div>
         <div class="menu-card" onclick="startGame(3)">
-            <div class="icon">🕵️</div>
-            <h2>3. Detetive da Prevenção</h2>
-            <p>Escolha a atitude correta.</p>
+            <div class="icon">🧱</div>
+            <h2>3. Propriedades</h2>
+            <p>O que é forte, leve ou flexível?</p>
         </div>
         <div class="menu-card" onclick="startGame(4)">
-            <div class="icon">✏️</div>
-            <h2>4. Complete a Regra</h2>
-            <p>Descubra a palavra que falta!</p>
+            <div class="icon">⚠️</div>
+            <h2>4. Alerta de Perigo</h2>
+            <p>Materiais que exigem cuidado!</p>
         </div>
     </div>
 
-    <!-- TELA JOGO 1: SEGURO OU PERIGOSO -->
+    <!-- TELA JOGO 1: LIGAR COLUNAS (ORIGENS) -->
     <div id="game-1" class="game-screen">
-        <div class="game-header"><h2>✅ Seguro ou Perigoso?</h2><button class="btn-back" onclick="showMenu()">Voltar</button></div>
-        <div class="question-text" id="g1-question"></div>
-        <div class="btn-safe-danger" id="g1-options">
-            <button class="btn-sd btn-safe" onclick="answerG1(true)">✅ SEGURO</button>
-            <button class="btn-sd btn-danger" onclick="answerG1(false)">❌ PERIGOSO</button>
-        </div>
-        <div id="g1-feedback" class="feedback"></div>
-        <button id="g1-next" class="btn-next" onclick="nextG1()">Próxima ➡️</button>
-    </div>
-
-    <!-- TELA JOGO 2: LIGAR COLUNAS -->
-    <div id="game-2" class="game-screen">
-        <div class="game-header"><h2>🔬 Origem dos Materiais</h2><button class="btn-back" onclick="showMenu()">Voltar</button></div>
-        <p style="text-align:center; font-size:1.1em; color: #34495e; font-weight: bold;">Toque no material e depois de onde ele é feito!</p>
+        <div class="game-header"><h2>🔬 De Onde Vem?</h2><button class="btn-back" onclick="showMenu()">Voltar</button></div>
+        <p style="text-align:center; font-size:1.1em; color: #34495e; font-weight: bold;">Ligue o material fabricado à sua origem na natureza!</p>
         <div class="match-grid">
             <div class="match-col" id="m-left"></div>
             <div class="match-col" id="m-right"></div>
         </div>
-        <div id="g2-feedback" class="feedback"></div>
+        <div id="g1-feedback" class="feedback"></div>
     </div>
 
-    <!-- TELA JOGO 3: DETETIVE DA PREVENÇÃO -->
+    <!-- TELA JOGO 2: SUSTENTÁVEL -->
+    <div id="game-2" class="game-screen">
+        <div class="game-header"><h2>♻️ Super Sustentável</h2><button class="btn-back" onclick="showMenu()">Voltar</button></div>
+        <div class="question-text" id="g2-question"></div>
+        <div class="options-grid" id="g2-options"></div>
+        <div id="g2-feedback" class="feedback"></div>
+        <button id="g2-next" class="btn-next" onclick="nextG2()">Próxima ➡️</button>
+    </div>
+
+    <!-- TELA JOGO 3: PROPRIEDADES -->
     <div id="game-3" class="game-screen">
-        <div class="game-header"><h2>🕵️ Detetive da Prevenção</h2><button class="btn-back" onclick="showMenu()">Voltar</button></div>
+        <div class="game-header"><h2>🧱 Propriedades</h2><button class="btn-back" onclick="showMenu()">Voltar</button></div>
         <div class="question-text" id="g3-question"></div>
         <div class="options-grid" id="g3-options"></div>
         <div id="g3-feedback" class="feedback"></div>
         <button id="g3-next" class="btn-next" onclick="nextG3()">Próxima ➡️</button>
     </div>
 
-    <!-- TELA JOGO 4: COMPLETE A REGRA -->
+    <!-- TELA JOGO 4: SEGURANÇA -->
     <div id="game-4" class="game-screen">
-        <div class="game-header"><h2>✏️ Complete a Regra</h2><button class="btn-back" onclick="showMenu()">Voltar</button></div>
-        <div class="question-text" id="g4-question" style="background:#f4f6f9; padding: 20px; border-radius:10px; border: 2px dashed #bdc3c7;"></div>
-        <div class="options-grid" style="grid-template-columns: 1fr 1fr;" id="g4-options"></div>
+        <div class="game-header"><h2>⚠️ Alerta de Perigo</h2><button class="btn-back" onclick="showMenu()">Voltar</button></div>
+        <div class="question-text" id="g4-question"></div>
+        <div class="options-grid" id="g4-options"></div>
         <div id="g4-feedback" class="feedback"></div>
         <button id="g4-next" class="btn-next" onclick="nextG4()">Próxima ➡️</button>
     </div>
@@ -271,7 +261,7 @@
     <div id="end-screen" class="game-screen end-screen">
         <div class="trophy">🏆</div>
         <h2>Excelente!</h2>
-        <p>Você é um verdadeiro Cientista da Segurança!</p>
+        <p>Você virou um especialista em Materiais e Segurança!</p>
         <button class="btn-next" style="display:block;" onclick="showMenu()">Voltar para o Menu</button>
     </div>
 
@@ -291,74 +281,28 @@
     }
 
     // ==========================================
-    // JOGO 1: SEGURO OU PERIGOSO
+    // JOGO 1: LIGAR COLUNAS (MATERIAIS E ORIGENS)
     // ==========================================
-    const dataG1 = [
-        { q: "Usar tesoura com pontas arredondadas e com bastante cuidado.", isSafe: true, tip: "As tesouras sem ponta evitam acidentes." },
-        { q: "Correr pelos corredores da escola ou perto das portas.", isSafe: false, tip: "Alguém pode abrir a porta de repente e machucar você." },
-        { q: "Sentar na janela de casa para olhar a rua.", isSafe: false, tip: "Janelas são muito perigosas e podem causar quedas graves." },
-        { q: "Brincar e correr na quadra ou no pátio da escola.", isSafe: true, tip: "Esses são os lugares certos para se movimentar bastante!" },
-        { q: "Reutilizar garrafas de plástico e caixas de papelão para fazer brinquedos.", isSafe: true, tip: "Reutilizar materiais é ótimo para a natureza." },
-        { q: "Brincar com papel e madeira perto do fogão aceso.", isSafe: false, tip: "Papel e madeira são INFLAMÁVEIS e pegam fogo fácil." },
-        { q: "Atravessar a rua sempre na faixa de pedestres com o semáforo fechado para os carros.", isSafe: true, tip: "Sempre com atenção e acompanhado de um adulto!" },
-        { q: "Colocar tintas coloridas escolares ou embalagens plásticas na boca.", isSafe: false, tip: "Esses materiais podem ser tóxicos e fazer muito mal." }
+    const allPairsG1 = [
+        { m: "Vidro", p: "Areia aquecida e moldada" },
+        { m: "Plástico", p: "Retirado do petróleo no solo" },
+        { m: "Papel", p: "Celulose encontrada nas plantas" },
+        { m: "Metal", p: "Minerais retirados das rochas" }
     ];
-    let curG1 = 0;
+    let selLeft = null, selRight = null, matchedCount = 0;
 
-    function startGame1() { curG1 = 0; document.getElementById('main-menu').style.display = 'none'; document.getElementById('game-1').style.display = 'block'; renderG1(); }
-    
-    function renderG1() {
-        if(curG1 >= dataG1.length) { document.getElementById('game-1').style.display = 'none'; document.getElementById('end-screen').style.display = 'block'; return; }
-        const q = dataG1[curG1];
-        document.getElementById('g1-question').innerText = `${curG1+1}/${dataG1.length} - ${q.q}`;
-        document.getElementById('g1-options').style.display = 'flex';
-        document.getElementById('g1-feedback').className = 'feedback';
-        document.getElementById('g1-next').style.display = 'none';
-    }
+    function startGame1() { document.getElementById('main-menu').style.display = 'none'; document.getElementById('game-1').style.display = 'block'; initG1(); }
 
-    function answerG1(userChoseSafe) {
-        const q = dataG1[curG1];
-        document.getElementById('g1-options').style.display = 'none';
-        const fb = document.getElementById('g1-feedback');
-
-        if(userChoseSafe === q.isSafe) {
-            fb.innerText = "✅ Acertou! " + q.tip; fb.className = "feedback good";
-            addScore();
-        } else {
-            fb.innerText = "❌ Errou! Lembre-se: " + q.tip; fb.className = "feedback bad";
-        }
-        document.getElementById('g1-next').style.display = 'block';
-    }
-    function nextG1() { curG1++; renderG1(); }
-
-
-    // ==========================================
-    // JOGO 2: LIGAR COLUNAS (MATERIAIS E ORIGENS/PROPRIEDADES)
-    // ==========================================
-    const allPairsG2 = [
-        { m: "Vidro", p: "Feito de areia aquecida" },
-        { m: "Plástico", p: "Retirado do petróleo" },
-        { m: "Papel", p: "Feito da celulose das árvores" },
-        { m: "Metal", p: "Minerais retirados das rochas" },
-        { m: "Papelão", p: "Tipo de papel mais grosso" },
-        { m: "Madeira", p: "Material resistente (palitos)" }
-    ];
-    let selLeft = null, selRight = null, matchedCount = 0, currentPairs = [];
-
-    function startGame2() { document.getElementById('main-menu').style.display = 'none'; document.getElementById('game-2').style.display = 'block'; initG2(); }
-
-    function initG2() {
+    function initG1() {
         matchedCount = 0;
-        document.getElementById('g2-feedback').innerHTML = "";
-        document.getElementById('g2-feedback').className = "feedback";
+        document.getElementById('g1-feedback').innerHTML = "";
+        document.getElementById('g1-feedback').className = "feedback";
         const leftCol = document.getElementById('m-left');
         const rightCol = document.getElementById('m-right');
         leftCol.innerHTML = ''; rightCol.innerHTML = '';
 
-        currentPairs = allPairsG2.sort(() => Math.random() - 0.5);
-
-        let leftItems = currentPairs.map((p, i) => ({ text: p.m, id: i, side: 'l' })).sort(() => Math.random() - 0.5);
-        let rightItems = currentPairs.map((p, i) => ({ text: p.p, id: i, side: 'r' })).sort(() => Math.random() - 0.5);
+        let leftItems = allPairsG1.map((p, i) => ({ text: p.m, id: i, side: 'l' })).sort(() => Math.random() - 0.5);
+        let rightItems = allPairsG1.map((p, i) => ({ text: p.p, id: i, side: 'r' })).sort(() => Math.random() - 0.5);
 
         leftItems.forEach(item => {
             let btn = document.createElement('button');
@@ -395,12 +339,12 @@
                 selLeft.btn.innerText += " ✅"; selRight.btn.innerText += " ✅";
                 addScore(); matchedCount++;
                 selLeft = null; selRight = null;
-                if(matchedCount === currentPairs.length) {
-                    let fb = document.getElementById('g2-feedback');
-                    fb.innerHTML = "🎉 Parabéns! Você conhece todos os materiais!";
+                if(matchedCount === allPairsG1.length) {
+                    let fb = document.getElementById('g1-feedback');
+                    fb.innerHTML = "🎉 Show! Você sabe a origem de tudo!";
                     fb.className = "feedback good";
                     setTimeout(() => {
-                        document.getElementById('game-2').style.display = 'none';
+                        document.getElementById('game-1').style.display = 'none';
                         document.getElementById('end-screen').style.display = 'block';
                     }, 3000);
                 }
@@ -415,15 +359,64 @@
     }
 
     // ==========================================
-    // JOGO 3: DETETIVE DA PREVENÇÃO E MATERIAIS
+    // JOGO 2: SUSTENTABILIDADE E RECICLAGEM
+    // ==========================================
+    const dataG2 = [
+        { q: "Os objetos que não usamos mais no dia a dia podem virar lixo ou podem ser...", opts: ["Reutilizados ou Reciclados", "Comidos ou Bebidos"], ans: 0 },
+        { q: "Quando pegamos um pote plástico de sorvete para guardar brinquedos, nós estamos:", opts: ["Reciclando o pote", "Reutilizando o pote"], ans: 1 },
+        { q: "Na RECICLAGEM, o que acontece com o material?", opts: ["Ele é guardado no armário para sempre", "Ele passa por uma transformação e vira um objeto novo"], ans: 1 },
+        { q: "Dobrar folhas de caderno usadas e jornais velhos para fazer aviõezinhos de brinquedo é uma forma de produzir...", opts: ["Mais lixo", "Menos lixo"], ans: 1 },
+        { q: "Objetos fabricados com materiais retirados da natureza pelo ser humano (como vidro e plástico) são chamados de:", opts: ["Naturais", "Artificiais"], ans: 1 }
+    ];
+    let curG2 = 0;
+
+    function startGame2() { curG2 = 0; document.getElementById('main-menu').style.display = 'none'; document.getElementById('game-2').style.display = 'block'; renderG2(); }
+
+    function renderG2() {
+        if(curG2 >= dataG2.length) { document.getElementById('game-2').style.display = 'none'; document.getElementById('end-screen').style.display = 'block'; return; }
+        const q = dataG2[curG2];
+        document.getElementById('g2-question').innerText = `${curG2+1}/${dataG2.length} - ${q.q}`;
+        
+        const optsDiv = document.getElementById('g2-options');
+        optsDiv.innerHTML = '';
+        q.opts.forEach((opt, i) => {
+            let btn = document.createElement('button');
+            btn.className = 'btn-opt'; btn.innerText = opt;
+            btn.onclick = () => checkG2(i, btn);
+            optsDiv.appendChild(btn);
+        });
+        document.getElementById('g2-feedback').className = 'feedback';
+        document.getElementById('g2-next').style.display = 'none';
+    }
+
+    function checkG2(selected, btn) {
+        const q = dataG2[curG2];
+        const buttons = document.getElementById('g2-options').querySelectorAll('.btn-opt');
+        buttons.forEach(b => b.style.pointerEvents = 'none');
+        const fb = document.getElementById('g2-feedback');
+
+        if(selected === q.ans) {
+            btn.classList.add('correct');
+            fb.innerText = "✅ Exatamente!"; fb.className = "feedback good";
+            addScore();
+        } else {
+            btn.classList.add('wrong');
+            buttons[q.ans].classList.add('correct');
+            fb.innerText = "❌ Quase lá!"; fb.className = "feedback bad";
+        }
+        document.getElementById('g2-next').style.display = 'block';
+    }
+    function nextG2() { curG2++; renderG2(); }
+
+    // ==========================================
+    // JOGO 3: PROPRIEDADES DOS MATERIAIS
     // ==========================================
     const dataG3 = [
-        { q: "Qual destes materiais não é encontrado pronto na natureza, sendo produzido pelo ser humano de forma artificial?", opts: ["Plástico e Vidro", "Madeira e Pedra", "Água e Terra"], ans: 0 },
-        { q: "O que significa 'Reutilizar' um objeto, como usar um pote de sorvete para guardar brinquedos?", opts: ["Jogar o objeto no lixo orgânico", "Usar o objeto novamente do mesmo modo ou de modo diferente", "Derreter o objeto para fazer fumaça"], ans: 1 },
-        { q: "Nas escolas, onde os alunos devem brincar e correr com segurança?", opts: ["Perto das escadas", "Dentro da sala de aula", "No pátio e na quadra"], ans: 2 },
-        { q: "Copos que usamos no dia a dia podem ter o mesmo formato, mas serem feitos de materiais diferentes, como:", opts: ["Apenas de água congelada", "Vidro, plástico ou isopor", "Folhas secas e areia"], ans: 1 },
-        { q: "Algumas embalagens são feitas de materiais com pontas arredondadas para não cortar a nossa...", opts: ["Pele", "Mesa", "Lousa"], ans: 0 },
-        { q: "Produtos de limpeza guardados no armário são muito perigosos. O que as crianças devem fazer?", opts: ["Abrir para ver a cor", "Não tocar nem cheirar", "Misturar com água para lavar louça"], ans: 1 }
+        { q: "Como o papel é um material ___________, nós podemos dobrá-lo de diferentes formas.", opts: ["MUITO PESADO", "FLEXÍVEL"], ans: 1 },
+        { q: "O papelão é muito usado para fazer caixas porque, em comparação com a folha de caderno, ele é:", opts: ["Mais grosso e resistente", "Mais fácil de rasgar"], ans: 0 },
+        { q: "Para fazer brinquedos que não quebram com facilidade, é melhor usar qual material resistente?", opts: ["Madeira (palitos e caixotes)", "Isopor"], ans: 0 },
+        { q: "As garrafas que compramos com água ou refrigerante são boas para construir brinquedos porque o plástico é:", opts: ["Muito pesado e afiado", "Leve e resistente"], ans: 1 },
+        { q: "Podemos ter vários copos com o MESMO formato, mas feitos de materiais:", opts: ["Diferentes (vidro, papel, plástico)", "Iguais sempre"], ans: 0 }
     ];
     let curG3 = 0;
 
@@ -454,26 +447,26 @@
 
         if(selected === q.ans) {
             btn.classList.add('correct');
-            fb.innerText = "✅ Detetive nota 10!"; fb.className = "feedback good";
+            fb.innerText = "✅ Boa lógica!"; fb.className = "feedback good";
             addScore();
         } else {
             btn.classList.add('wrong');
             buttons[q.ans].classList.add('correct');
-            fb.innerText = "❌ Cuidado redobrado na próxima!"; fb.className = "feedback bad";
+            fb.innerText = "❌ Cuidado com a propriedade do material."; fb.className = "feedback bad";
         }
         document.getElementById('g3-next').style.display = 'block';
     }
     function nextG3() { curG3++; renderG3(); }
 
     // ==========================================
-    // JOGO 4: COMPLETE A REGRA
+    // JOGO 4: SEGURANÇA E ALERTAS
     // ==========================================
     const dataG4 = [
-        { text: "Ao descer a escada, desça com calma segurando no seu ", opt: ["CORRIMÃO", "FOGÃO"], ans: 0 },
-        { text: "Materiais que pegam fogo facilmente (como papel) são chamados de materiais ", opt: ["INFLAMÁVEIS", "FLEXÍVEIS"], ans: 0 },
-        { text: "Para andar de bicicleta com segurança, além do capacete, devemos usar a ", opt: ["RODOVIA", "CICLOVIA"], ans: 1 },
-        { text: "As tintas coloridas e a cola não devem ser colocadas na ", opt: ["BOCA", "MESA"], ans: 0 },
-        { text: "O papel pode ser dobrado para fazer aviõezinhos de brinquedo porque ele é muito ", opt: ["FLEXÍVEL", "PESADO"], ans: 0 }
+        { q: "O papel e a madeira são materiais INFLAMÁVEIS. Isso significa que eles:", opts: ["Pegam fogo com facilidade", "Apagam o fogo rápido"], ans: 0 },
+        { q: "Por que as crianças devem usar tesouras escolares COM PONTAS ARREDONDADAS?", opts: ["Para cortar mais rápido", "Para evitar acidentes e cortes perigosos"], ans: 1 },
+        { q: "Existem materiais tóxicos (como tintas e algumas colas) que nos fazem mal. Por isso, nunca devemos colocar esses objetos...", opts: ["Na mochila", "Na boca"], ans: 1 },
+        { q: "Qual é a regra mais importante ao brincar perto do fogão ou de onde tem fogo?", opts: ["Nunca brincar perto do fogo!", "Soprar o fogo para brincar"], ans: 0 },
+        { q: "O que NUNCA devemos fazer sozinhos, sem a ajuda de um adulto?", opts: ["Ligar equipamentos na tomada", "Desenhar com lápis"], ans: 0 }
     ];
     let curG4 = 0;
 
@@ -482,15 +475,13 @@
     function renderG4() {
         if(curG4 >= dataG4.length) { document.getElementById('game-4').style.display = 'none'; document.getElementById('end-screen').style.display = 'block'; return; }
         const q = dataG4[curG4];
-        document.getElementById('g4-question').innerHTML = q.text + " <br><br><b>[ _______ ]</b>";
+        document.getElementById('g4-question').innerText = `${curG4+1}/${dataG4.length} - ${q.q}`;
         
         const optsDiv = document.getElementById('g4-options');
         optsDiv.innerHTML = '';
-        q.opt.forEach((opt, i) => {
+        q.opts.forEach((opt, i) => {
             let btn = document.createElement('button');
-            btn.className = 'btn-opt'; 
-            btn.style.textAlign = 'center';
-            btn.innerText = opt;
+            btn.className = 'btn-opt'; btn.innerText = opt;
             btn.onclick = () => checkG4(i, btn);
             optsDiv.appendChild(btn);
         });
@@ -506,14 +497,12 @@
 
         if(selected === q.ans) {
             btn.classList.add('correct');
-            document.getElementById('g4-question').innerHTML = q.text + ` <br><br><b style="color:#27ae60;">[ ${q.opt[q.ans]} ]</b>`;
-            fb.innerText = "✅ Frase completa com sucesso!"; fb.className = "feedback good";
+            fb.innerText = "✅ Segurança em primeiro lugar!"; fb.className = "feedback good";
             addScore();
         } else {
             btn.classList.add('wrong');
             buttons[q.ans].classList.add('correct');
-            document.getElementById('g4-question').innerHTML = q.text + ` <br><br><b style="color:#27ae60;">[ ${q.opt[q.ans]} ]</b>`;
-            fb.innerText = "❌ Essa não era a palavra certa."; fb.className = "feedback bad";
+            fb.innerText = "❌ Alerta vermelho!"; fb.className = "feedback bad";
         }
         document.getElementById('g4-next').style.display = 'block';
     }
