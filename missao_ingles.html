@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>English Mission - 2º Ano</title>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap');
+    
+    body {
+        font-family: 'Nunito', sans-serif;
+        background-color: #fce4ec; /* Fundo rosa bem clarinho */
+        color: #2c3e50;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+    }
+    
+    /* BARRA DE NAVEGAÇÃO */
+    .top-bar {
+        width: 100%;
+        background-color: #2c3e50;
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        flex-wrap: wrap;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        z-index: 100;
+        position: sticky;
+        top: 0;
+    }
+    .top-bar a {
+        text-decoration: none;
+        color: white;
+        background-color: #34495e;
+        padding: 8px 15px;
+        border-radius: 8px;
+        font-weight: bold;
+        font-size: 0.9em;
+        transition: 0.2s;
+    }
+    .top-bar a:hover { background-color: #7f8c8d; }
+    .top-bar a.active { background-color: #e84393; color: white; pointer-events: none; }
+
+    /* HEADER */
+    .header {
+        background: linear-gradient(135deg, #e84393, #fd79a8); /* Gradiente Rosa */
+        color: white;
+        width: 100%;
+        text-align: center;
+        padding: 25px 10px 40px;
+        border-bottom-left-radius: 30px;
+        border-bottom-right-radius: 30px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        position: relative;
+    }
+    .header h1 { margin: 0; font-size: 2.2em; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
+    
+    .score-badge {
+        position: absolute;
+        bottom: -20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #f1c40f;
+        color: #855e00;
+        padding: 8px 25px;
+        border-radius: 25px;
+        font-size: 1.2em;
+        font-weight: 900;
+        border: 3px solid white;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    /* CONTAINER PRINCIPAL */
+    .container {
+        width: 95%;
+        max-width: 600px;
+        margin: 40px auto 20px;
+    }
+
+    /* MENU DE JOGOS */
+    .menu-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    .menu-card {
+        background: white;
+        border-radius: 20px;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0 6px 0px #bdc3c7;
+        cursor: pointer;
+        transition: 0.1s;
+        border-top: 6px solid #e84393;
+    }
+    .menu-card:active { transform: translateY(6px); box-shadow: 0 0px 0px #bdc3c7; }
+    .menu-card .icon { font-size: 3em; margin-bottom: 10px; }
+    .menu-card h2 { margin: 0; color: #2c3e50; font-size: 1.5em; }
+
+    /* TELAS DE JOGO */
+    .game-screen {
+        display: none;
+        background: white;
+        padding: 25px;
+        border-radius: 20px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        border-top: 6px solid #e84393;
+        animation: fadeIn 0.3s;
+    }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+    .game-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 2px dashed #eee;
+        padding-bottom: 15px;
+        margin-bottom: 20px;
+    }
+    .game-header h2 { margin: 0; color: #e84393; font-size: 1.4em; }
+    .btn-back {
+        background: #e74c3c; color: white; border: none; padding: 8px 15px;
+        border-radius: 8px; font-weight: bold; cursor: pointer;
+    }
+
+    /* ELEMENTOS DAS QUESTÕES */
+    .emoji-display { font-size: 5em; text-align: center; margin: 10px 0; }
+    .question-text { font-size: 1.4em; text-align: center; font-weight: bold; margin-bottom: 25px; color: #34495e; }
+    
+    .options-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+    .options-grid.two-cols { grid-template-columns: 1fr 1fr; }
+    
+    .btn-opt {
+        background: #f8f9fa; border: 2px solid #dcdde1; padding: 15px;
+        border-radius: 12px; font-size: 1.2em; font-weight: 700; color: #2c3e50;
+        cursor: pointer; transition: 0.2s; font-family: inherit;
+    }
+    .btn-opt:active { transform: scale(0.98); }
+    .btn-opt.correct { background: #2ecc71; border-color: #27ae60; color: white; }
+    .btn-opt.wrong { background: #e74c3c; border-color: #c0392b; color: white; }
+
+    /* BOTÕES ESPECIAIS (SMILE / FROWN) */
+    .btn-face { font-size: 3em; padding: 10px; background: transparent; border: none; cursor: pointer; transition: 0.2s; filter: grayscale(100%); opacity: 0.6; }
+    .btn-face:hover { filter: grayscale(0%); opacity: 1; transform: scale(1.1); }
+    .btn-face.selected { filter: grayscale(0%); opacity: 1; transform: scale(1.2); }
+    .faces-container { display: flex; justify-content: center; gap: 30px; margin-bottom: 20px; }
+
+    .feedback { text-align: center; font-size: 1.2em; font-weight: bold; min-height: 30px; margin-top: 20px; border-radius: 8px; padding: 10px; display: none; }
+    .feedback.good { display: block; background: #d5f5e3; color: #1e8449; }
+    .feedback.bad { display: block; background: #fadbd8; color: #943126; }
+
+    .btn-next {
+        width: 100%; background: #e84393; color: white; border: none; padding: 15px;
+        border-radius: 12px; font-size: 1.2em; font-weight: bold; margin-top: 20px;
+        display: none; cursor: pointer; box-shadow: 0 4px 0 #b71540;
+    }
+    .btn-next:active { transform: translateY(4px); box-shadow: 0 0 0 transparent; }
+
+    .end-screen { text-align: center; padding: 20px; }
+    .end-screen .trophy { font-size: 5em; margin-bottom: 10px; }
+
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+    <a href="index.html">🏠 Menu Inicial</a>
+    <a href="#" class="active">🗣️ English Mission</a>
+</div>
+
+<div class="header">
+    <h1>English Time!</h1>
+    <div class="score-badge">⭐ <span id="score">0</span> Points</div>
+</div>
+
+<div class="container">
+    
+    <!-- MENU PRINCIPAL -->
+    <div id="main-menu" class="menu-grid">
+        <div class="menu-card" onclick="startGame(1)">
+            <div class="icon">🍕</div>
+            <h2>1. Food Words</h2>
+            <p>Adivinhe a palavra em inglês!</p>
+        </div>
+        <div class="menu-card" onclick="startGame(2)">
+            <div class="icon">🙂☹️</div>
+            <h2>2. Yummy or Yuck?</h2>
+            <p>I like... / I don't like...</p>
+        </div>
+        <div class="menu-card" onclick="startGame(3)">
+            <div class="icon">🎤</div>
+            <h2>3. The Chant</h2>
+            <p>Do you like...?</p>
+        </div>
+    </div>
+
+    <!-- TELA JOGO 1: FOOD WORDS -->
+    <div id="game-1" class="game-screen">
+        <div class="game-header"><h2>🍕 Food Words</h2><button class="btn-back" onclick="showMenu()">Back</button></div>
+        <div class="emoji-display" id="g1-emoji"></div>
+        <div class="question-text">What is this?</div>
+        <div class="options-grid" id="g1-options"></div>
+        <div id="g1-feedback" class="feedback"></div>
+        <button id="g1-next" class="btn-next" onclick="nextG1()">Next ➡️</button>
+    </div>
+
+    <!-- TELA JOGO 2: YUMMY OR YUCK -->
+    <div id="game-2" class="game-screen">
+        <div class="game-header"><h2>🙂 Yummy or Yuck?</h2><button class="btn-back" onclick="showMenu()">Back</button></div>
+        <div class="emoji-display" id="g2-emoji"></div>
+        <div class="question-text" id="g2-sentence"></div>
+        <div class="faces-container">
+            <button class="btn-face" id="face-happy" onclick="answerG2(true)">🙂</button>
+            <button class="btn-face" id="face-sad" onclick="answerG2(false)">☹️</button>
+        </div>
+        <div id="g2-feedback" class="feedback"></div>
+        <button id="g2-next" class="btn-next" onclick="nextG2()">Next ➡️</button>
+    </div>
+
+    <!-- TELA JOGO 3: THE CHANT -->
+    <div id="game-3" class="game-screen">
+        <div class="game-header"><h2>🎤 The Chant</h2><button class="btn-back" onclick="showMenu()">Back</button></div>
+        <div class="emoji-display" id="g3-emoji"></div>
+        <div class="question-text" id="g3-question"></div>
+        <div class="options-grid two-cols" id="g3-options"></div>
+        <div id="g3-feedback" class="feedback"></div>
+        <button id="g3-next" class="btn-next" onclick="nextG3()">Next ➡️</button>
+    </div>
+
+    <!-- TELA FINAL -->
+    <div id="end-screen" class="game-screen end-screen">
+        <div class="trophy">🏆</div>
+        <h2>Great Job!</h2>
+        <p>Você completou esta missão de Inglês!</p>
+        <button class="btn-next" style="display:block;" onclick="showMenu()">Voltar para o Menu</button>
+    </div>
+
+</div>
+
+<script>
+    let score = 0;
+    
+    function addScore() {
+        score += 10;
+        document.getElementById('score').innerText = score;
+    }
+
+    function showMenu() {
+        document.querySelectorAll('.game-screen').forEach(el => el.style.display = 'none');
+        document.getElementById('main-menu').style.display = 'grid';
+    }
+
+    // ==========================================
+    // JOGO 1: FOOD WORDS
+    // ==========================================
+    const dataG1 = [
+        { emoji: '🍗', opts: ['Chicken', 'Cheese', 'Bread'], ans: 0 },
+        { emoji: '🧀', opts: ['Pizza', 'Milk', 'Cheese'], ans: 2 },
+        { emoji: '🍅', opts: ['Tomatoes', 'Olives', 'Strawberries'], ans: 0 },
+        { emoji: '🥛', opts: ['Sandwich', 'Milk', 'Milkshake'], ans: 1 },
+        { emoji: '🍓', opts: ['Bananas', 'Strawberries', 'Olives'], ans: 1 }
+    ];
+    let curG1 = 0;
+
+    function startGame1() { curG1 = 0; document.getElementById('main-menu').style.display = 'none'; document.getElementById('game-1').style.display = 'block'; renderG1(); }
+    
+    function renderG1() {
+        if(curG1 >= dataG1.length) { document.getElementById('game-1').style.display = 'none'; document.getElementById('end-screen').style.display = 'block'; return; }
+        const q = dataG1[curG1];
+        document.getElementById('g1-emoji').innerText = q.emoji;
+        const optsDiv = document.getElementById('g1-options');
+        optsDiv.innerHTML = '';
+        q.opts.forEach((opt, i) => {
+            let btn = document.createElement('button');
+            btn.className = 'btn-opt'; btn.innerText = opt;
+            btn.onclick = () => checkG1(i, btn);
+            optsDiv.appendChild(btn);
+        });
+        document.getElementById('g1-feedback').className = 'feedback';
+        document.getElementById('g1-next').style.display = 'none';
+    }
+
+    function checkG1(selected, btn) {
+        const q = dataG1[curG1];
+        const buttons = document.getElementById('g1-options').querySelectorAll('.btn-opt');
+        buttons.forEach(b => b.style.pointerEvents = 'none');
+        const fb = document.getElementById('g1-feedback');
+
+        if(selected === q.ans) {
+            btn.classList.add('correct');
+            fb.innerText = "✅ Excellent!"; fb.className = "feedback good";
+            addScore();
+        } else {
+            btn.classList.add('wrong');
+            buttons[q.ans].classList.add('correct');
+            fb.innerText = "❌ Oops!"; fb.className = "feedback bad";
+        }
+        document.getElementById('g1-next').style.display = 'block';
+    }
+    function nextG1() { curG1++; renderG1(); }
+
+
+    // ==========================================
+    // JOGO 2: YUMMY OR YUCK
+    // ==========================================
+    const dataG2 = [
+        { text: "I like chicken.", emoji: '🍗', isLike: true },
+        { text: "I don't like olives.", emoji: '🫒', isLike: false },
+        { text: "I like strawberries.", emoji: '🍓', isLike: true },
+        { text: "I don't like cheese.", emoji: '🧀', isLike: false }
+    ];
+    let curG2 = 0;
+
+    function startGame2() { curG2 = 0; document.getElementById('main-menu').style.display = 'none'; document.getElementById('game-2').style.display = 'block'; renderG2(); }
+
+    function renderG2() {
+        if(curG2 >= dataG2.length) { document.getElementById('game-2').style.display = 'none'; document.getElementById('end-screen').style.display = 'block'; return; }
+        const q = dataG2[curG2];
+        document.getElementById('g2-emoji').innerText = q.emoji;
+        document.getElementById('g2-sentence').innerText = q.text;
+        document.getElementById('face-happy').className = 'btn-face';
+        document.getElementById('face-sad').className = 'btn-face';
+        document.getElementById('face-happy').style.pointerEvents = 'auto';
+        document.getElementById('face-sad').style.pointerEvents = 'auto';
+        document.getElementById('g2-feedback').className = 'feedback';
+        document.getElementById('g2-next').style.display = 'none';
+    }
+
+    function answerG2(userChoseLike) {
+        const q = dataG2[curG2];
+        document.getElementById('face-happy').style.pointerEvents = 'none';
+        document.getElementById('face-sad').style.pointerEvents = 'none';
+        const fb = document.getElementById('g2-feedback');
+
+        if(userChoseLike) document.getElementById('face-happy').classList.add('selected');
+        else document.getElementById('face-sad').classList.add('selected');
+
+        if(userChoseLike === q.isLike) {
+            fb.innerText = "✅ Very good!"; fb.className = "feedback good";
+            addScore();
+        } else {
+            fb.innerText = "❌ Remember: 'don't like' is sad ☹️"; fb.className = "feedback bad";
+        }
+        document.getElementById('g2-next').style.display = 'block';
+    }
+    function nextG2() { curG2++; renderG2(); }
+
+
+    // ==========================================
+    // JOGO 3: THE CHANT (Q&A)
+    // ==========================================
+    const dataG3 = [
+        { emoji: '🍕', q: "Do you like pizza?", opts: ["Yes, I do.", "No, I don't."], ans: 1, note: "(Look at the chant!)" },
+        { emoji: '🥤', q: "Do you like milkshakes?", opts: ["Yes, I am.", "Yes, I do."], ans: 1, note: "(Look at the chant!)" },
+        { emoji: '🥪', q: "Do you like sandwiches?", opts: ["No, I don't.", "No, I isn't."], ans: 0, note: "(Correct grammar!)" },
+        { emoji: '🍦', q: "Do you like ice cream?", opts: ["Yes, I do.", "Yes, I don't."], ans: 0, note: "(Correct grammar!)" }
+    ];
+    let curG3 = 0;
+
+    function startGame3() { curG3 = 0; document.getElementById('main-menu').style.display = 'none'; document.getElementById('game-3').style.display = 'block'; renderG3(); }
+
+    function renderG3() {
+        if(curG3 >= dataG3.length) { document.getElementById('game-3').style.display = 'none'; document.getElementById('end-screen').style.display = 'block'; return; }
+        const q = dataG3[curG3];
+        document.getElementById('g3-emoji').innerText = q.emoji;
+        document.getElementById('g3-question').innerHTML = `${q.q} <br><span style="font-size:0.7em; color:#7f8c8d;">${q.note}</span>`;
+        
+        const optsDiv = document.getElementById('g3-options');
+        optsDiv.innerHTML = '';
+        q.opts.forEach((opt, i) => {
+            let btn = document.createElement('button');
+            btn.className = 'btn-opt'; btn.innerText = opt;
+            btn.onclick = () => checkG3(i, btn);
+            optsDiv.appendChild(btn);
+        });
+        document.getElementById('g3-feedback').className = 'feedback';
+        document.getElementById('g3-next').style.display = 'none';
+    }
+
+    function checkG3(selected, btn) {
+        const q = dataG3[curG3];
+        const buttons = document.getElementById('g3-options').querySelectorAll('.btn-opt');
+        buttons.forEach(b => b.style.pointerEvents = 'none');
+        const fb = document.getElementById('g3-feedback');
+
+        if(selected === q.ans) {
+            btn.classList.add('correct');
+            fb.innerText = "✅ Perfect!"; fb.className = "feedback good";
+            addScore();
+        } else {
+            btn.classList.add('wrong');
+            buttons[q.ans].classList.add('correct');
+            fb.innerText = "❌ Not quite!"; fb.className = "feedback bad";
+        }
+        document.getElementById('g3-next').style.display = 'block';
+    }
+    function nextG3() { curG3++; renderG3(); }
+
+    // Roteador inicial
+    function startGame(id) {
+        if(id === 1) startGame1();
+        if(id === 2) startGame2();
+        if(id === 3) startGame3();
+    }
+
+</script>
+</body>
+</html>
