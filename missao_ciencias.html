@@ -101,6 +101,9 @@
         flex-direction: column;
         justify-content: center;
     }
+    .menu-card.full-width {
+        grid-column: 1 / -1;
+    }
     .menu-card:active { transform: translateY(6px); box-shadow: 0 0px 0px #bdc3c7; }
     .menu-card .icon { font-size: 2.5em; margin-bottom: 5px; }
     .menu-card h2 { margin: 0 0 5px 0; color: #2c3e50; font-size: 1.2em; }
@@ -108,6 +111,7 @@
 
     @media (max-width: 480px) {
         .menu-grid { grid-template-columns: 1fr; }
+        .menu-card.full-width { grid-column: auto; }
     }
 
     /* TELAS DE JOGO */
@@ -150,6 +154,13 @@
     .btn-opt.correct { background: #2ecc71; border-color: #27ae60; color: white; }
     .btn-opt.wrong { background: #e74c3c; border-color: #c0392b; color: white; }
 
+    /* BOTOES SEGURO / PERIGOSO */
+    .btn-safe-danger { display: flex; gap: 15px; justify-content: center; }
+    .btn-sd { flex: 1; padding: 15px 10px; font-size: 1.2em; border: none; border-radius: 15px; color: white; font-weight: bold; cursor: pointer; box-shadow: 0 5px 0 rgba(0,0,0,0.2); transition: 0.2s; }
+    .btn-safe { background: #2ecc71; }
+    .btn-danger { background: #e74c3c; }
+    .btn-sd:active { transform: translateY(5px); box-shadow: 0 0 0 transparent; }
+
     /* LIGAR COLUNAS */
     .match-grid { display: flex; justify-content: space-between; gap: 10px; }
     .match-col { display: flex; flex-direction: column; gap: 10px; width: 48%; }
@@ -189,7 +200,7 @@
 </div>
 
 <div class="header">
-    <h1>Laboratório de Ciências</h1>
+    <h1>Laboratório e Esquadrão</h1>
     <div class="score-badge">⭐ <span id="score">0</span> Pontos</div>
 </div>
 
@@ -199,69 +210,88 @@
     <div id="main-menu" class="menu-grid">
         <div class="menu-card" onclick="startGame(1)">
             <div class="icon">🔬</div>
-            <h2>1. De Onde Vem?</h2>
-            <p>A origem dos materiais artificiais.</p>
+            <h2>1. Origem</h2>
+            <p>De onde vêm os materiais?</p>
         </div>
         <div class="menu-card" onclick="startGame(2)">
             <div class="icon">♻️</div>
-            <h2>2. Super Sustentável</h2>
-            <p>O poder de reutilizar objetos.</p>
+            <h2>2. Quiz dos Materiais</h2>
+            <p>Reciclagem e Propriedades.</p>
         </div>
         <div class="menu-card" onclick="startGame(3)">
-            <div class="icon">🧱</div>
-            <h2>3. Propriedades</h2>
-            <p>O que é forte, leve ou flexível?</p>
+            <div class="icon">✅❌</div>
+            <h2>3. Seguro ou Perigoso?</h2>
+            <p>Atitudes no dia a dia.</p>
         </div>
         <div class="menu-card" onclick="startGame(4)">
-            <div class="icon">⚠️</div>
-            <h2>4. Alerta de Perigo</h2>
-            <p>Materiais que exigem cuidado!</p>
+            <div class="icon">🔌</div>
+            <h2>4. Alerta em Casa</h2>
+            <p>Conecte os objetos aos cuidados.</p>
+        </div>
+        <div class="menu-card full-width" onclick="startGame(5)">
+            <div class="icon">✏️</div>
+            <h2>5. Complete a Regra</h2>
+            <p>Descubra a palavra da segurança!</p>
         </div>
     </div>
 
     <!-- TELA JOGO 1: LIGAR COLUNAS (ORIGENS) -->
     <div id="game-1" class="game-screen">
-        <div class="game-header"><h2>🔬 De Onde Vem?</h2><button class="btn-back" onclick="showMenu()">Voltar</button></div>
+        <div class="game-header"><h2>🔬 Origem</h2><button class="btn-back" onclick="showMenu()">Voltar</button></div>
         <p style="text-align:center; font-size:1.1em; color: #34495e; font-weight: bold;">Ligue o material fabricado à sua origem na natureza!</p>
         <div class="match-grid">
-            <div class="match-col" id="m-left"></div>
-            <div class="match-col" id="m-right"></div>
+            <div class="match-col" id="m1-left"></div>
+            <div class="match-col" id="m1-right"></div>
         </div>
         <div id="g1-feedback" class="feedback"></div>
     </div>
 
-    <!-- TELA JOGO 2: SUSTENTÁVEL -->
+    <!-- TELA JOGO 2: QUIZ MATERIAIS E RECICLAGEM -->
     <div id="game-2" class="game-screen">
-        <div class="game-header"><h2>♻️ Super Sustentável</h2><button class="btn-back" onclick="showMenu()">Voltar</button></div>
+        <div class="game-header"><h2>♻️ Quiz dos Materiais</h2><button class="btn-back" onclick="showMenu()">Voltar</button></div>
         <div class="question-text" id="g2-question"></div>
         <div class="options-grid" id="g2-options"></div>
         <div id="g2-feedback" class="feedback"></div>
         <button id="g2-next" class="btn-next" onclick="nextG2()">Próxima ➡️</button>
     </div>
 
-    <!-- TELA JOGO 3: PROPRIEDADES -->
+    <!-- TELA JOGO 3: SEGURO OU PERIGOSO -->
     <div id="game-3" class="game-screen">
-        <div class="game-header"><h2>🧱 Propriedades</h2><button class="btn-back" onclick="showMenu()">Voltar</button></div>
+        <div class="game-header"><h2>✅ Seguro ou Perigoso?</h2><button class="btn-back" onclick="showMenu()">Voltar</button></div>
         <div class="question-text" id="g3-question"></div>
-        <div class="options-grid" id="g3-options"></div>
+        <div class="btn-safe-danger" id="g3-options">
+            <button class="btn-sd btn-safe" onclick="answerG3(true)">✅ SEGURO</button>
+            <button class="btn-sd btn-danger" onclick="answerG3(false)">❌ PERIGOSO</button>
+        </div>
         <div id="g3-feedback" class="feedback"></div>
         <button id="g3-next" class="btn-next" onclick="nextG3()">Próxima ➡️</button>
     </div>
 
-    <!-- TELA JOGO 4: SEGURANÇA -->
+    <!-- TELA JOGO 4: LIGAR COLUNAS (SEGURANÇA EM CASA) -->
     <div id="game-4" class="game-screen">
-        <div class="game-header"><h2>⚠️ Alerta de Perigo</h2><button class="btn-back" onclick="showMenu()">Voltar</button></div>
-        <div class="question-text" id="g4-question"></div>
-        <div class="options-grid" id="g4-options"></div>
+        <div class="game-header"><h2>🔌 Alerta em Casa</h2><button class="btn-back" onclick="showMenu()">Voltar</button></div>
+        <p style="text-align:center; font-size:1.1em; color: #34495e; font-weight: bold;">Ligue o objeto ao cuidado que devemos ter com ele!</p>
+        <div class="match-grid">
+            <div class="match-col" id="m4-left"></div>
+            <div class="match-col" id="m4-right"></div>
+        </div>
         <div id="g4-feedback" class="feedback"></div>
-        <button id="g4-next" class="btn-next" onclick="nextG4()">Próxima ➡️</button>
+    </div>
+
+    <!-- TELA JOGO 5: COMPLETE A REGRA -->
+    <div id="game-5" class="game-screen">
+        <div class="game-header"><h2>✏️ Complete a Regra</h2><button class="btn-back" onclick="showMenu()">Voltar</button></div>
+        <div class="question-text" id="g5-question" style="background:#f4f6f9; padding: 20px; border-radius:10px; border: 2px dashed #bdc3c7;"></div>
+        <div class="options-grid" style="grid-template-columns: 1fr 1fr;" id="g5-options"></div>
+        <div id="g5-feedback" class="feedback"></div>
+        <button id="g5-next" class="btn-next" onclick="nextG5()">Próxima ➡️</button>
     </div>
 
     <!-- TELA FINAL -->
     <div id="end-screen" class="game-screen end-screen">
         <div class="trophy">🏆</div>
-        <h2>Excelente!</h2>
-        <p>Você virou um especialista em Materiais e Segurança!</p>
+        <h2>Missão Cumprida!</h2>
+        <p>Você é fera em Materiais e Segurança!</p>
         <button class="btn-next" style="display:block;" onclick="showMenu()">Voltar para o Menu</button>
     </div>
 
@@ -281,65 +311,65 @@
     }
 
     // ==========================================
-    // JOGO 1: LIGAR COLUNAS (MATERIAIS E ORIGENS)
+    // JOGO 1: ORIGEM DOS MATERIAIS (LIGAR)
     // ==========================================
-    const allPairsG1 = [
-        { m: "Vidro", p: "Areia aquecida e moldada" },
-        { m: "Plástico", p: "Retirado do petróleo no solo" },
-        { m: "Papel", p: "Celulose encontrada nas plantas" },
-        { m: "Metal", p: "Minerais retirados das rochas" }
+    const pairsG1 = [
+        { m: "Vidro", p: "Areia aquecida" },
+        { m: "Plástico", p: "Petróleo no solo" },
+        { m: "Papel", p: "Celulose das plantas" },
+        { m: "Metal", p: "Minerais das rochas" }
     ];
-    let selLeft = null, selRight = null, matchedCount = 0;
+    let selLeft1 = null, selRight1 = null, matchedCount1 = 0;
 
     function startGame1() { document.getElementById('main-menu').style.display = 'none'; document.getElementById('game-1').style.display = 'block'; initG1(); }
 
     function initG1() {
-        matchedCount = 0;
+        matchedCount1 = 0;
         document.getElementById('g1-feedback').innerHTML = "";
         document.getElementById('g1-feedback').className = "feedback";
-        const leftCol = document.getElementById('m-left');
-        const rightCol = document.getElementById('m-right');
+        const leftCol = document.getElementById('m1-left');
+        const rightCol = document.getElementById('m1-right');
         leftCol.innerHTML = ''; rightCol.innerHTML = '';
 
-        let leftItems = allPairsG1.map((p, i) => ({ text: p.m, id: i, side: 'l' })).sort(() => Math.random() - 0.5);
-        let rightItems = allPairsG1.map((p, i) => ({ text: p.p, id: i, side: 'r' })).sort(() => Math.random() - 0.5);
+        let leftItems = pairsG1.map((p, i) => ({ text: p.m, id: i, side: 'l' })).sort(() => Math.random() - 0.5);
+        let rightItems = pairsG1.map((p, i) => ({ text: p.p, id: i, side: 'r' })).sort(() => Math.random() - 0.5);
 
         leftItems.forEach(item => {
             let btn = document.createElement('button');
             btn.className = 'match-btn'; btn.innerText = item.text;
-            btn.onclick = () => clickMatch(btn, item);
+            btn.onclick = () => clickMatch1(btn, item);
             leftCol.appendChild(btn);
         });
         rightItems.forEach(item => {
             let btn = document.createElement('button');
             btn.className = 'match-btn'; btn.innerText = item.text;
-            btn.onclick = () => clickMatch(btn, item);
+            btn.onclick = () => clickMatch1(btn, item);
             rightCol.appendChild(btn);
         });
     }
 
-    function clickMatch(btn, item) {
+    function clickMatch1(btn, item) {
         if(btn.classList.contains('matched')) return;
-        document.querySelectorAll('.match-btn').forEach(b => b.classList.remove('error'));
+        document.querySelectorAll('#game-1 .match-btn').forEach(b => b.classList.remove('error'));
 
         if(item.side === 'l') {
-            if(selLeft) selLeft.btn.classList.remove('selected');
-            selLeft = { btn, id: item.id };
+            if(selLeft1) selLeft1.btn.classList.remove('selected');
+            selLeft1 = { btn, id: item.id };
             btn.classList.add('selected');
         } else {
-            if(selRight) selRight.btn.classList.remove('selected');
-            selRight = { btn, id: item.id };
+            if(selRight1) selRight1.btn.classList.remove('selected');
+            selRight1 = { btn, id: item.id };
             btn.classList.add('selected');
         }
 
-        if(selLeft && selRight) {
-            if(selLeft.id === selRight.id) {
-                selLeft.btn.classList.replace('selected', 'matched');
-                selRight.btn.classList.replace('selected', 'matched');
-                selLeft.btn.innerText += " ✅"; selRight.btn.innerText += " ✅";
-                addScore(); matchedCount++;
-                selLeft = null; selRight = null;
-                if(matchedCount === allPairsG1.length) {
+        if(selLeft1 && selRight1) {
+            if(selLeft1.id === selRight1.id) {
+                selLeft1.btn.classList.replace('selected', 'matched');
+                selRight1.btn.classList.replace('selected', 'matched');
+                selLeft1.btn.innerText += " ✅"; selRight1.btn.innerText += " ✅";
+                addScore(); matchedCount1++;
+                selLeft1 = null; selRight1 = null;
+                if(matchedCount1 === pairsG1.length) {
                     let fb = document.getElementById('g1-feedback');
                     fb.innerHTML = "🎉 Show! Você sabe a origem de tudo!";
                     fb.className = "feedback good";
@@ -349,24 +379,24 @@
                     }, 3000);
                 }
             } else {
-                selLeft.btn.classList.remove('selected'); selRight.btn.classList.remove('selected');
-                selLeft.btn.classList.add('error'); selRight.btn.classList.add('error');
-                let tempL = selLeft.btn, tempR = selRight.btn;
-                selLeft = null; selRight = null;
+                selLeft1.btn.classList.remove('selected'); selRight1.btn.classList.remove('selected');
+                selLeft1.btn.classList.add('error'); selRight1.btn.classList.add('error');
+                let tempL = selLeft1.btn, tempR = selRight1.btn;
+                selLeft1 = null; selRight1 = null;
                 setTimeout(() => { tempL.classList.remove('error'); tempR.classList.remove('error'); }, 400);
             }
         }
     }
 
     // ==========================================
-    // JOGO 2: SUSTENTABILIDADE E RECICLAGEM
+    // JOGO 2: QUIZ DOS MATERIAIS E RECICLAGEM
     // ==========================================
     const dataG2 = [
-        { q: "Os objetos que não usamos mais no dia a dia podem virar lixo ou podem ser...", opts: ["Reutilizados ou Reciclados", "Comidos ou Bebidos"], ans: 0 },
-        { q: "Quando pegamos um pote plástico de sorvete para guardar brinquedos, nós estamos:", opts: ["Reciclando o pote", "Reutilizando o pote"], ans: 1 },
-        { q: "Na RECICLAGEM, o que acontece com o material?", opts: ["Ele é guardado no armário para sempre", "Ele passa por uma transformação e vira um objeto novo"], ans: 1 },
-        { q: "Dobrar folhas de caderno usadas e jornais velhos para fazer aviõezinhos de brinquedo é uma forma de produzir...", opts: ["Mais lixo", "Menos lixo"], ans: 1 },
-        { q: "Objetos fabricados com materiais retirados da natureza pelo ser humano (como vidro e plástico) são chamados de:", opts: ["Naturais", "Artificiais"], ans: 1 }
+        { q: "O papel é um material ___________, por isso podemos dobrá-lo para fazer aviõezinhos.", opts: ["MUITO PESADO", "FLEXÍVEL"], ans: 1 },
+        { q: "A madeira e o plástico das garrafas são bons para fazer brinquedos porque são:", opts: ["Resistentes", "Frágeis (quebram fácil)"], ans: 0 },
+        { q: "Quando pegamos um pote plástico para guardar brinquedos, nós estamos:", opts: ["Reciclando o pote", "Reutilizando o pote"], ans: 1 },
+        { q: "Na RECICLAGEM, o que acontece com o material do objeto que foi para o lixo?", opts: ["Ele é lavado e usado do mesmo jeito", "Ele é transformado e vira um objeto novo"], ans: 1 },
+        { q: "Brincar e inventar brinquedos com garrafas e caixas velhas ajuda o planeta porque nós...", opts: ["Produzimos MENOS lixo", "Sujamos mais a casa"], ans: 0 }
     ];
     let curG2 = 0;
 
@@ -397,26 +427,27 @@
 
         if(selected === q.ans) {
             btn.classList.add('correct');
-            fb.innerText = "✅ Exatamente!"; fb.className = "feedback good";
+            fb.innerText = "✅ Excelente!"; fb.className = "feedback good";
             addScore();
         } else {
             btn.classList.add('wrong');
             buttons[q.ans].classList.add('correct');
-            fb.innerText = "❌ Quase lá!"; fb.className = "feedback bad";
+            fb.innerText = "❌ Cuidado para não confundir!"; fb.className = "feedback bad";
         }
         document.getElementById('g2-next').style.display = 'block';
     }
     function nextG2() { curG2++; renderG2(); }
 
     // ==========================================
-    // JOGO 3: PROPRIEDADES DOS MATERIAIS
+    // JOGO 3: SEGURO OU PERIGOSO
     // ==========================================
     const dataG3 = [
-        { q: "Como o papel é um material ___________, nós podemos dobrá-lo de diferentes formas.", opts: ["MUITO PESADO", "FLEXÍVEL"], ans: 1 },
-        { q: "O papelão é muito usado para fazer caixas porque, em comparação com a folha de caderno, ele é:", opts: ["Mais grosso e resistente", "Mais fácil de rasgar"], ans: 0 },
-        { q: "Para fazer brinquedos que não quebram com facilidade, é melhor usar qual material resistente?", opts: ["Madeira (palitos e caixotes)", "Isopor"], ans: 0 },
-        { q: "As garrafas que compramos com água ou refrigerante são boas para construir brinquedos porque o plástico é:", opts: ["Muito pesado e afiado", "Leve e resistente"], ans: 1 },
-        { q: "Podemos ter vários copos com o MESMO formato, mas feitos de materiais:", opts: ["Diferentes (vidro, papel, plástico)", "Iguais sempre"], ans: 0 }
+        { q: "Usar tesoura com pontas arredondadas e com cuidado.", isSafe: true, tip: "Tesouras sem ponta evitam acidentes." },
+        { q: "Correr pelos corredores da escola perto das portas.", isSafe: false, tip: "Alguém pode abrir a porta de repente!" },
+        { q: "Sentar na janela de casa ou subir em lugares altos sozinho.", isSafe: false, tip: "Pode causar quedas muito graves." },
+        { q: "Atravessar a rua sempre na faixa de pedestres.", isSafe: true, tip: "A faixa é o local correto e mais seguro." },
+        { q: "Brincar com papel e madeira perto do fogão aceso.", isSafe: false, tip: "Papel e madeira são INFLAMÁVEIS (pegam fogo)." },
+        { q: "Colocar tintas ou partes de brinquedos plásticos na boca.", isSafe: false, tip: "Esses materiais podem ser tóxicos." }
     ];
     let curG3 = 0;
 
@@ -426,87 +457,158 @@
         if(curG3 >= dataG3.length) { document.getElementById('game-3').style.display = 'none'; document.getElementById('end-screen').style.display = 'block'; return; }
         const q = dataG3[curG3];
         document.getElementById('g3-question').innerText = `${curG3+1}/${dataG3.length} - ${q.q}`;
-        
-        const optsDiv = document.getElementById('g3-options');
-        optsDiv.innerHTML = '';
-        q.opts.forEach((opt, i) => {
-            let btn = document.createElement('button');
-            btn.className = 'btn-opt'; btn.innerText = opt;
-            btn.onclick = () => checkG3(i, btn);
-            optsDiv.appendChild(btn);
-        });
+        document.getElementById('g3-options').style.display = 'flex';
         document.getElementById('g3-feedback').className = 'feedback';
         document.getElementById('g3-next').style.display = 'none';
     }
 
-    function checkG3(selected, btn) {
+    function answerG3(userChoseSafe) {
         const q = dataG3[curG3];
-        const buttons = document.getElementById('g3-options').querySelectorAll('.btn-opt');
-        buttons.forEach(b => b.style.pointerEvents = 'none');
+        document.getElementById('g3-options').style.display = 'none';
         const fb = document.getElementById('g3-feedback');
 
-        if(selected === q.ans) {
-            btn.classList.add('correct');
-            fb.innerText = "✅ Boa lógica!"; fb.className = "feedback good";
+        if(userChoseSafe === q.isSafe) {
+            fb.innerText = "✅ Acertou! " + q.tip; fb.className = "feedback good";
             addScore();
         } else {
-            btn.classList.add('wrong');
-            buttons[q.ans].classList.add('correct');
-            fb.innerText = "❌ Cuidado com a propriedade do material."; fb.className = "feedback bad";
+            fb.innerText = "❌ Errou! Lembre-se: " + q.tip; fb.className = "feedback bad";
         }
         document.getElementById('g3-next').style.display = 'block';
     }
     function nextG3() { curG3++; renderG3(); }
 
     // ==========================================
-    // JOGO 4: SEGURANÇA E ALERTAS
+    // JOGO 4: LIGAR COLUNAS (SEGURANÇA EM CASA)
     // ==========================================
-    const dataG4 = [
-        { q: "O papel e a madeira são materiais INFLAMÁVEIS. Isso significa que eles:", opts: ["Pegam fogo com facilidade", "Apagam o fogo rápido"], ans: 0 },
-        { q: "Por que as crianças devem usar tesouras escolares COM PONTAS ARREDONDADAS?", opts: ["Para cortar mais rápido", "Para evitar acidentes e cortes perigosos"], ans: 1 },
-        { q: "Existem materiais tóxicos (como tintas e algumas colas) que nos fazem mal. Por isso, nunca devemos colocar esses objetos...", opts: ["Na mochila", "Na boca"], ans: 1 },
-        { q: "Qual é a regra mais importante ao brincar perto do fogão ou de onde tem fogo?", opts: ["Nunca brincar perto do fogo!", "Soprar o fogo para brincar"], ans: 0 },
-        { q: "O que NUNCA devemos fazer sozinhos, sem a ajuda de um adulto?", opts: ["Ligar equipamentos na tomada", "Desenhar com lápis"], ans: 0 }
+    const pairsG4 = [
+        { m: "Tomada Elétrica", p: "Pedir ajuda a um adulto" },
+        { m: "Facas", p: "Cuidado, lâmina cortante!" },
+        { m: "Panela no Fogão", p: "Não se aproximar do fogo" },
+        { m: "Copo de Vidro", p: "Manusear com cuidado" },
+        { m: "Produtos de Limpeza", p: "Não cheirar ou tocar" }
     ];
-    let curG4 = 0;
+    let selLeft4 = null, selRight4 = null, matchedCount4 = 0;
 
-    function startGame4() { curG4 = 0; document.getElementById('main-menu').style.display = 'none'; document.getElementById('game-4').style.display = 'block'; renderG4(); }
+    function startGame4() { document.getElementById('main-menu').style.display = 'none'; document.getElementById('game-4').style.display = 'block'; initG4(); }
 
-    function renderG4() {
-        if(curG4 >= dataG4.length) { document.getElementById('game-4').style.display = 'none'; document.getElementById('end-screen').style.display = 'block'; return; }
-        const q = dataG4[curG4];
-        document.getElementById('g4-question').innerText = `${curG4+1}/${dataG4.length} - ${q.q}`;
-        
-        const optsDiv = document.getElementById('g4-options');
-        optsDiv.innerHTML = '';
-        q.opts.forEach((opt, i) => {
+    function initG4() {
+        matchedCount4 = 0;
+        document.getElementById('g4-feedback').innerHTML = "";
+        document.getElementById('g4-feedback').className = "feedback";
+        const leftCol = document.getElementById('m4-left');
+        const rightCol = document.getElementById('m4-right');
+        leftCol.innerHTML = ''; rightCol.innerHTML = '';
+
+        let leftItems = pairsG4.map((p, i) => ({ text: p.m, id: i, side: 'l' })).sort(() => Math.random() - 0.5);
+        let rightItems = pairsG4.map((p, i) => ({ text: p.p, id: i, side: 'r' })).sort(() => Math.random() - 0.5);
+
+        leftItems.forEach(item => {
             let btn = document.createElement('button');
-            btn.className = 'btn-opt'; btn.innerText = opt;
-            btn.onclick = () => checkG4(i, btn);
-            optsDiv.appendChild(btn);
+            btn.className = 'match-btn'; btn.innerText = item.text;
+            btn.onclick = () => clickMatch4(btn, item);
+            leftCol.appendChild(btn);
         });
-        document.getElementById('g4-feedback').className = 'feedback';
-        document.getElementById('g4-next').style.display = 'none';
+        rightItems.forEach(item => {
+            let btn = document.createElement('button');
+            btn.className = 'match-btn'; btn.innerText = item.text;
+            btn.onclick = () => clickMatch4(btn, item);
+            rightCol.appendChild(btn);
+        });
     }
 
-    function checkG4(selected, btn) {
-        const q = dataG4[curG4];
-        const buttons = document.getElementById('g4-options').querySelectorAll('.btn-opt');
+    function clickMatch4(btn, item) {
+        if(btn.classList.contains('matched')) return;
+        document.querySelectorAll('#game-4 .match-btn').forEach(b => b.classList.remove('error'));
+
+        if(item.side === 'l') {
+            if(selLeft4) selLeft4.btn.classList.remove('selected');
+            selLeft4 = { btn, id: item.id };
+            btn.classList.add('selected');
+        } else {
+            if(selRight4) selRight4.btn.classList.remove('selected');
+            selRight4 = { btn, id: item.id };
+            btn.classList.add('selected');
+        }
+
+        if(selLeft4 && selRight4) {
+            if(selLeft4.id === selRight4.id) {
+                selLeft4.btn.classList.replace('selected', 'matched');
+                selRight4.btn.classList.replace('selected', 'matched');
+                selLeft4.btn.innerText += " ✅"; selRight4.btn.innerText += " ✅";
+                addScore(); matchedCount4++;
+                selLeft4 = null; selRight4 = null;
+                if(matchedCount4 === pairsG4.length) {
+                    let fb = document.getElementById('g4-feedback');
+                    fb.innerHTML = "🎉 Cuidado garantido em casa!";
+                    fb.className = "feedback good";
+                    setTimeout(() => {
+                        document.getElementById('game-4').style.display = 'none';
+                        document.getElementById('end-screen').style.display = 'block';
+                    }, 3000);
+                }
+            } else {
+                selLeft4.btn.classList.remove('selected'); selRight4.btn.classList.remove('selected');
+                selLeft4.btn.classList.add('error'); selRight4.btn.classList.add('error');
+                let tempL = selLeft4.btn, tempR = selRight4.btn;
+                selLeft4 = null; selRight4 = null;
+                setTimeout(() => { tempL.classList.remove('error'); tempR.classList.remove('error'); }, 400);
+            }
+        }
+    }
+
+    // ==========================================
+    // JOGO 5: COMPLETE A REGRA (TRÂNSITO E ESCOLA)
+    // ==========================================
+    const dataG5 = [
+        { text: "No carro, a criança senta no banco de trás usando o ", opt: ["CINTO", "VIDRO"], ans: 0 },
+        { text: "Para atravessar, devemos olhar o farol para os carros e passar na ", opt: ["FAIXA", "CALÇADA"], ans: 0 },
+        { text: "Ao descer a escada da escola, segure firme no seu ", opt: ["CORRIMÃO", "CADERNO"], ans: 0 },
+        { text: "Andar de bicicleta exige equipamentos de segurança, como buzina e ", opt: ["CAPACETE", "BONÉ"], ans: 0 },
+        { text: "Nunca coloque a cabeça ou o braço para fora da ", opt: ["JANELA", "MOCHILA"], ans: 0 }
+    ];
+    let curG5 = 0;
+
+    function startGame5() { curG5 = 0; document.getElementById('main-menu').style.display = 'none'; document.getElementById('game-5').style.display = 'block'; renderG5(); }
+
+    function renderG5() {
+        if(curG5 >= dataG5.length) { document.getElementById('game-5').style.display = 'none'; document.getElementById('end-screen').style.display = 'block'; return; }
+        const q = dataG5[curG5];
+        document.getElementById('g5-question').innerHTML = q.text + " <br><br><b>[ _______ ]</b>";
+        
+        const optsDiv = document.getElementById('g5-options');
+        optsDiv.innerHTML = '';
+        q.opt.forEach((opt, i) => {
+            let btn = document.createElement('button');
+            btn.className = 'btn-opt'; 
+            btn.style.textAlign = 'center';
+            btn.innerText = opt;
+            btn.onclick = () => checkG5(i, btn);
+            optsDiv.appendChild(btn);
+        });
+        document.getElementById('g5-feedback').className = 'feedback';
+        document.getElementById('g5-next').style.display = 'none';
+    }
+
+    function checkG5(selected, btn) {
+        const q = dataG5[curG5];
+        const buttons = document.getElementById('g5-options').querySelectorAll('.btn-opt');
         buttons.forEach(b => b.style.pointerEvents = 'none');
-        const fb = document.getElementById('g4-feedback');
+        const fb = document.getElementById('g5-feedback');
 
         if(selected === q.ans) {
             btn.classList.add('correct');
-            fb.innerText = "✅ Segurança em primeiro lugar!"; fb.className = "feedback good";
+            document.getElementById('g5-question').innerHTML = q.text + ` <br><br><b style="color:#27ae60;">[ ${q.opt[q.ans]} ]</b>`;
+            fb.innerText = "✅ Regra completada com sucesso!"; fb.className = "feedback good";
             addScore();
         } else {
             btn.classList.add('wrong');
             buttons[q.ans].classList.add('correct');
-            fb.innerText = "❌ Alerta vermelho!"; fb.className = "feedback bad";
+            document.getElementById('g5-question').innerHTML = q.text + ` <br><br><b style="color:#27ae60;">[ ${q.opt[q.ans]} ]</b>`;
+            fb.innerText = "❌ Essa não era a palavra certa."; fb.className = "feedback bad";
         }
-        document.getElementById('g4-next').style.display = 'block';
+        document.getElementById('g5-next').style.display = 'block';
     }
-    function nextG4() { curG4++; renderG4(); }
+    function nextG5() { curG5++; renderG5(); }
 
     // Roteador inicial
     function startGame(id) {
@@ -514,6 +616,7 @@
         if(id === 2) startGame2();
         if(id === 3) startGame3();
         if(id === 4) startGame4();
+        if(id === 5) startGame5();
     }
 
 </script>
