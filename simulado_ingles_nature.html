@@ -50,9 +50,22 @@
     }
     .campo { display: flex; font-weight: bold; font-size: 1.1em; align-items: center; }
     
-    .q-container { margin-bottom: 20px; font-size: 1.1em; }
-    .q-enunciado { font-weight: bold; margin-bottom: 10px; color: #2c3e50; }
+    .q-container { margin-bottom: 25px; font-size: 1.1em; }
+    .q-enunciado { font-weight: bold; margin-bottom: 15px; color: #2c3e50; }
     
+    /* CAIXA DE PALAVRAS (WORD BANK) */
+    .word-bank {
+        background-color: #e8f5e9;
+        border: 2px dashed #43a047;
+        padding: 15px;
+        text-align: center;
+        font-weight: bold;
+        color: #2e7d32;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        letter-spacing: 1px;
+    }
+
     /* ESTILOS DOS CAMPOS DE TEXTO INTERATIVOS */
     input[type="text"] {
         border: none;
@@ -66,20 +79,34 @@
         outline: none;
         border-radius: 4px 4px 0 0;
         transition: 0.2s;
+        text-align: center;
     }
     input[type="text"]:focus {
         border-bottom-color: #2e7d32;
         background-color: #e8f5e9;
     }
     
-    /* Tamanhos dos inputs */
-    .input-cabecalho { flex-grow: 1; margin-left: 10px; background-color: transparent !important; border-bottom-color: #333 !important; }
-    .input-short { width: 180px; }
-    .input-long { width: 60%; }
-    .input-tiny { width: 40px; text-align: center; }
+    .input-cabecalho { flex-grow: 1; margin-left: 10px; background-color: transparent !important; border-bottom-color: #333 !important; text-align: left !important; }
+    .input-medium { width: 120px; }
+    .input-long { width: 250px; }
 
-    .match-box { display: flex; justify-content: space-around; border: 2px dashed #43a047; padding: 15px; border-radius: 10px; }
-    .draw-box { border: 2px dashed #95a5a6; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #bdc3c7; font-weight: bold; }
+    .grid-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+    .item-linha { display: flex; align-items: center; gap: 10px; font-size: 1.2em; margin-bottom: 10px; }
+    .emoji-big { font-size: 1.5em; }
+
+    .draw-box { 
+        border: 2px solid #95a5a6; 
+        border-radius: 10px; 
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        color: #bdc3c7; 
+        font-weight: bold; 
+        background-image: 
+            linear-gradient(to right, #ecf0f1 1px, transparent 1px),
+            linear-gradient(to bottom, #ecf0f1 1px, transparent 1px);
+        background-size: 30px 30px;
+    }
 
     /* ESTILOS PARA IMPRESSÃO */
     @media print {
@@ -88,7 +115,6 @@
         .page-container { padding: 0; }
         .page { box-shadow: none; max-width: 100%; margin: 0; padding: 0; page-break-after: always; }
         
-        /* Remove o fundo verde dos campos de texto na impressão para ficar só a linha */
         input[type="text"] {
             background-color: transparent !important;
             border-bottom: 1px solid #000 !important;
@@ -107,11 +133,11 @@
 
 <div class="page-container">
     <div class="page">
-        <h1>SIMULADO DE INGLÊS</h1>
+        <h1>ENGLISH PRACTICE</h1>
         <p style="text-align: center; font-size: 1.2em; color: #7f8c8d;">Unit 5: Nature Around Us</p>
         
         <p style="text-align: center; font-weight: bold; background: #e8f5e9; padding: 10px; border-radius: 8px; border: 1px solid #43a047; font-size: 0.9em;">
-            Podes imprimir esta folha ou clicar nas linhas abaixo para escreveres as tuas respostas aqui mesmo!
+            Podes imprimir esta folha ou clicar nas linhas abaixo para escreveres as tuas respostas!
         </p>
 
         <div class="cabecalho">
@@ -123,121 +149,107 @@
 
         <!-- BLOCO A: ANIMALS -->
         <h2>A. Vocabulary: Animals</h2>
-        
         <div class="q-container">
-            <div class="q-enunciado">Traduza o nome dos animais para português:</div>
-            <p>1) Fox: <input type="text" class="input-short"></p>
-            <p>2) Turtle: <input type="text" class="input-short"></p>
-            <p>3) Duck: <input type="text" class="input-short"></p>
-            <p>4) Mouse: <input type="text" class="input-short"></p>
-        </div>
-
-        <div class="q-container">
-            <div class="q-enunciado">Traduza o nome dos animais para inglês:</div>
-            <p>5) Lagarto: <input type="text" class="input-short"></p>
-            <p>6) Coruja: <input type="text" class="input-short"></p>
-            <p>7) Coelho: <input type="text" class="input-short"></p>
-            <p>8) Sapo: <input type="text" class="input-short"></p>
+            <div class="q-enunciado">Look at the animals and write the correct word.</div>
+            <div class="word-bank">
+                fox - duck - turtle - owl - rabbit - mouse - lizard - frog
+            </div>
+            
+            <div class="grid-2col">
+                <div class="item-linha">1) <span class="emoji-big">🦊</span> <input type="text" class="input-medium"></div>
+                <div class="item-linha">5) <span class="emoji-big">🦎</span> <input type="text" class="input-medium"></div>
+                
+                <div class="item-linha">2) <span class="emoji-big">🐢</span> <input type="text" class="input-medium"></div>
+                <div class="item-linha">6) <span class="emoji-big">🦉</span> <input type="text" class="input-medium"></div>
+                
+                <div class="item-linha">3) <span class="emoji-big">🦆</span> <input type="text" class="input-medium"></div>
+                <div class="item-linha">7) <span class="emoji-big">🐰</span> <input type="text" class="input-medium"></div>
+                
+                <div class="item-linha">4) <span class="emoji-big">🐭</span> <input type="text" class="input-medium"></div>
+                <div class="item-linha">8) <span class="emoji-big">🐸</span> <input type="text" class="input-medium"></div>
+            </div>
         </div>
 
         <!-- BLOCO B: INSECTS -->
         <h2>B. Vocabulary: Insects</h2>
-
         <div class="q-container">
-            <div class="q-enunciado">Escreve o NÚMERO em inglês dentro da resposta correta:</div>
-            <div class="match-box">
-                <div>
-                    <p>A. Joaninha</p>
-                    <p>B. Abelha</p>
-                    <p>C. Borboleta</p>
-                    <p>D. Formiga</p>
-                </div>
-                <div>
-                    <p>1. Bee</p>
-                    <p>2. Ant</p>
-                    <p>3. Ladybug</p>
-                    <p>4. Butterfly</p>
-                </div>
+            <div class="q-enunciado">Listen and find! Write the name of the insects.</div>
+            <div class="word-bank">
+                bee - butterfly - ladybug - ant
             </div>
-            <p style="margin-top: 15px; font-weight: bold;">
-                Respostas:<br>
-                9) A - <input type="text" class="input-tiny" maxlength="1"> &nbsp;&nbsp;
-                10) B - <input type="text" class="input-tiny" maxlength="1"> &nbsp;&nbsp;
-                11) C - <input type="text" class="input-tiny" maxlength="1"> &nbsp;&nbsp;
-                12) D - <input type="text" class="input-tiny" maxlength="1">
-            </p>
-        </div>
-
-        <div class="q-container">
-            <div class="q-enunciado">13 a 16) Desenha (Draw):</div>
-            <div style="display: flex; gap: 10px;">
-                <div style="border: 1px solid #ccc; width: 50%; height: 100px; text-align: center; padding-top: 10px; border-radius: 8px;">13) A bee <br><span style="font-size: 0.8em; color: #7f8c8d;">(Desenha no papel)</span></div>
-                <div style="border: 1px solid #ccc; width: 50%; height: 100px; text-align: center; padding-top: 10px; border-radius: 8px;">14) A butterfly <br><span style="font-size: 0.8em; color: #7f8c8d;">(Desenha no papel)</span></div>
-            </div>
-            <div style="display: flex; gap: 10px; margin-top: 10px;">
-                <div style="border: 1px solid #ccc; width: 50%; height: 100px; text-align: center; padding-top: 10px; border-radius: 8px;">15) A frog <br><span style="font-size: 0.8em; color: #7f8c8d;">(Desenha no papel)</span></div>
-                <div style="border: 1px solid #ccc; width: 50%; height: 100px; text-align: center; padding-top: 10px; border-radius: 8px;">16) An owl <br><span style="font-size: 0.8em; color: #7f8c8d;">(Desenha no papel)</span></div>
+            
+            <div class="grid-2col">
+                <div class="item-linha">9) <span class="emoji-big">🐝</span> <input type="text" class="input-medium"></div>
+                <div class="item-linha">10) <span class="emoji-big">🦋</span> <input type="text" class="input-medium"></div>
+                <div class="item-linha">11) <span class="emoji-big">🐞</span> <input type="text" class="input-medium"></div>
+                <div class="item-linha">12) <span class="emoji-big">🐜</span> <input type="text" class="input-medium"></div>
             </div>
         </div>
     </div>
 
     <div class="page">
-        <!-- BLOCO C: IS IT...? -->
-        <h2>C. Grammar: Is it a...?</h2>
+        <!-- BLOCO C: COUNTING -->
+        <h2>C. What can you see?</h2>
         <div class="q-container">
-            <div class="q-enunciado">Responde com "Yes, it is." ou "No, it isn't.":</div>
-            <p>17) Look at the ladybug. Is it an ant? <input type="text" class="input-short"></p>
-            <p>18) Look at the bee. Is it a bee? <input type="text" class="input-short"></p>
-            <p>19) Look at the butterfly. Is it a turtle? <input type="text" class="input-short"></p>
-            <p>20) Look at the fox. Is it a fox? <input type="text" class="input-short"></p>
-            <p>21) Look at the mouse. Is it a lizard? <input type="text" class="input-short"></p>
-        </div>
-
-        <div class="q-container">
-            <div class="q-enunciado">Escreve a pergunta (Exemplo: "Is it a frog?"):</div>
-            <p>22) (Coruja) <input type="text" class="input-short"> ? Yes, it is.</p>
-            <p>23) (Coelho) <input type="text" class="input-short"> ? No, it isn't.</p>
-            <p>24) (Formiga) <input type="text" class="input-short"> ? Yes, it is.</p>
-        </div>
-
-        <!-- BLOCO D: COUNTING & SEEING -->
-        <h2>D. What can you see?</h2>
-        <div class="q-container">
-            <div class="q-enunciado">Traduz as frases para inglês:</div>
-            <p>25) O que consegues ver? <br> <input type="text" class="input-long"></p>
-            <p>26) Eu consigo ver um pato. <br> <input type="text" class="input-long"></p>
-            <p>27) Eu consigo ver uma lagarto. <br> <input type="text" class="input-long"></p>
-        </div>
-
-        <div class="q-container">
-            <div class="q-enunciado">Conta os animais (Count the animals): <br><span style="font-weight: normal; font-size: 0.9em;">Exemplo: "I can see five ducks."</span></div>
-            <p>28) 🐸🐸🐸 : <input type="text" class="input-long"></p>
-            <p>29) 🐢🐢 : <input type="text" class="input-long"></p>
-            <p>30) 🦊 : <input type="text" class="input-long"></p>
-        </div>
-
-        <!-- BLOCO E: CHANT & SONG -->
-        <h2>E. The Chant</h2>
-        <div class="q-container">
-            <div class="q-enunciado">Completa a música com as palavras da caixa:</div>
-            <p style="text-align: center; font-weight: bold; background: #e8f5e9; padding: 10px; border-radius: 8px;">see (2x) &nbsp;-&nbsp; around &nbsp;-&nbsp; frog &nbsp;-&nbsp; ladybug</p>
+            <div class="q-enunciado">Count all the animals. Then write. <br><span style="font-weight: normal; font-size: 0.9em; color: #7f8c8d;">Example: 🦆🦆🦆🦆🦆 ➔ I can see five ducks.</span></div>
             
-            <p>Look at the flower. What can you 31) <input type="text" class="input-short"> ?</p>
-            <p>Is it a 32) <input type="text" class="input-short"> ? No, it isn't.</p>
-            <br>
-            <p>Look 33) <input type="text" class="input-short"> you. What can you 34) <input type="text" class="input-short"> ?</p>
-            <p>I can see a 35) <input type="text" class="input-short"> .</p>
+            <p>13) 🐸🐸</p>
+            <p style="margin-left: 20px;">I can see <input type="text" class="input-medium" placeholder="number"> <input type="text" class="input-medium" placeholder="animal">.</p>
+            
+            <p>14) 🦊</p>
+            <p style="margin-left: 20px;">I can see <input type="text" class="input-medium" placeholder="number/a"> <input type="text" class="input-medium" placeholder="animal">.</p>
+            
+            <p>15) 🐢🐢🐢</p>
+            <p style="margin-left: 20px;">I can see <input type="text" class="input-medium" placeholder="number"> <input type="text" class="input-medium" placeholder="animal">.</p>
         </div>
 
+        <!-- BLOCO D: IS IT...? -->
+        <h2>D. Is it a...?</h2>
         <div class="q-container">
-            <div class="q-enunciado">Desafio Final:</div>
-            <p>36) Escreve o teu animal favorito em inglês: <input type="text" class="input-short"></p>
-            <p>37) Escreve o teu inseto favorito em inglês: <input type="text" class="input-short"></p>
-            <p>Para as questões 38, 39 e 40, desenha o teu animal favorito no espaço abaixo!</p>
-            <div class="draw-box" style="height: 180px;">My favorite animal! <br><span style="font-size: 0.8em; margin-left: 10px;">(Desenha no papel)</span></div>
+            <div class="q-enunciado">Answer the questions with: <b>Yes, it is.</b> or <b>No, it isn't.</b></div>
+            
+            <div class="item-linha">16) <span class="emoji-big">🐞</span> Is it a ladybug? <input type="text" class="input-long" style="margin-left: 10px;"></div>
+            <div class="item-linha">17) <span class="emoji-big">🐜</span> Is it a bee? <input type="text" class="input-long" style="margin-left: 10px;"></div>
+            <div class="item-linha">18) <span class="emoji-big">🦊</span> Is it a fox? <input type="text" class="input-long" style="margin-left: 10px;"></div>
+            <div class="item-linha">19) <span class="emoji-big">🦉</span> Is it a mouse? <input type="text" class="input-long" style="margin-left: 10px;"></div>
+            <div class="item-linha">20) <span class="emoji-big">🦋</span> Is it a butterfly? <input type="text" class="input-long" style="margin-left: 10px;"></div>
+        </div>
+
+        <!-- BLOCO E: SONGS AND CHANTS -->
+        <h2>E. Song and Chant</h2>
+        <div class="q-container">
+            <div class="q-enunciado">Complete the Song and the Chant from the book.</div>
+            
+            <div style="background: #fff3e0; padding: 15px; border-left: 5px solid #ffb300; margin-bottom: 20px; border-radius: 0 8px 8px 0;">
+                <p><b>🎵 Song:</b></p>
+                <p>Look 21) <input type="text" class="input-medium"> you.</p>
+                <p>What can you 22) <input type="text" class="input-medium"> ?</p>
+                <p>I can 23) <input type="text" class="input-medium"> a frog.</p>
+            </div>
+
+            <div style="background: #e1f5fe; padding: 15px; border-left: 5px solid #03a9f4; border-radius: 0 8px 8px 0;">
+                <p><b>🎶 Chant:</b></p>
+                <p>Look at the 24) <input type="text" class="input-medium"> . What can you see?</p>
+                <p>Is it a ladybug? 25) <input type="text" class="input-medium"> , it isn't.</p>
+                <p>Is it a 26) <input type="text" class="input-medium"> ? Yes, it is!</p>
+            </div>
+        </div>
+
+        <!-- BLOCO F: DRAWING -->
+        <h2>F. Draw, circle, and write</h2>
+        <div class="q-container">
+            <div class="q-enunciado">Draw an insect in the grid! Then write its name.</div>
+            
+            <div class="draw-box" style="height: 250px; width: 250px; margin: 0 auto;">
+                <span style="font-size: 0.9em; background: rgba(255,255,255,0.8); padding: 5px; border-radius: 5px; color: #7f8c8d;">(Desenha no papel)</span>
+            </div>
+            
+            <p style="text-align: center; font-size: 1.2em; font-weight: bold; margin-top: 20px;">
+                27) This is a <input type="text" class="input-medium"> .
+            </p>
         </div>
         
-        <p style="text-align: center; font-size: 1.5em; margin-top: 40px; color: #43a047;">🌟 PARABÉNS! 🌟</p>
+        <p style="text-align: center; font-size: 1.5em; margin-top: 40px; color: #43a047;">🌟 VERY GOOD! 🌟</p>
     </div>
 </div>
 
