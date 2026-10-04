@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulado de Inglês - Nature Around Us</title>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap');
+    
+    body {
+        font-family: 'Nunito', sans-serif;
+        color: #333;
+        background-color: #f4f6f9;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .action-bar {
+        background-color: #2c3e50;
+        padding: 15px;
+        text-align: center;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+    }
+    
+    .btn-action {
+        color: white; border: none; padding: 12px 25px; border-radius: 8px;
+        font-size: 1.1em; font-weight: bold; cursor: pointer; transition: 0.2s;
+    }
+    .btn-print { background-color: #2ecc71; box-shadow: 0 4px 0 #27ae60; }
+    .btn-print:active { transform: translateY(4px); box-shadow: 0 0 0 transparent; }
+
+    .page-container { padding: 20px; }
+    .page {
+        background: white; max-width: 850px; margin: 0 auto 30px auto;
+        padding: 40px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    h1 { color: #2e7d32; text-align: center; border-bottom: 3px solid #43a047; padding-bottom: 10px; font-size: 2.2em; margin-top: 0; }
+    h2 { color: #1b5e20; border-bottom: 2px dashed #a5d6a7; padding-bottom: 5px; margin-top: 30px; font-size: 1.4em; }
+    
+    .cabecalho {
+        display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 30px;
+        background: #fdfefe; padding: 20px; border: 2px solid #bdc3c7; border-radius: 10px;
+    }
+    .linha-campo { border-bottom: 1px solid #333; flex-grow: 1; margin-left: 10px; }
+    .campo { display: flex; font-weight: bold; font-size: 1.1em; }
+    
+    .q-container { margin-bottom: 20px; font-size: 1.1em; }
+    .q-enunciado { font-weight: bold; margin-bottom: 10px; color: #2c3e50; }
+    
+    .linha-escrita { border-bottom: 1px solid #999; height: 30px; width: 100%; display: inline-block; }
+    .linha-curta { border-bottom: 1px solid #999; width: 150px; display: inline-block; }
+
+    .match-box { display: flex; justify-content: space-around; border: 2px dashed #43a047; padding: 15px; border-radius: 10px; }
+
+    @media print {
+        body { background-color: white; margin: 0; padding: 0; }
+        .action-bar { display: none !important; }
+        .page-container { padding: 0; }
+        .page { box-shadow: none; max-width: 100%; margin: 0; padding: 0; page-break-after: always; }
+    }
+</style>
+</head>
+<body>
+
+<div class="action-bar">
+    <button class="btn-action btn-print" onclick="window.print()">🖨️ Imprimir Simulado</button>
+</div>
+
+<div class="page-container">
+    <div class="page">
+        <h1>SIMULADO DE INGLÊS</h1>
+        <p style="text-align: center; font-size: 1.2em; color: #7f8c8d;">Unit 5: Nature Around Us</p>
+        
+        <div class="cabecalho">
+            <div class="campo">Name: <div class="linha-campo"></div></div>
+            <div class="campo">Class: <div class="linha-campo"></div></div>
+            <div class="campo">Date: <div class="linha-campo"></div></div>
+            <div class="campo">Score: <div class="linha-campo"></div></div>
+        </div>
+
+        <!-- BLOCO A: ANIMALS -->
+        <h2>A. Vocabulary: Animals</h2>
+        
+        <div class="q-container">
+            <div class="q-enunciado">Traduza o nome dos animais para português:</div>
+            <p>1) Fox: <span class="linha-curta"></span></p>
+            <p>2) Turtle: <span class="linha-curta"></span></p>
+            <p>3) Duck: <span class="linha-curta"></span></p>
+            <p>4) Mouse: <span class="linha-curta"></span></p>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">Traduza o nome dos animais para inglês:</div>
+            <p>5) Lagarto: <span class="linha-curta"></span></p>
+            <p>6) Coruja: <span class="linha-curta"></span></p>
+            <p>7) Coelho: <span class="linha-curta"></span></p>
+            <p>8) Sapo: <span class="linha-curta"></span></p>
+        </div>
+
+        <!-- BLOCO B: INSECTS -->
+        <h2>B. Vocabulary: Insects</h2>
+
+        <div class="q-container">
+            <div class="q-enunciado">Ligue o inseto (Letra) ao seu nome em inglês (Número):</div>
+            <div class="match-box">
+                <div>
+                    <p>A. Joaninha ( )</p>
+                    <p>B. Abelha ( )</p>
+                    <p>C. Borboleta ( )</p>
+                    <p>D. Formiga ( )</p>
+                </div>
+                <div>
+                    <p>1. Bee</p>
+                    <p>2. Ant</p>
+                    <p>3. Ladybug</p>
+                    <p>4. Butterfly</p>
+                </div>
+            </div>
+            <p>Respostas: 9) A-_ 10) B-_ 11) C-_ 12) D-_</p>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">13 a 16) Desenha (Draw):</div>
+            <div style="display: flex; gap: 10px;">
+                <div style="border: 1px solid #ccc; width: 50%; height: 100px; text-align: center; padding-top: 10px;">13) A bee</div>
+                <div style="border: 1px solid #ccc; width: 50%; height: 100px; text-align: center; padding-top: 10px;">14) A butterfly</div>
+            </div>
+            <div style="display: flex; gap: 10px; margin-top: 10px;">
+                <div style="border: 1px solid #ccc; width: 50%; height: 100px; text-align: center; padding-top: 10px;">15) A frog</div>
+                <div style="border: 1px solid #ccc; width: 50%; height: 100px; text-align: center; padding-top: 10px;">16) An owl</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page">
+        <!-- BLOCO C: IS IT...? -->
+        <h2>C. Grammar: Is it a...?</h2>
+        <div class="q-container">
+            <div class="q-enunciado">Responde com "Yes, it is." ou "No, it isn't.":</div>
+            <p>17) Look at the ladybug. Is it an ant? <span class="linha-curta"></span></p>
+            <p>18) Look at the bee. Is it a bee? <span class="linha-curta"></span></p>
+            <p>19) Look at the butterfly. Is it a turtle? <span class="linha-curta"></span></p>
+            <p>20) Look at the fox. Is it a fox? <span class="linha-curta"></span></p>
+            <p>21) Look at the mouse. Is it a lizard? <span class="linha-curta"></span></p>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">Escreve a pergunta (Ex: Is it a frog?):</div>
+            <p>22) (Coruja) ________________________? Yes, it is.</p>
+            <p>23) (Coelho) ________________________? No, it isn't.</p>
+            <p>24) (Formiga) ________________________? Yes, it is.</p>
+        </div>
+
+        <!-- BLOCO D: COUNTING & SEEING -->
+        <h2>D. What can you see?</h2>
+        <div class="q-container">
+            <div class="q-enunciado">Traduz as frases para inglês:</div>
+            <p>25) O que consegues ver? <span class="linha-escrita" style="width: 60%;"></span></p>
+            <p>26) Eu consigo ver um pato. <span class="linha-escrita" style="width: 60%;"></span></p>
+            <p>27) Eu consigo ver uma lagarto. <span class="linha-escrita" style="width: 60%;"></span></p>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">Conta os animais (Count the animals): Exemplo: "I can see five ducks."</div>
+            <p>28) 🐸🐸🐸 : <span class="linha-escrita" style="width: 60%;"></span></p>
+            <p>29) 🐢🐢 : <span class="linha-escrita" style="width: 60%;"></span></p>
+            <p>30) 🦊 : <span class="linha-escrita" style="width: 60%;"></span></p>
+        </div>
+
+        <!-- BLOCO E: CHANT & SONG -->
+        <h2>E. The Chant</h2>
+        <div class="q-container">
+            <div class="q-enunciado">Completa a música com as palavras da caixa:</div>
+            <p style="text-align: center; font-weight: bold; background: #e8f5e9; padding: 10px;">see (2x) - around - frog - ladybug</p>
+            
+            <p>Look at the flower. What can you 31) _______________?</p>
+            <p>Is it a 32) _______________? No, it isn't.</p>
+            <br>
+            <p>Look 33) _______________ you. What can you 34) _______________?</p>
+            <p>I can see a 35) _______________.</p>
+        </div>
+
+        <div class="q-container">
+            <div class="q-enunciado">Desafio Final:</div>
+            <p>36) Escreve o teu animal favorito em inglês: <span class="linha-curta"></span></p>
+            <p>37) Escreve o teu inseto favorito em inglês: <span class="linha-curta"></span></p>
+            <p>Para as questões 38, 39 e 40, desenha o teu animal favorito no espaço abaixo!</p>
+            <div class="draw-box" style="height: 200px;">My favorite animal!</div>
+        </div>
+        
+        <p style="text-align: center; font-size: 1.5em; margin-top: 40px; color: #43a047;">🌟 PARABÉNS! 🌟</p>
+    </div>
+</div>
+
+</body>
+</html>
