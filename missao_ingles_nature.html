@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>English Mission - Nature Around Us</title>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap');
+    
+    body {
+        font-family: 'Nunito', sans-serif;
+        background-color: #e8f5e9; /* Fundo verde claro da natureza */
+        color: #1b5e20;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+    }
+    
+    /* BARRA DE NAVEGAÇÃO */
+    .top-bar {
+        width: 100%;
+        background-color: #1b5e20;
+        padding: 10px;
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        flex-wrap: wrap;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        z-index: 100;
+        position: sticky;
+        top: 0;
+    }
+    .top-bar a {
+        text-decoration: none;
+        color: white;
+        background-color: #2e7d32;
+        padding: 8px 15px;
+        border-radius: 8px;
+        font-weight: bold;
+        font-size: 0.9em;
+        transition: 0.2s;
+    }
+    .top-bar a:hover { background-color: #43a047; }
+    .top-bar a.active { background-color: #ffb300; color: #3e2723; pointer-events: none; }
+
+    /* CABEÇALHO */
+    .header {
+        background: linear-gradient(135deg, #43a047, #2e7d32);
+        color: white;
+        width: 100%;
+        text-align: center;
+        padding: 25px 10px 40px;
+        border-bottom-left-radius: 30px;
+        border-bottom-right-radius: 30px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        position: relative;
+    }
+    .header h1 { margin: 0; font-size: 2.2em; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
+    
+    .score-badge {
+        position: absolute;
+        bottom: -20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #ffb300;
+        color: #5c4000;
+        padding: 8px 25px;
+        border-radius: 25px;
+        font-size: 1.2em;
+        font-weight: 900;
+        border: 3px solid white;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    /* RECIPIENTE PRINCIPAL */
+    .container {
+        width: 95%;
+        max-width: 600px;
+        margin: 40px auto 20px;
+    }
+
+    /* MENU DE JOGOS */
+    .menu-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+    }
+    .menu-card {
+        background: white;
+        border-radius: 20px;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0 6px 0px #a5d6a7;
+        cursor: pointer;
+        transition: 0.1s;
+        border-top: 6px solid #43a047;
+    }
+    .menu-card:active { transform: translateY(6px); box-shadow: 0 0px 0px #a5d6a7; }
+    .menu-card .icon { font-size: 3em; margin-bottom: 10px; }
+    .menu-card h2 { margin: 0; color: #1b5e20; font-size: 1.3em; }
+
+    @media (max-width: 400px) {
+        .menu-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ECRÃS DE JOGO */
+    .game-screen {
+        display: none;
+        background: white;
+        padding: 25px;
+        border-radius: 20px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        border-top: 6px solid #43a047;
+        animation: fadeIn 0.3s;
+    }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+    .game-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 2px dashed #eee;
+        padding-bottom: 15px;
+        margin-bottom: 20px;
+    }
+    .game-header h2 { margin: 0; color: #2e7d32; font-size: 1.4em; }
+    .btn-back {
+        background: #e53935; color: white; border: none; padding: 8px 15px;
+        border-radius: 8px; font-weight: bold; cursor: pointer;
+    }
+
+    /* ELEMENTOS DAS QUESTÕES */
+    .emoji-display { font-size: 5em; text-align: center; margin: 10px 0; }
+    .question-text { font-size: 1.4em; text-align: center; font-weight: bold; margin-bottom: 25px; color: #1b5e20; }
+    
+    .options-grid { display: grid; grid-template-columns: 1fr; gap: 12px; }
+    .options-grid.two-cols { grid-template-columns: 1fr 1fr; }
+    
+    .btn-opt {
+        background: #f1f8e9; border: 2px solid #c5e1a5; padding: 15px;
+        border-radius: 12px; font-size: 1.2em; font-weight: 700; color: #2e7d32;
+        cursor: pointer; transition: 0.2s; font-family: inherit;
+    }
+    .btn-opt:active { transform: scale(0.98); }
+    .btn-opt.correct { background: #43a047; border-color: #2e7d32; color: white; }
+    .btn-opt.wrong { background: #e53935; border-color: #c62828; color: white; }
+
+    .feedback { text-align: center; font-size: 1.2em; font-weight: bold; min-height: 30px; margin-top: 20px; border-radius: 8px; padding: 10px; display: none; }
+    .feedback.good { display: block; background: #c8e6c9; color: #1b5e20; }
+    .feedback.bad { display: block; background: #ffcdd2; color: #b71c1c; }
+
+    .btn-next {
+        width: 100%; background: #ffb300; color: #3e2723; border: none; padding: 15px;
+        border-radius: 12px; font-size: 1.2em; font-weight: bold; margin-top: 20px;
+        display: none; cursor: pointer; box-shadow: 0 4px 0 #ff8f00;
+    }
+    .btn-next:active { transform: translateY(4px); box-shadow: 0 0 0 transparent; }
+
+    .end-screen { text-align: center; padding: 20px; }
+    .end-screen .trophy { font-size: 5em; margin-bottom: 10px; }
+
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+    <a href="index.html">🏠 Menu Inicial</a>
+    <a href="#" class="active">🍃 Nature Around Us</a>
+</div>
+
+<div class="header">
+    <h1>Nature Around Us</h1>
+    <div class="score-badge">⭐ <span id="score">0</span> Points</div>
+</div>
+
+<div class="container">
+    
+    <!-- MENU PRINCIPAL -->
+    <div id="main-menu" class="menu-grid">
+        <div class="menu-card" onclick="startGame(1)">
+            <div class="icon">🦊🐢</div>
+            <h2>1. Animals</h2>
+            <p>What can you see?</p>
+        </div>
+        <div class="menu-card" onclick="startGame(2)">
+            <div class="icon">🦋🐝</div>
+            <h2>2. Insects</h2>
+            <p>Is it an ant?</p>
+        </div>
+        <div class="menu-card" onclick="startGame(3)">
+            <div class="icon">🦆🦆</div>
+            <h2>3. Counting</h2>
+            <p>I can see five ducks.</p>
+        </div>
+        <div class="menu-card" onclick="startGame(4)">
+            <div class="icon">🎤</div>
+            <h2>4. The Chant</h2>
+            <p>Complete the song.</p>
+        </div>
+    </div>
+
+    <!-- TELA JOGO 1: ANIMALS -->
+    <div id="game-1" class="game-screen">
+        <div class="game-header"><h2>🦊 Animals</h2><button class="btn-back" onclick="showMenu()">Back</button></div>
+        <div class="emoji-display" id="g1-emoji"></div>
+        <div class="question-text">What can you see? <br> I can see a...</div>
+        <div class="options-grid two-cols" id="g1-options"></div>
+        <div id="g1-feedback" class="feedback"></div>
+        <button id="g1-next" class="btn-next" onclick="nextG1()">Next ➡️</button>
+    </div>
+
+    <!-- TELA JOGO 2: INSECTS (YES/NO) -->
+    <div id="game-2" class="game-screen">
+        <div class="game-header"><h2>🦋 Insects</h2><button class="btn-back" onclick="showMenu()">Back</button></div>
+        <div class="emoji-display" id="g2-emoji"></div>
+        <div class="question-text" id="g2-sentence"></div>
+        <div class="options-grid two-cols" id="g2-options"></div>
+        <div id="g2-feedback" class="feedback"></div>
+        <button id="g2-next" class="btn-next" onclick="nextG2()">Next ➡️</button>
+    </div>
+
+    <!-- TELA JOGO 3: COUNTING -->
+    <div id="game-3" class="game-screen">
+        <div class="game-header"><h2>🦆 Counting</h2><button class="btn-back" onclick="showMenu()">Back</button></div>
+        <div class="emoji-display" id="g3-emoji" style="font-size: 3em;"></div>
+        <div class="question-text">Count the animals!</div>
+        <div class="options-grid" id="g3-options"></div>
+        <div id="g3-feedback" class="feedback"></div>
+        <button id="g3-next" class="btn-next" onclick="nextG3()">Next ➡️</button>
+    </div>
+
+    <!-- TELA JOGO 4: THE CHANT -->
+    <div id="game-4" class="game-screen">
+        <div class="game-header"><h2>🎤 The Chant</h2><button class="btn-back" onclick="showMenu()">Back</button></div>
+        <div class="question-text" id="g4-sentence" style="font-size: 1.2em; font-style: italic;"></div>
+        <div class="options-grid" id="g4-options"></div>
+        <div id="g4-feedback" class="feedback"></div>
+        <button id="g4-next" class="btn-next" onclick="nextG4()">Next ➡️</button>
+    </div>
+
+    <!-- TELA FINAL -->
+    <div id="end-screen" class="game-screen end-screen">
+        <div class="trophy">🏆</div>
+        <h2>Great Job!</h2>
+        <p>Concluíste a missão da Natureza!</p>
+        <button class="btn-next" style="display:block;" onclick="showMenu()">Voltar para o Menu</button>
+    </div>
+
+</div>
+
+<script>
+    let score = 0;
+    
+    function addScore() {
+        score += 10;
+        document.getElementById('score').innerText = score;
+    }
+
+    function showMenu() {
+        document.querySelectorAll('.game-screen').forEach(el => el.style.display = 'none');
+        document.getElementById('main-menu').style.display = 'grid';
+    }
+
+    // ==========================================
+    // JOGO 1: ANIMALS
+    // ==========================================
+    const dataG1 = [
+        { emoji: '🦊', opts: ['Fox', 'Turtle', 'Rabbit', 'Duck'], ans: 0 },
+        { emoji: '🐢', opts: ['Frog', 'Turtle', 'Lizard', 'Owl'], ans: 1 },
+        { emoji: '🐸', opts: ['Mouse', 'Duck', 'Frog', 'Fox'], ans: 2 },
+        { emoji: '🦎', opts: ['Owl', 'Rabbit', 'Mouse', 'Lizard'], ans: 3 },
+        { emoji: '🦉', opts: ['Owl', 'Fox', 'Turtle', 'Frog'], ans: 0 },
+        { emoji: '🐰', opts: ['Duck', 'Rabbit', 'Mouse', 'Lizard'], ans: 1 },
+        { emoji: '🐭', opts: ['Frog', 'Owl', 'Mouse', 'Turtle'], ans: 2 },
+        { emoji: '🦆', opts: ['Lizard', 'Fox', 'Rabbit', 'Duck'], ans: 3 }
+    ];
+    let curG1 = 0;
+
+    function startGame1() { curG1 = 0; document.getElementById('main-menu').style.display = 'none'; document.getElementById('game-1').style.display = 'block'; renderG1(); }
+    
+    function renderG1() {
+        if(curG1 >= dataG1.length) { document.getElementById('game-1').style.display = 'none'; document.getElementById('end-screen').style.display = 'block'; return; }
+        const q = dataG1[curG1];
+        document.getElementById('g1-emoji').innerText = q.emoji;
+        const optsDiv = document.getElementById('g1-options');
+        optsDiv.innerHTML = '';
+        q.opts.forEach((opt, i) => {
+            let btn = document.createElement('button');
+            btn.className = 'btn-opt'; btn.innerText = opt;
+            btn.onclick = () => checkG1(i, btn);
+            optsDiv.appendChild(btn);
+        });
+        document.getElementById('g1-feedback').className = 'feedback';
+        document.getElementById('g1-next').style.display = 'none';
+    }
+
+    function checkG1(selected, btn) {
+        const q = dataG1[curG1];
+        const buttons = document.getElementById('g1-options').querySelectorAll('.btn-opt');
+        buttons.forEach(b => b.style.pointerEvents = 'none');
+        const fb = document.getElementById('g1-feedback');
+
+        if(selected === q.ans) {
+            btn.classList.add('correct');
+            fb.innerText = "✅ Excellent!"; fb.className = "feedback good";
+            addScore();
+        } else {
+            btn.classList.add('wrong');
+            buttons[q.ans].classList.add('correct');
+            fb.innerText = "❌ Oops!"; fb.className = "feedback bad";
+        }
+        document.getElementById('g1-next').style.display = 'block';
+    }
+    function nextG1() { curG1++; renderG1(); }
+
+
+    // ==========================================
+    // JOGO 2: INSECTS (YES/NO)
+    // ==========================================
+    const dataG2 = [
+        { emoji: '🐜', q: "Is it an ant?", opts: ["Yes, it is.", "No, it isn't."], ans: 0 },
+        { emoji: '🦋', q: "Is it a ladybug?", opts: ["Yes, it is.", "No, it isn't."], ans: 1 },
+        { emoji: '🐞', q: "Is it a ladybug?", opts: ["Yes, it is.", "No, it isn't."], ans: 0 },
+        { emoji: '🐝', q: "Is it a butterfly?", opts: ["Yes, it is.", "No, it isn't."], ans: 1 }
+    ];
+    let curG2 = 0;
+
+    function startGame2() { curG2 = 0; document.getElementById('main-menu').style.display = 'none'; document.getElementById('game-2').style.display = 'block'; renderG2(); }
+
+    function renderG2() {
+        if(curG2 >= dataG2.length) { document.getElementById('game-2').style.display = 'none'; document.getElementById('end-screen').style.display = 'block'; return; }
+        const q = dataG2[curG2];
+        document.getElementById('g2-emoji').innerText = q.emoji;
+        document.getElementById('g2-sentence').innerText = q.q;
+        
+        const optsDiv = document.getElementById('g2-options');
+        optsDiv.innerHTML = '';
+        q.opts.forEach((opt, i) => {
+            let btn = document.createElement('button');
+            btn.className = 'btn-opt'; btn.innerText = opt;
+            btn.onclick = () => checkG2(i, btn);
+            optsDiv.appendChild(btn);
+        });
+        document.getElementById('g2-feedback').className = 'feedback';
+        document.getElementById('g2-next').style.display = 'none';
+    }
+
+    function checkG2(selected, btn) {
+        const q = dataG2[curG2];
+        const buttons = document.getElementById('g2-options').querySelectorAll('.btn-opt');
+        buttons.forEach(b => b.style.pointerEvents = 'none');
+        const fb = document.getElementById('g2-feedback');
+
+        if(selected === q.ans) {
+            fb.innerText = "✅ Very good!"; fb.className = "feedback good";
+            btn.classList.add('correct');
+            addScore();
+        } else {
+            fb.innerText = "❌ Incorrect!"; fb.className = "feedback bad";
+            btn.classList.add('wrong');
+            buttons[q.ans].classList.add('correct');
+        }
+        document.getElementById('g2-next').style.display = 'block';
+    }
+    function nextG2() { curG2++; renderG2(); }
+
+
+    // ==========================================
+    // JOGO 3: COUNTING
+    // ==========================================
+    const dataG3 = [
+        { emoji: '🦆🦆🦆🦆🦆', opts: ["I can see four ducks.", "I can see five ducks."], ans: 1 },
+        { emoji: '🦊', opts: ["I can see a fox.", "I can see two foxes."], ans: 0 },
+        { emoji: '🐸🐸🐸', opts: ["I can see three frogs.", "I can see six frogs."], ans: 0 },
+        { emoji: '🐢🐢', opts: ["I can see one turtle.", "I can see two turtles."], ans: 1 }
+    ];
+    let curG3 = 0;
+
+    function startGame3() { curG3 = 0; document.getElementById('main-menu').style.display = 'none'; document.getElementById('game-3').style.display = 'block'; renderG3(); }
+
+    function renderG3() {
+        if(curG3 >= dataG3.length) { document.getElementById('game-3').style.display = 'none'; document.getElementById('end-screen').style.display = 'block'; return; }
+        const q = dataG3[curG3];
+        document.getElementById('g3-emoji').innerText = q.emoji;
+        
+        const optsDiv = document.getElementById('g3-options');
+        optsDiv.innerHTML = '';
+        q.opts.forEach((opt, i) => {
+            let btn = document.createElement('button');
+            btn.className = 'btn-opt'; btn.innerText = opt;
+            btn.onclick = () => checkG3(i, btn);
+            optsDiv.appendChild(btn);
+        });
+        document.getElementById('g3-feedback').className = 'feedback';
+        document.getElementById('g3-next').style.display = 'none';
+    }
+
+    function checkG3(selected, btn) {
+        const q = dataG3[curG3];
+        const buttons = document.getElementById('g3-options').querySelectorAll('.btn-opt');
+        buttons.forEach(b => b.style.pointerEvents = 'none');
+        const fb = document.getElementById('g3-feedback');
+
+        if(selected === q.ans) {
+            btn.classList.add('correct');
+            fb.innerText = "✅ Perfect!"; fb.className = "feedback good";
+            addScore();
+        } else {
+            btn.classList.add('wrong');
+            buttons[q.ans].classList.add('correct');
+            fb.innerText = "❌ Count again!"; fb.className = "feedback bad";
+        }
+        document.getElementById('g3-next').style.display = 'block';
+    }
+    function nextG3() { curG3++; renderG3(); }
+
+    // ==========================================
+    // JOGO 4: THE CHANT
+    // ==========================================
+    const dataG4 = [
+        { q: "Look at the flower. <br> What can you ________?", opts: ["see", "look", "ant"], ans: 0 },
+        { q: "Is it a ladybug? <br> No, it ________.", opts: ["is", "isn't", "can"], ans: 1 },
+        { q: "Is it a bee? <br> Yes, it ________!", opts: ["isn't", "is", "see"], ans: 1 },
+        { q: "Look around you. <br> I can see a ________.", opts: ["flowers", "frog", "five"], ans: 1 }
+    ];
+    let curG4 = 0;
+
+    function startGame4() { curG4 = 0; document.getElementById('main-menu').style.display = 'none'; document.getElementById('game-4').style.display = 'block'; renderG4(); }
+
+    function renderG4() {
+        if(curG4 >= dataG4.length) { document.getElementById('game-4').style.display = 'none'; document.getElementById('end-screen').style.display = 'block'; return; }
+        const q = dataG4[curG4];
+        document.getElementById('g4-sentence').innerHTML = q.q;
+        
+        const optsDiv = document.getElementById('g4-options');
+        optsDiv.innerHTML = '';
+        q.opts.forEach((opt, i) => {
+            let btn = document.createElement('button');
+            btn.className = 'btn-opt'; btn.innerText = opt;
+            btn.onclick = () => checkG4(i, btn);
+            optsDiv.appendChild(btn);
+        });
+        document.getElementById('g4-feedback').className = 'feedback';
+        document.getElementById('g4-next').style.display = 'none';
+    }
+
+    function checkG4(selected, btn) {
+        const q = dataG4[curG4];
+        const buttons = document.getElementById('g4-options').querySelectorAll('.btn-opt');
+        buttons.forEach(b => b.style.pointerEvents = 'none');
+        const fb = document.getElementById('g4-feedback');
+
+        if(selected === q.ans) {
+            btn.classList.add('correct');
+            fb.innerText = "✅ Great memory!"; fb.className = "feedback good";
+            addScore();
+        } else {
+            btn.classList.add('wrong');
+            buttons[q.ans].classList.add('correct');
+            fb.innerText = "❌ Not quite!"; fb.className = "feedback bad";
+        }
+        document.getElementById('g4-next').style.display = 'block';
+    }
+    function nextG4() { curG4++; renderG4(); }
+
+    // Roteador inicial
+    function startGame(id) {
+        if(id === 1) startGame1();
+        if(id === 2) startGame2();
+        if(id === 3) startGame3();
+        if(id === 4) startGame4();
+    }
+
+</script>
+</body>
+</html>
