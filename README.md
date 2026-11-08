@@ -26,3 +26,8 @@ Abra `index.html` no navegador com a pasta `assets` ao lado, ou publique todos o
 ## Adicionar conteúdo
 
 No Inglês 2, edite o catálogo `natureActivities` em `assets/english-nature-data.js`. Cada questão contém `id`, `q`, `opts`, `ans` (índice começando em zero) e `explanation`; `emoji` e `alt` são opcionais. Mantenha IDs únicos e atualize as quantidades divulgadas no portal ao adicionar questões. Revise sempre a alternativa correta e a explicação antes de publicar.
+
+
+## Missão Reforço de Português · 3º trimestre
+
+`missao_portugues_reforco.html` adiciona 96 questões em oito missões de 12: singular/plural, S/SS, R/RR, separação silábica, sons do X, pontuação, maiúsculas e leitura/parágrafos. O banco está em `assets/portugues-reforco-data.js` e reutiliza o motor de `assets/portugues-aventura.js`, com explicações, pontuação por rodada e revisão apenas dos erros. Não expõe dados ou resultados individuais de alunos. O progresso é temporário e os jogos anteriores são preservados.
