@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#186346">
+<title>Ciências · Missões do Sol e da Tecnologia · 4º trimestre</title>
+<link rel="stylesheet" href="assets/portal.css">
+<link rel="stylesheet" href="assets/portugues-aventura.css">
+<style>
+body.ciencias4{background:#edf8f2;color:#18432c}
+.ciencias4 .game-intro h1{color:#166344}
+.ciencias4 .game-card{border-color:#b7ddc7;color:#1a5336;box-shadow:0 4px 0 #c8e8d4}
+.ciencias4 .game-card:hover{border-color:#22865d;background:#f4fff8}
+.ciencias4 .game-card small{color:#186b46}
+.ciencias4 .primary{background:#15764d}
+.ciencias4 .progress div{background:#229e6a}
+.ciencias4 .result strong{color:#16734c}
+.ciencias4 .option.correct{background:#d8f7e6;border-color:#2c9158}
+.ciencias4 .option.wrong{background:#ffe4e0;border-color:#b8493e}
+.ciencias4 .reading{background:#f7fff9}
+</style>
+</head>
+<body class="ciencias4">
+<nav class="portal-nav" aria-label="Navegação do portal">
+<a href="index.html">✦ Anchieta · 2º ano</a>
+<div><a href="index.html#historia">História e Geo.</a><a href="index.html#ciencias">Ciências</a><a href="index.html#ingles">Inglês</a><a href="index.html#portugues">Português</a><a href="index.html#matematica">Matemática</a></div>
+</nav>
+<main class="game-layout">
+<header class="game-intro">
+<span class="pill">Ciências · 2º ano · 4º trimestre · 60 desafios</span>
+<h1>Missões do Sol e da Tecnologia ☀️</h1>
+<p>Quatro missões para revisar a prova: tecnologia do passado e do presente, luz e sombras, caminho do Sol e energia solar. São 15 perguntas por missão, com explicação após cada resposta, pontuação e revisão dos erros.</p>
+</header>
+<div id="menu" class="game-menu"></div>
+<section id="quiz" class="quiz-panel" hidden aria-labelledby="activity-title">
+<div class="quiz-top"><h2 id="activity-title" tabindex="-1"></h2><button class="quiet" id="back">← Atividades</button></div>
+<p id="position" class="muted"></p>
+<div class="progress" role="progressbar" aria-label="Questões respondidas" aria-valuemin="0" aria-valuemax="100" id="progress"><div id="bar"></div></div>
+<div id="emoji" class="emoji" role="img"></div>
+<aside id="reading" class="reading" aria-label="Texto para leitura" hidden></aside>
+<h3 id="question" class="question" lang="pt-BR" tabindex="-1"></h3>
+<div id="options" class="options" lang="pt-BR"></div>
+<div id="feedback" class="feedback" role="status" hidden></div>
+<div class="actions"><button id="next" class="primary" hidden>Próxima →</button></div>
+</section>
+<section id="result" class="quiz-panel result" hidden aria-labelledby="result-title">
+<div class="emoji" aria-hidden="true">🌟</div>
+<h2 id="result-title" tabindex="-1">Rodada concluída!</h2>
+<strong id="result-score"></strong>
+<p id="result-text"></p>
+<div class="actions">
+<button id="review" class="primary">Revisar erros</button>
+<button id="again" class="quiet">Jogar novamente</button>
+<button id="home" class="quiet">Voltar às atividades</button>
+</div>
+</section>
+<p class="note">Atividades originais baseadas nas unidades 8 a 11 do livro de Ciências. As respostas mostram uma explicação curta. Pontos e progresso são desta rodada, sem cadastro ou armazenamento de dados pessoais.</p>
+</main>
+<script src="assets/ciencias_4trimestre_data.js"></script>
+<script src="assets/portugues-aventura.js"></script>
+</body>
+</html>
