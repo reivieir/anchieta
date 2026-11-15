@@ -6,8 +6,18 @@
     quiz.hidden = true; result.hidden = true; menu.hidden = false;
     if (activity) document.querySelector('[data-activity="' + activity.id + '"]').focus();
   }
+  // Shuffle copies so review and replay never mutate the question bank.
+  function shuffleOptions(question) {
+    const options = question.opts.map((text, originalIndex) => ({ text, originalIndex }));
+    for (let i = options.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [options[i], options[j]] = [options[j], options[i]];
+    }
+    return { ...question, opts: options.map(option => option.text),
+      ans: options.findIndex(option => option.originalIndex === question.ans) };
+  }
   function start(a, reviewQuestions) {
-    activity = a; reviewing = Boolean(reviewQuestions); questions = reviewQuestions || a.questions;
+    activity = a; reviewing = Boolean(reviewQuestions); questions = (reviewQuestions || a.questions).map(shuffleOptions);
     index = 0; hits = 0; mistakes = []; menu.hidden = true; result.hidden = true; quiz.hidden = false;
     byId('activity-title').textContent = a.title + (reviewing ? ' · Revisão' : '');
     const passage = byId('reading');
